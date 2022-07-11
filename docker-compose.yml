@@ -1,0 +1,68 @@
+version: "3"
+services:
+  ###############
+  # MYSQL
+  ###############
+  mysql:
+    platform: linux/x86_64
+    image: mysql:8
+    container_name: toy-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=qwer1234
+      - MYSQL_DATABASE=public
+    ports:
+      - "3307:3306"
+  
+  ###############
+  # REDIS as message broker
+  ###############
+  redis-message-broker:
+    platform: linux/x86_64
+    image: redis:6.2
+    container_name: redis-mq
+    ports:
+      - 6390:6379
+
+  ###############
+  # REDIS Cluster
+  ###############
+  redis-cluster:
+    platform: linux/x86_64
+    image: redis:6.2
+    container_name: toy-redis-0
+    volumes:
+      - ./docker/redis/redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    ports:
+      - 6380:6380
+      - 6381:6381
+      - 6379:6379
+
+  redis-node-1:
+    network_mode: "service:redis-cluster"
+    platform: linux/x86_64
+    image: redis:6.2
+    container_name: toy-redis-1
+    volumes:
+      - ./docker/redis/redis1.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+
+  redis-node-2:
+    network_mode: "service:redis-cluster"
+    platform: linux/x86_64
+    image: redis:6.2
+    container_name: toy-redis-2
+    volumes:
+      - ./docker/redis/redis2.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+
+  redis-cluster-entry:
+    network_mode: "service:redis-cluster"
+    platform: linux/x86_64
+    image: redis:6.2
+    container_name: toy-redis-cluster-entry
+    command: redis-cli --cluster create 127.0.0.1:6379 127.0.0.1:6380 127.0.0.1:6381 --cluster-yes
+    depends_on:
+      - redis-cluster
+      - redis-node-1
+      - redis-node-2

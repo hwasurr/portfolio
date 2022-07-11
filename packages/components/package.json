@@ -1,0 +1,33 @@
+{
+  "name": "@my/components",
+  "private": true,
+  "version": "0.0.0",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@emotion/react": "^11.9.3",
+    "@my/style": "workspace:*",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.6",
+    "@babel/plugin-transform-runtime": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-typescript": "^7.18.6",
+    "@emotion/jest": "^11.9.3",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@types/jest": "^28.1.4",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "jest": "^28.1.2",
+    "jest-canvas-mock": "^2.4.0",
+    "jest-environment-jsdom": "^28.1.2",
+    "typescript": "^4.6.3",
+    "typescript-styled-plugin": "^0.18.2"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}

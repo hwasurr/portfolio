@@ -1,0 +1,23 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
+    "baseUrl": ".",
+    "composite": true,
+    "declaration": true,
+    "types": ["jest"],
+    "plugins": [
+      {
+        "name": "typescript-styled-plugin",
+        "tags": ["styled", "css"]
+      }
+    ]
+  },
+  "include": [
+    "src/**/*",
+    "src/**/*.spec.js",
+    "src/**/*.json",
+    "../style/src/emotion.d.ts"
+  ]
+}
