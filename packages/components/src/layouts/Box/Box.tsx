@@ -12,9 +12,8 @@ export function Box({ children }: BoxProps): JSX.Element {
 export function Center({ children }: BoxProps): JSX.Element {
   const theme = useTheme();
   const boxStyle = css`
-    background-color: ${theme.palette.gray.gray6};
-    display: flex;
-    justify-content: center;
+    background-color: ${theme.palette.white.dark};
+    text-align: center;
   `;
   return <div css={boxStyle}>{children}</div>;
 }
