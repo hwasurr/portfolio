@@ -17,6 +17,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "../common-styles/src/emotion.d.ts",],
+  "include": ["src", "../../packages/style/src/emotion.d.ts",],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

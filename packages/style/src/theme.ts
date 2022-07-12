@@ -218,39 +218,39 @@ export const palette: IPalette = {
     dark: '#fff',
   },
   gray: {
-    light: '#F7FAFC',
+    light: '#EDF2F7',
     medium: '#A0AEC0',
-    dark: '#1A202C',
+    dark: '#718096',
   },
   primary: {
-    light: '#B2F5EA',
+    light: '#4FD1C5',
     medium: '#38B2AC',
-    dark: '#285E61',
+    dark: '#319795',
   },
   secondary: {
-    light: '#B2F5EA',
-    medium: '#38B2AC',
-    dark: '#285E61',
+    light: '#4FD1C5',
+    medium: 'linear-gradient(90deg, rgba(56,178,172,1) 15%, rgba(49,130,206,1) 85%)',
+    dark: '#319795',
   },
   success: {
     light: '#68D391',
     medium: '#48BB78',
-    dark: '#276749',
+    dark: '#38A169',
   },
   warn: {
     light: '#F6AD55',
     medium: '#ED8936',
-    dark: '#C05621',
+    dark: '#DD6B20',
   },
   info: {
-    light: '#BEE3F8',
-    medium: '#4299E1',
-    dark: '#2A4365',
+    light: '#63B3ED',
+    medium: '#3182CE',
+    dark: '#2B6CB0',
   },
   error: {
     light: '#FC8181',
     medium: '#E53E3E',
-    dark: '#9B2C2C',
+    dark: '#C53030',
   },
 };
 
