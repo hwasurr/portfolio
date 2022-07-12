@@ -1,15 +1,19 @@
 html {
-  max-width: 70ch; /* 70글자로 좌우 넓이 설정 */
-  padding: 3em 1em; /* 상하 여백 */
-  margin: auto; /* 가운데로 */
-  line-height: 1.75; /* 읽기 편한 라인 높이. 글꼴 크기에 따라 조정되도록 일부러 단위는 생략 */
+  box-sizing: border-box;
+}
+
+* {
+  padding:0;
+  margin:0;
+  background-repeat: no-repeat;
+  cursor: inherit;
 }
 
 body {
+  display: block;
   margin: 0;
   font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-

@@ -3803,11 +3803,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/jest", "npm:28.1.4"],\
             ["@types/react", "npm:18.0.15"],\
             ["@types/react-dom", "npm:18.0.6"],\
+            ["csstype", "npm:3.1.0"],\
             ["jest", "virtual:62573a3b61ec6fe643a41d93ffa4ebd18a388dcd65c8cb24d9c86e851eb981c2764668b271ce43155e158809ba35a2a6f515276032c105924e6c314ac6de1cd6#npm:28.1.2"],\
             ["jest-canvas-mock", "npm:2.4.0"],\
             ["jest-environment-jsdom", "npm:28.1.2"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:9e05c98faccdfc7dafbaea8c5fc22e01e5085e5d1ebb1f6237b50185bbd8ad4557555b3cc224c877eda274e567f5c1fb9226741f7d1cc2f18b479767d93f40bb#npm:18.2.0"],\
+            ["tslib", "npm:2.4.0"],\
             ["typescript", "patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=7ad353"],\
             ["typescript-styled-plugin", "npm:0.18.2"]\
           ],\

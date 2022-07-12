@@ -69,9 +69,19 @@ const displaySizes: IDisplaySize = {
   xl: '80em',
   '2xl': '96em',
 };
+export type displayMediaQueryKey = Exclude<IDisplaySizeKey, '2xl'> | 'base';
+export type IDisplayMediaQuery = Record<displayMediaQueryKey, string>;
+export const displayMediaQueries: IDisplayMediaQuery = {
+  base: `@meda (min-width: ${displaySizes.sm}`,
+  sm: `@meda (min-width: ${displaySizes.md}`,
+  md: `@meda (min-width: ${displaySizes.lg}`,
+  lg: `@meda (min-width: ${displaySizes.xl}`,
+  xl: `@meda (min-width: ${displaySizes['2xl']}`,
+};
 
 // Spacing
 export type ISpacingKey =
+  | 0
   | 0.5
   | 1
   | 1.5
@@ -103,9 +113,12 @@ export type ISpacingKey =
   | 64
   | 72
   | 80
-  | 96;
+  | 96
+  | 'auto';
+
 export type ISpacing = Record<ISpacingKey, string>;
 const spacing: ISpacing = {
+  0: '0',
   0.5: '0.125rem',
   1: '0.25rem',
   1.5: '0.375rem',
@@ -138,6 +151,7 @@ const spacing: ISpacing = {
   72: '18rem',
   80: '20rem',
   96: '24rem',
+  auto: 'auto',
 };
 
 // Border Radius
@@ -162,6 +176,15 @@ const borderRadius: IBorderRadius = {
   '2xl': '1rem',
   '3xl': '1.5rem',
   full: '9999px',
+};
+
+// Border Width
+export type IBorderWidthKey = 'thin' | 'medium' | 'thick';
+export type IBorderWidth = Record<IBorderWidthKey, string>;
+const borderWidth: IBorderWidth = {
+  thin: '0.05rem',
+  medium: '0.1rem',
+  thick: '0.15rem',
 };
 
 // Color Palette
@@ -234,11 +257,13 @@ export const palette: IPalette = {
 export interface ITheme {
   palette: IPalette;
   borderRadius: IBorderRadius;
+  borderWidth: IBorderWidth;
   spacing: ISpacing;
   fonts: IFont;
   fontSize: IFontSize;
   fontWeight: IFontWeight;
   displaySize: IDisplaySize;
+  displayMediaQueries: IDisplayMediaQuery;
 }
 
 export const theme: ITheme = {
@@ -250,7 +275,9 @@ export const theme: ITheme = {
   },
   fontSize: fontsizes,
   borderRadius,
+  borderWidth,
   displaySize: displaySizes,
+  displayMediaQueries,
   spacing,
 };
 

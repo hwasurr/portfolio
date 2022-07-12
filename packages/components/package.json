@@ -6,8 +6,10 @@
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@my/style": "workspace:*",
+    "csstype": "^3.1.0",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "tslib": "^2.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.6",
