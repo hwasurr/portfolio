@@ -1,11 +1,12 @@
-import { css, SerializedStyles, useTheme } from '@emotion/react';
-import { IFontSizeKey, IFontWeightKey, IPaletteColors } from '@my/style';
+import { css, Interpolation, SerializedStyles, useTheme } from '@emotion/react';
+import { IFontSizeKey, IFontWeightKey, IPaletteColors, ITheme } from '@my/style';
 import { PropsWithChildren } from 'react';
 
 export interface HeadingProps extends PropsWithChildren {
   color?: IPaletteColors;
   fontSize?: IFontSizeKey;
   fontWeight?: IFontWeightKey;
+  sx?: Interpolation<ITheme>;
 }
 const useHeadingCSS = ({
   color,
@@ -13,13 +14,14 @@ const useHeadingCSS = ({
   fontWeight,
 }: HeadingProps): SerializedStyles => {
   const theme = useTheme();
-  return css`
-    color: ${theme.palette[color].medium};
-    font-size: ${theme.fontSize[fontSize]};
-    font-weight: ${theme.fontWeight[fontWeight]};
-    line-height: 1.6;
-    letter-spacing: -0.025rem;
-  `;
+  return css({
+    color: theme.palette[color].medium,
+    fontSize: theme.fontSize[fontSize],
+    fontWeight: theme.fontWeight[fontWeight],
+    lineHeight: '1.6',
+    letterSpacing: '-0.025rem',
+    wordBreak: 'keep-all',
+  });
 };
 
 export function H1({
@@ -27,9 +29,10 @@ export function H1({
   color = 'black',
   fontSize = '6xl',
   fontWeight = 'bold',
+  sx,
 }: HeadingProps): JSX.Element {
   const headingCss = useHeadingCSS({ color, fontSize, fontWeight });
-  return <h1 css={headingCss}>{children}</h1>;
+  return <h1 css={[headingCss, sx]}>{children}</h1>;
 }
 
 export function H2({
@@ -37,9 +40,10 @@ export function H2({
   color = 'black',
   fontSize = '5xl',
   fontWeight = 'bold',
+  sx,
 }: HeadingProps): JSX.Element {
   const headingCss = useHeadingCSS({ color, fontSize, fontWeight });
-  return <h2 css={headingCss}>{children}</h2>;
+  return <h2 css={[headingCss, sx]}>{children}</h2>;
 }
 
 export function H3({
@@ -47,9 +51,10 @@ export function H3({
   color = 'black',
   fontSize = '4xl',
   fontWeight = 'bold',
+  sx,
 }: HeadingProps): JSX.Element {
   const headingCss = useHeadingCSS({ color, fontSize, fontWeight });
-  return <h3 css={headingCss}>{children}</h3>;
+  return <h3 css={[headingCss, sx]}>{children}</h3>;
 }
 
 export function H4({
@@ -57,9 +62,10 @@ export function H4({
   color = 'black',
   fontSize = '3xl',
   fontWeight = 'bold',
+  sx,
 }: HeadingProps): JSX.Element {
   const headingCss = useHeadingCSS({ color, fontSize, fontWeight });
-  return <h4 css={headingCss}>{children}</h4>;
+  return <h4 css={[headingCss, sx]}>{children}</h4>;
 }
 
 export function H5({
@@ -67,9 +73,10 @@ export function H5({
   color = 'black',
   fontSize = '2xl',
   fontWeight = 'bold',
+  sx,
 }: HeadingProps): JSX.Element {
   const headingCss = useHeadingCSS({ color, fontSize, fontWeight });
-  return <h5 css={headingCss}>{children}</h5>;
+  return <h5 css={[headingCss, sx]}>{children}</h5>;
 }
 
 export function H6({
@@ -77,9 +84,10 @@ export function H6({
   color = 'black',
   fontSize = 'xl',
   fontWeight = 'bold',
+  sx,
 }: HeadingProps): JSX.Element {
   const headingCss = useHeadingCSS({ color, fontSize, fontWeight });
-  return <h6 css={headingCss}>{children}</h6>;
+  return <h6 css={[headingCss, sx]}>{children}</h6>;
 }
 
 export default {

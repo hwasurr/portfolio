@@ -9,23 +9,26 @@ export interface TextProps extends PropsWithChildren {
   fontWeight?: IFontWeightKey;
   lineHeight?: Property.LineHeight;
   letterSpacing?: Property.LetterSpacing;
+  wordbreak?: Property.WordBreak;
 }
 
 export function Text({
   children,
-  color = 'black',
-  fontSize = 'md',
+  color,
+  fontSize,
   fontWeight = 'regular',
-  lineHeight = '1.6',
+  lineHeight = '1.5',
   letterSpacing = '-0.025rem',
+  wordbreak,
 }: TextProps): JSX.Element {
   const theme = useTheme();
   const textCss = css`
-    color: ${theme.palette[color].medium};
-    font-size: ${theme.fontSize[fontSize]};
+    color: ${color ? theme.palette[color].medium : 'inherit'};
+    font-size: ${fontSize ? theme.fontSize[fontSize] : 'inherit'};
     font-weight: ${theme.fontWeight[fontWeight]};
     line-height: ${lineHeight};
     letter-spacing: ${letterSpacing};
+    word-break: ${wordbreak};
   `;
   return <p css={textCss}>{children}</p>;
 }
