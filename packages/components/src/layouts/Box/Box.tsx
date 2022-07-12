@@ -16,6 +16,11 @@ export interface BoxProps extends PropsWithChildren {
   flexDir?: CSSType.Property.FlexDirection;
   border?: CSSType.Property.Border;
   display?: CSSType.Property.Display;
+  position?: CSSType.Property.Position;
+  top?: CSSType.Property.Top;
+  left?: CSSType.Property.Left;
+  right?: CSSType.Property.Right;
+  bottom?: CSSType.Property.Bottom;
   padding?: ISpacingKey;
   paddingX?: ISpacingKey;
   paddingY?: ISpacingKey;
@@ -24,7 +29,7 @@ export interface BoxProps extends PropsWithChildren {
   marginY?: ISpacingKey;
   gap?: ISpacingKey;
   rounded?: IBorderRadiusKey;
-  as?: 'div' | 'section' | 'article' | 'aside' | 'main';
+  as?: 'div' | 'section' | 'article' | 'aside' | 'main' | 'header' | 'footer';
   sx?: Interpolation<ITheme>;
 }
 
