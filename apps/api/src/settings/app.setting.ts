@@ -3,6 +3,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import helmet from 'helmet';
+import cors from 'cors';
 
 export class AppSetting {
   constructor(
@@ -13,7 +14,14 @@ export class AppSetting {
   public initialize() {
     // Some API settings are located here.
 
-    this.app.use(helmet());
+    this.app.use(
+      helmet({
+        crossOriginEmbedderPolicy:
+          process.env.NODE_ENV === 'production' ? undefined : false,
+        contentSecurityPolicy: process.env.NODE_ENV === 'production' ? undefined : false,
+      }),
+    );
+    this.app.use(cors());
     this.app.use(express.urlencoded({ limit: '50mb', extended: true }));
     this.app.use(express.json({ limit: '50mb' }));
     this.app.use(
