@@ -11,7 +11,7 @@ async function bootstrap() {
   const appSetting = new AppSetting(app, configService);
   appSetting.initialize();
 
-  const PORT = 3000;
+  const PORT = 4000;
   await app.listen(PORT).then(() => {
     Logger.log(`Server listening on http://localhost:${PORT}`);
   });
