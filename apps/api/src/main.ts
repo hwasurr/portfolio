@@ -13,7 +13,10 @@ async function bootstrap() {
 
   const PORT = 4000;
   await app.listen(PORT).then(() => {
-    Logger.log(`Server listening on http://localhost:${PORT}`);
+    Logger.log(`
+    Server listening on http://localhost:${PORT}
+    GraphQL Playground -> http://localhost:${PORT}/graphql
+    `);
   });
 }
 bootstrap();
