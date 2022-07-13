@@ -15,7 +15,7 @@ const useHeadingCSS = ({
 }: HeadingProps): SerializedStyles => {
   const theme = useTheme();
   return css({
-    color: theme.palette[color].medium,
+    color: theme.palette[color]?.medium ?? 'inherit',
     fontSize: theme.fontSize[fontSize],
     fontWeight: theme.fontWeight[fontWeight],
     lineHeight: '1.6',
@@ -26,7 +26,7 @@ const useHeadingCSS = ({
 
 export function H1({
   children,
-  color = 'black',
+  color,
   fontSize = '6xl',
   fontWeight = 'bold',
   sx,
@@ -37,7 +37,7 @@ export function H1({
 
 export function H2({
   children,
-  color = 'black',
+  color,
   fontSize = '5xl',
   fontWeight = 'bold',
   sx,
@@ -48,7 +48,7 @@ export function H2({
 
 export function H3({
   children,
-  color = 'black',
+  color,
   fontSize = '4xl',
   fontWeight = 'bold',
   sx,
@@ -59,7 +59,7 @@ export function H3({
 
 export function H4({
   children,
-  color = 'black',
+  color,
   fontSize = '3xl',
   fontWeight = 'bold',
   sx,
@@ -70,7 +70,7 @@ export function H4({
 
 export function H5({
   children,
-  color = 'black',
+  color,
   fontSize = '2xl',
   fontWeight = 'bold',
   sx,
@@ -81,7 +81,7 @@ export function H5({
 
 export function H6({
   children,
-  color = 'black',
+  color,
   fontSize = 'xl',
   fontWeight = 'bold',
   sx,

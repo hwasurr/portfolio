@@ -4,6 +4,7 @@ import type * as CSSType from 'csstype';
 import { PropsWithChildren } from 'react';
 
 export interface BoxProps extends PropsWithChildren {
+  id?: string;
   width?: CSSType.Property.Width | IDisplaySizeKey;
   minWidth?: CSSType.Property.MinWidth | IDisplaySizeKey;
   maxWidth?: CSSType.Property.MaxWidth | IDisplaySizeKey;
@@ -29,7 +30,7 @@ export interface BoxProps extends PropsWithChildren {
   marginY?: ISpacingKey;
   gap?: ISpacingKey;
   rounded?: IBorderRadiusKey;
-  as?: 'div' | 'section' | 'article' | 'aside' | 'main' | 'header' | 'footer';
+  as?: 'div' | 'section' | 'article' | 'aside' | 'main' | 'header' | 'footer' | 'span';
   sx?: Interpolation<ITheme>;
 }
 
@@ -40,6 +41,7 @@ const useSize = (wORh: CSSType.Property.Width | IDisplaySizeKey): string => {
     : wORh;
 };
 export function Box({
+  id,
   children,
   as = 'div',
   padding,
@@ -89,7 +91,11 @@ export function Box({
     ...rest,
   });
   const Cmp = as;
-  return <Cmp css={[boxStyle, sx]}>{children}</Cmp>;
+  return (
+    <Cmp id={id} css={[boxStyle, sx]}>
+      {children}
+    </Cmp>
+  );
 }
 
 export function Center(props: BoxProps): JSX.Element {

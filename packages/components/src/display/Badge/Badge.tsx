@@ -7,8 +7,13 @@ export interface BadgeProps extends PropsWithChildren {
   color?: IPaletteChromaticColors | string;
   /** color prop is ignored when randomColorMode is enabled */
   randomColorMode?: boolean;
+  variant?: 'solid' | 'outline';
 }
-export function Badge({ children, color = 'primary' }: BadgeProps): JSX.Element {
+export function Badge({
+  children,
+  color = 'primary',
+  variant = 'solid',
+}: BadgeProps): JSX.Element {
   const theme = useTheme();
   const badgeCss = css({
     userSelect: 'none',
@@ -21,9 +26,15 @@ export function Badge({ children, color = 'primary' }: BadgeProps): JSX.Element 
     fontSize: theme.fontSize.sm,
     transition: 'background 0.2s',
   });
+  const badgeOutlineCss = css({
+    border: `${theme.borderWidth.thin} solid`,
+    color: theme.palette[color]?.medium || color,
+    borderColor: theme.palette[color]?.medium || color,
+    background: 'transparent',
+  });
   return (
-    <div css={badgeCss}>
-      <Text>{children}</Text>
+    <div css={[badgeCss, variant === 'outline' ? badgeOutlineCss : undefined]}>
+      <Text fontWeight="medium">{children}</Text>
     </div>
   );
 }

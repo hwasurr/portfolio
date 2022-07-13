@@ -182,7 +182,7 @@ const borderRadius: IBorderRadius = {
 export type IBorderWidthKey = 'thin' | 'medium' | 'thick';
 export type IBorderWidth = Record<IBorderWidthKey, string>;
 const borderWidth: IBorderWidth = {
-  thin: '0.05rem',
+  thin: '0.075rem',
   medium: '0.1rem',
   thick: '0.15rem',
 };
@@ -229,7 +229,7 @@ export const palette: IPalette = {
   },
   secondary: {
     light: '#4FD1C5',
-    medium: 'linear-gradient(90deg, rgba(56,178,172,1) 15%, rgba(49,130,206,1) 85%)',
+    medium: '#38B2AC',
     dark: '#319795',
   },
   success: {
@@ -254,6 +254,48 @@ export const palette: IPalette = {
   },
 };
 
+// zIndex
+export type IZIndexKeys =
+  | 'hide'
+  | 'auto'
+  | 'base'
+  | 'docked'
+  | 'dropdown'
+  | 'sticky'
+  | 'banner'
+  | 'overlay'
+  | 'modal'
+  | 'popover'
+  | 'skipLink'
+  | 'toast'
+  | 'tooltip';
+export type IZIndex = Record<IZIndexKeys, string | number>;
+export const zIndex: IZIndex = {
+  hide: -1,
+  auto: 'auto',
+  base: 0,
+  docked: 10,
+  dropdown: 1000,
+  sticky: 1100,
+  banner: 1200,
+  overlay: 1300,
+  modal: 1400,
+  popover: 1500,
+  skipLink: 1600,
+  toast: 1700,
+  tooltip: 1800,
+};
+
+// shadows
+export type IShadowKeys = 'none' | 'sm' | 'md' | 'lg';
+export type IShadow = Record<IShadowKeys, string>;
+export const shadows: IShadow = {
+  none: 'none',
+  sm: '0px 2px 6px -1px rgba(0,0,0,0.13)',
+  md: '0px 4px 14px -1px rgba(0,0,0,0.13)',
+  lg: '0px 8px 20px -1px rgba(0,0,0,0.13)',
+};
+
 export interface ITheme {
   palette: IPalette;
   borderRadius: IBorderRadius;
@@ -264,6 +306,8 @@ export interface ITheme {
   fontWeight: IFontWeight;
   displaySize: IDisplaySize;
   displayMediaQueries: IDisplayMediaQuery;
+  zIndex: IZIndex;
+  shadows: IShadow;
 }
 
 export const theme: ITheme = {
@@ -279,6 +323,8 @@ export const theme: ITheme = {
   displaySize: displaySizes,
   displayMediaQueries,
   spacing,
+  zIndex,
+  shadows,
 };
 
 export default theme;

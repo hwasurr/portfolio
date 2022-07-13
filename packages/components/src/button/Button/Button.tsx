@@ -1,5 +1,5 @@
-import { css, useTheme } from '@emotion/react';
-import { IPaletteChromaticColors } from '@my/style';
+import { css, Interpolation, useTheme } from '@emotion/react';
+import { IPaletteChromaticColors, ITheme } from '@my/style';
 import { PropsWithChildren, useMemo } from 'react';
 
 export interface ButtonProps extends PropsWithChildren {
@@ -8,7 +8,8 @@ export interface ButtonProps extends PropsWithChildren {
   size?: 'sm' | 'md' | 'lg';
   color?: IPaletteChromaticColors;
   fullWidth?: boolean;
-  variant?: 'outline' | 'solid';
+  variant?: 'outline' | 'solid' | 'ghost-outline';
+  sx?: Interpolation<ITheme>;
 }
 export function Button({
   children,
@@ -16,6 +17,7 @@ export function Button({
   color = 'primary',
   fullWidth = false,
   variant = 'solid',
+  sx,
   onClick,
 }: ButtonProps): JSX.Element {
   const theme = useTheme();
@@ -31,6 +33,16 @@ export function Button({
     color: theme.palette.black.medium,
   });
 
+  const outlineGhostBtnCss = css({
+    background: 'transparent',
+    color: theme.palette.black.medium,
+    ':hover': {
+      border: `1px solid ${theme.palette[color].medium}`,
+      color: theme.palette.black.medium,
+      backgroundColor: `${theme.palette[color].light}30`, // 30 mean transparent
+    },
+  });
+
   const btnCss = css({
     display: 'inline-block',
     cursor: 'pointer',
@@ -44,7 +56,7 @@ export function Button({
     borderRadius: theme.borderRadius.lg,
     color: theme.palette.white.medium,
     fontWeight: theme.fontWeight.semiBold,
-    transition: '0.2s background-color, 0.2s color',
+    transition: '0.3s background-color, 0.2s color',
     ':hover': {
       backgroundColor: theme.palette[color].dark,
       color: theme.palette.white.medium,
@@ -53,7 +65,12 @@ export function Button({
   return (
     <button
       type="button"
-      css={[btnCss, variant === 'outline' ? outlineBtnCss : undefined]}
+      css={[
+        btnCss,
+        variant === 'outline' ? outlineBtnCss : undefined,
+        variant === 'ghost-outline' ? outlineGhostBtnCss : undefined,
+        sx,
+      ]}
       onClick={onClick}
     >
       {children}

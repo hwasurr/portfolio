@@ -1,17 +1,29 @@
 import { css, useTheme } from '@emotion/react';
+import { IShadowKeys } from '@my/style';
 import Box, { BoxProps } from '../../layouts/Box/Box';
 
-export type CardProps = BoxProps;
-export function Card({ children, ...rest }: BoxProps): JSX.Element {
+export interface CardProps extends BoxProps {
+  shadow?: { base: IShadowKeys; hover: IShadowKeys };
+}
+export function Card({
+  children,
+  shadow = { base: 'none', hover: 'none' },
+  ...rest
+}: CardProps): JSX.Element {
   const theme = useTheme();
   const cardStyle = css({
     borderStyle: 'solid',
     borderRadius: theme.borderRadius.xl,
     borderWidth: theme.borderWidth.thin,
     borderColor: theme.palette.gray.light,
+    transition: 'boxShadow 0.3s',
+    boxShadow: theme.shadows[shadow.base],
+    ':hover': {
+      boxShadow: theme.shadows[shadow.hover],
+    },
   });
   return (
-    <Box as="article" {...rest} sx={cardStyle}>
+    <Box as="article" {...rest} sx={[cardStyle, rest.sx]}>
       {children}
     </Box>
   );
@@ -20,8 +32,12 @@ export function Card({ children, ...rest }: BoxProps): JSX.Element {
 export interface CardImageProps {
   src: string;
   alt: string;
+  fallbackSrc?: string;
 }
-function CardImage({ src }: CardImageProps): JSX.Element {
+function CardImage({
+  src,
+  fallbackSrc = 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbvwM6R%2FbtqCQ3snviR%2FlgasJwKusFJyND3TNGwZbK%2Fimg.jpg',
+}: CardImageProps): JSX.Element {
   const theme = useTheme();
   const cardImageCss = css({
     borderTopLeftRadius: theme.borderRadius.xl,
@@ -29,7 +45,7 @@ function CardImage({ src }: CardImageProps): JSX.Element {
     width: '100%',
     minHeight: '280px',
     objectFit: 'contain',
-    background: `url(${src}), url(https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbvwM6R%2FbtqCQ3snviR%2FlgasJwKusFJyND3TNGwZbK%2Fimg.jpg)`,
+    background: `url(${src}), url(${fallbackSrc})`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     backgroundPosition: 'center',

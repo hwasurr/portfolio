@@ -1,10 +1,17 @@
+import { useTheme } from '@emotion/react';
 import { Box } from '@my/components';
+import type { Property } from 'csstype';
 import { PropsWithChildren } from 'react';
-import Navbar, { NavbarHeight } from './Navbar';
-import Sidebar from './Sidebar';
-import Toolbar from './Toolbar';
+import Navbar, { NavbarHeight } from '../Navbar';
 
-export function GlobalLayout({ children }: PropsWithChildren): JSX.Element {
+export interface GlobalLayoutProps extends PropsWithChildren {
+  gridTemplateColumns: Property.GridTemplateColumns;
+}
+export function GlobalLayout({
+  children,
+  gridTemplateColumns,
+}: GlobalLayoutProps): JSX.Element {
+  const theme = useTheme();
   return (
     <Box>
       <Box
@@ -15,17 +22,13 @@ export function GlobalLayout({ children }: PropsWithChildren): JSX.Element {
         paddingX={2}
         gap={4}
         sx={{
-          margin: '16px auto 0',
+          margin: `${theme.spacing[4]} auto 0`,
           display: 'grid',
-          gridTemplateColumns: '1fr 3fr 1fr',
+          gridTemplateColumns,
           paddingTop: NavbarHeight,
         }}
       >
-        <Sidebar />
-        <Box as="main" paddingX={2}>
-          {children}
-        </Box>
-        <Toolbar />
+        {children}
       </Box>
 
       {/* Navbar는 Fixed로 최상단에 위치함 */}
