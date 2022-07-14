@@ -1,9 +1,10 @@
 import { ConfigService } from '@nestjs/config';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
-import cors from 'cors';
+import morgan from 'morgan';
 
 export class AppSetting {
   constructor(
@@ -27,6 +28,7 @@ export class AppSetting {
     this.app.use(
       cookieParser(this.configService.get('COOKIE_SECRET') || 'COOKIE_SECRET'),
     );
+    this.app.use(morgan('common'));
     return this.app;
   }
 }

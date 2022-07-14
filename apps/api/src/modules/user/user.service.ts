@@ -1,6 +1,7 @@
-import { CreateUserDto, UpdateUserDto } from '@my/common/dist/src';
+import { CreateUserDto, PaginationDto, UpdateUserDto } from '@my/common/dist/src';
 import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
+import argon2 from 'argon2';
 import { USER_REPOSITORY } from '../../constants/inject-keys/user.repository';
 import { User } from './user.entity';
 
@@ -8,12 +9,32 @@ import { User } from './user.entity';
 export class UserService {
   constructor(@Inject(USER_REPOSITORY) private readonly userRepo: Repository<User>) {}
 
-  public async findOne(id: number): Promise<User | null> {
-    return this.userRepo.findOne({ where: { id } });
+  public async findOne(whereField: string): Promise<User | null>;
+  public async findOne(whereField: number): Promise<User | null>;
+  public async findOne(whereField: string | number): Promise<User | null> {
+    if (typeof whereField === 'string') {
+      return this.userRepo.findOne({ where: { loginId: whereField } });
+    }
+    if (typeof whereField === 'number') {
+      return this.userRepo.findOne({ where: { id: whereField } });
+    }
+    return null;
+  }
+
+  public async findAll(pagiationDto: PaginationDto): Promise<User[]> {
+    return this.userRepo.find({
+      cache: true,
+      skip: pagiationDto.skip,
+      take: pagiationDto.take,
+    });
   }
 
   public async create(dto: CreateUserDto): Promise<User> {
-    return this.userRepo.save(dto);
+    const hashedPw = await argon2.hash(dto.password);
+    return this.userRepo.save({
+      ...dto,
+      password: hashedPw,
+    });
   }
 
   public async update(id: User['id'], dto: UpdateUserDto): Promise<User> {

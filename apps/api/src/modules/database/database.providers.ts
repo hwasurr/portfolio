@@ -13,6 +13,7 @@ export const databaseProviders = [
         database: 'public',
         entities: [`${__dirname}/../**/*.entity{.ts,.js}`],
         synchronize: !(process.env.NODE_ENV === 'production'),
+        logger: 'advanced-console',
       });
 
       return dataSource.initialize();

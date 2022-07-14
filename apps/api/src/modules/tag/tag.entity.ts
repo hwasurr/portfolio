@@ -1,6 +1,6 @@
 import { Entity, Column, ManyToMany, JoinTable } from 'typeorm';
 import { Content } from '../database/base.entity';
-import { Game } from '../game/game.entity';
+import { Game } from '../game/entities/game.entity';
 
 @Entity()
 export class Tag extends Content {

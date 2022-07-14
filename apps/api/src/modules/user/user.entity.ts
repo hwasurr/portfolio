@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { GameReaction } from '../game/game.entity';
+import { GameReaction } from '../game/entities/game-reaction.entity';
 
 @Entity()
 export class User {

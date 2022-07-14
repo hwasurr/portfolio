@@ -18,6 +18,12 @@ scalar DateTime
 
 type Query {
   user(id: Int!): User
+  users(pagination: PaginationDto!): [User!]
+}
+
+input PaginationDto {
+  skip: Int!
+  take: Int!
 }
 
 type Mutation {

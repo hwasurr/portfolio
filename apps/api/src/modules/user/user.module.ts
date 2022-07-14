@@ -7,7 +7,7 @@ import { UserService } from './user.service';
 
 @Module({
   imports: [DatabaseModule],
-  exports: [],
+  exports: [UserService],
   providers: [...userProviders, UserService, UserResolver],
   controllers: [UserController],
 })
