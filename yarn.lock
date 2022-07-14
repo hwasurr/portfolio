@@ -2451,10 +2451,16 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@my/common@workspace:packages/common"
   dependencies:
+    "@nestjs/common": ^9.0.3
+    "@nestjs/core": ^9.0.3
+    "@nestjs/graphql": ^10.0.18
     "@types/node": ^18.0.3
     class-transformer: ^0.5.1
     class-validator: ^0.13.2
+    graphql: ^16.5.0
     reflect-metadata: ^0.1.13
+    rxjs: ^7.5.6
+    tslib: ^2.4.0
     typescript: ^4.7.4
   languageName: unknown
   linkType: soft
@@ -2594,6 +2600,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nestjs/common@npm:^9.0.3":
+  version: 9.0.3
+  resolution: "@nestjs/common@npm:9.0.3"
+  dependencies:
+    iterare: 1.2.1
+    tslib: 2.4.0
+    uuid: 8.3.2
+  peerDependencies:
+    cache-manager: "*"
+    class-transformer: "*"
+    class-validator: "*"
+    reflect-metadata: ^0.1.12
+    rxjs: ^7.1.0
+  peerDependenciesMeta:
+    cache-manager:
+      optional: true
+    class-transformer:
+      optional: true
+    class-validator:
+      optional: true
+  checksum: 533c05ece2238013ad7f1205195090703287141d78aa2e33dc61e836452e665f0ddfd658b2743757d9e8e34d230703d1a9fcaded0fc2aa14f08d41d8e6d6daaa
+  languageName: node
+  linkType: hard
+
 "@nestjs/config@npm:^2.2.0":
   version: 2.2.0
   resolution: "@nestjs/config@npm:2.2.0"
@@ -2636,6 +2666,35 @@ __metadata:
     "@nestjs/websockets":
       optional: true
   checksum: fa9a6e49a3303621582dac0ebbc21537bb1add42190b20bea9b4e02e96e7112d74b9261e10b1300951254ca99ba6f891db7bfc581e9310d97b5f20b95326a2af
+  languageName: node
+  linkType: hard
+
+"@nestjs/core@npm:^9.0.3":
+  version: 9.0.3
+  resolution: "@nestjs/core@npm:9.0.3"
+  dependencies:
+    "@nuxtjs/opencollective": 0.3.2
+    fast-safe-stringify: 2.1.1
+    iterare: 1.2.1
+    object-hash: 3.0.0
+    path-to-regexp: 3.2.0
+    tslib: 2.4.0
+    uuid: 8.3.2
+  peerDependencies:
+    "@nestjs/common": ^9.0.0
+    "@nestjs/microservices": ^9.0.0
+    "@nestjs/platform-express": ^9.0.0
+    "@nestjs/websockets": ^9.0.0
+    reflect-metadata: ^0.1.12
+    rxjs: ^7.1.0
+  peerDependenciesMeta:
+    "@nestjs/microservices":
+      optional: true
+    "@nestjs/platform-express":
+      optional: true
+    "@nestjs/websockets":
+      optional: true
+  checksum: 8c6a3752f39d809a511e3dc1c30fd0f9adc4d96af874c346a86ae7514178c8aea4338fc0d5bea33c0e0ebcd125bd3f8d029764c8b7b8189c0d1bbab31ec67855
   languageName: node
   linkType: hard
 
@@ -10454,6 +10513,15 @@ __metadata:
   dependencies:
     tslib: ^2.1.0
   checksum: e034f60805210cce756dd2f49664a8108780b117cf5d0e2281506e9e6387f7b4f1532d974a8c8b09314fa7a16dd2f6cff3462072a5789672b5dcb45c4173f3c6
+  languageName: node
+  linkType: hard
+
+"rxjs@npm:^7.5.6":
+  version: 7.5.6
+  resolution: "rxjs@npm:7.5.6"
+  dependencies:
+    tslib: ^2.1.0
+  checksum: fc05f01364a74dac57490fb3e07ea63b422af04017fae1db641a009073f902ef69f285c5daac31359620dc8d9aee7d81e42b370ca2a8573d1feae0b04329383b
   languageName: node
   linkType: hard
 

@@ -13,29 +13,6 @@ import { Content, Site, StandingStyle } from '../database/base.entity';
 import { User } from '../user/user.entity';
 
 @Entity()
-export class Game extends Content {
-  @Column({ comment: '대표 이모지', length: 1, type: 'char' }) titleEmoji: string;
-  @Index({ unique: true }) @Column({ comment: '고유이름(영어)' }) gamename: string;
-  @Column({ comment: '간략 설명' }) summary: string;
-
-  // 게임 - 일대다 - 게임이미지 관계정의
-  @OneToMany(() => GameImage, (gameImage) => gameImage.game, { onDelete: 'CASCADE' })
-  images: GameImage[];
-
-  // 게임 - 일대일 - 게임정보 관계정의
-  @OneToOne(() => GameInformation, (gameInfo) => gameInfo.game, { onDelete: 'CASCADE' })
-  information: GameInformation;
-
-  // 게임 - 일대다 - 코멘트 관계정의
-  @OneToMany(() => GameComment, (comment) => comment.game, { onDelete: 'CASCADE' })
-  comments: GameComment[];
-
-  // 게임 - 다대다 - 유저 -> 리액션 관계정의
-  @OneToMany(() => GameReaction, (reaction) => reaction.game, { onDelete: 'CASCADE' })
-  reactions: GameReaction[];
-}
-
-@Entity()
 export class GameImage {
   @PrimaryGeneratedColumn() id: number;
   @Column() name: string;
@@ -107,6 +84,29 @@ export class GameReaction {
 
   @ManyToOne(() => Game, (game) => game.reactions, { cascade: true })
   game: Game;
+}
+
+@Entity()
+export class Game extends Content {
+  @Column({ comment: '대표 이모지', length: 1, type: 'char' }) titleEmoji: string;
+  @Index({ unique: true }) @Column({ comment: '고유이름(영어)' }) gamename: string;
+  @Column({ comment: '간략 설명' }) summary: string;
+
+  // 게임 - 일대다 - 게임이미지 관계정의
+  @OneToMany(() => GameImage, (gameImage) => gameImage.game, { onDelete: 'CASCADE' })
+  images: GameImage[];
+
+  // 게임 - 일대일 - 게임정보 관계정의
+  @OneToOne(() => GameInformation, (gameInfo) => gameInfo.game, { onDelete: 'CASCADE' })
+  information: GameInformation;
+
+  // 게임 - 일대다 - 코멘트 관계정의
+  @OneToMany(() => GameComment, (comment) => comment.game, { onDelete: 'CASCADE' })
+  comments: GameComment[];
+
+  // 게임 - 다대다 - 유저 -> 리액션 관계정의
+  @OneToMany(() => GameReaction, (reaction) => reaction.game, { onDelete: 'CASCADE' })
+  reactions: GameReaction[];
 }
 
 // TODO 제보 (유저 등록 게임)

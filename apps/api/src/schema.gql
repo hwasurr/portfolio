@@ -7,8 +7,35 @@ type User {
   loginId: String!
   nickname: String
   avatar: String
+  createDate: DateTime!
+  updateDate: DateTime!
 }
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
 type Query {
   user(id: Int!): User
+}
+
+type Mutation {
+  createUser(data: CreateUserDto!): User!
+  updateUser(data: UpdateUserDto!): User!
+  deleteUser(id: Int!): Boolean!
+}
+
+input CreateUserDto {
+  loginId: String!
+  password: String!
+  nickname: String
+  avatar: String
+}
+
+input UpdateUserDto {
+  password: String
+  nickname: String
+  avatar: String
+  id: Int!
 }

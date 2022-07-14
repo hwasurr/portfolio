@@ -1,1 +1,1 @@
-export const someCommonVar = 'asdf';
+export * from './dto/user.dto';
