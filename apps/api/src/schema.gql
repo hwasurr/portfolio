@@ -23,6 +23,7 @@ type Login {
 type Me {
   sub: String!
   loginId: String!
+  userId: Int!
   role: Role!
 }
 

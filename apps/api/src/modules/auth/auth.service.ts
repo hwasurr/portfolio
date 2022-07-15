@@ -12,8 +12,8 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  private userToProfile(user: Pick<User, 'loginId'>): UserProfile {
-    return { sub: user.loginId, loginId: user.loginId };
+  private userToProfile(user: Pick<User, 'loginId' | 'id'>): UserProfile {
+    return { sub: user.loginId, loginId: user.loginId, userId: user.id };
   }
 
   public async validateUser(
@@ -28,10 +28,9 @@ export class AuthService {
     return this.userToProfile(user);
   }
 
-  public async login(user: UserProfile): Promise<LoginRes> {
-    const profile = this.userToProfile(user);
+  public async login(userProfile: UserProfile): Promise<LoginRes> {
     return {
-      accessToken: this.jwtService.sign(profile),
+      accessToken: this.jwtService.sign(userProfile),
     };
   }
 }

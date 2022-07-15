@@ -1,4 +1,4 @@
-import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { LoginRes, UserProfile } from '../../interfaces/auth.profile';
 import { Role } from '../database/base.entity';
 
@@ -14,5 +14,6 @@ registerEnumType(Role, { name: 'Role' });
 export class Me implements UserProfile {
   @Field() sub: string;
   @Field() loginId: string;
+  @Field(() => Int) userId: number;
   @Field(() => Role, { defaultValue: Role.GUEST }) role: Role;
 }
