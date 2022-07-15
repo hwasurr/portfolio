@@ -1,11 +1,18 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Game } from './game.entity';
 
+@ObjectType()
 @Entity()
 export class GameImage {
-  @PrimaryGeneratedColumn() id: number;
-  @Column() name: string;
-  @Column() src: string;
+  @Field(() => Int) @PrimaryGeneratedColumn() readonly id!: number;
+  @Field() @Column() name: string;
+  @Field() @Column() src: string;
 
-  @ManyToOne(() => Game, (game) => game.images, { cascade: true }) game: Game;
+  @ManyToOne(() => Game, (game) => game.images, {
+    onDelete: 'CASCADE',
+    nullable: false,
+    orphanedRowAction: 'delete',
+  })
+  game: Game;
 }

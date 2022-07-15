@@ -6459,6 +6459,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["class-validator", "npm:0.13.2"],\
             ["cookie-parser", "npm:1.4.6"],\
             ["cors", "npm:2.8.5"],\
+            ["dataloader", "npm:2.1.0"],\
             ["eslint", "npm:8.19.0"],\
             ["eslint-config-prettier", "virtual:a36918f531cb63d10a1f2f6ae4fc9c85787f9dce279b9260311277d576aff03c431b908926ceb80192669ea5c048a2f8ff99e1908147278af264bb49a2cae57d#npm:8.5.0"],\
             ["eslint-plugin-prettier", "virtual:a36918f531cb63d10a1f2f6ae4fc9c85787f9dce279b9260311277d576aff03c431b908926ceb80192669ea5c048a2f8ff99e1908147278af264bb49a2cae57d#npm:4.2.1"],\
@@ -8180,6 +8181,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["abab", "npm:2.0.6"],\
             ["whatwg-mimetype", "npm:3.0.0"],\
             ["whatwg-url", "npm:11.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["dataloader", [\
+        ["npm:2.1.0", {\
+          "packageLocation": "./.yarn/cache/dataloader-npm-2.1.0-d26357d865-bbd43496c4.zip/node_modules/dataloader/",\
+          "packageDependencies": [\
+            ["dataloader", "npm:2.1.0"]\
           ],\
           "linkType": "HARD"\
         }]\

@@ -1,4 +1,4 @@
-import { Role } from '../modules/database/base.entity';
+import { Role } from '@my/common';
 
 export interface UserProfile {
   sub: string;

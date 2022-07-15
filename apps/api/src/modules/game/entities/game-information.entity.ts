@@ -1,3 +1,5 @@
+import { Site, StandingStyle } from '@my/common';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 import {
   Column,
   Entity,
@@ -6,15 +8,17 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Site, StandingStyle } from '../../database/base.entity';
+
 import { Game } from './game.entity';
 
 @Entity()
+@ObjectType()
 export class GameInformation {
-  @PrimaryGeneratedColumn() id: number;
-  @Column({ type: 'longtext' }) howToPlay: string;
-  @Column({ nullable: true, type: 'text' }) benefit?: string;
+  @Field(() => Int) @PrimaryGeneratedColumn() readonly id!: number;
+  @Field() @Column({ type: 'longtext' }) howToPlay: string;
+  @Field() @Column({ nullable: true, type: 'text' }) benefit?: string;
 
+  @Field(() => Site, { defaultValue: Site.INDOOR })
   @Index()
   @Column({
     comment: '실내/실외/둘다가능',
@@ -24,6 +28,7 @@ export class GameInformation {
   })
   availableSite?: Site;
 
+  @Field(() => StandingStyle, { defaultValue: StandingStyle.SEDENTARY })
   @Index()
   @Column({
     comment: '좌식/입식',
@@ -31,15 +36,25 @@ export class GameInformation {
     enum: StandingStyle,
     default: StandingStyle.SEDENTARY,
   })
-  standingStyle?: Site;
+  standingStyle?: StandingStyle;
 
-  @Column({ comment: '최소 인원' }) minNumberOfPeople: number;
-  @Column({ comment: '최대 인원(9999=이상)' }) maxNumberOfPeople: number;
+  @Field(() => Int)
+  @Column({ comment: '최소 인원' })
+  minNumberOfPeople: number;
 
-  @Column({ comment: '최소 소요 시간' }) minMinuteTaken: number;
-  @Column({ comment: '최대 소요 시간' }) maxMinuteTaken: number;
+  @Field(() => Int)
+  @Column({ comment: '최대 인원(9999=이상)' })
+  maxNumberOfPeople: number;
 
-  @OneToOne(() => Game, (game) => game.information, { cascade: true })
+  @Field(() => Int)
+  @Column({ comment: '최소 소요 시간' })
+  minMinuteTaken: number;
+
+  @Field(() => Int)
+  @Column({ comment: '최대 소요 시간' })
+  maxMinuteTaken: number;
+
+  @OneToOne(() => Game, (game) => game.information, { onDelete: 'CASCADE' })
   @JoinColumn()
   game: Game;
 }

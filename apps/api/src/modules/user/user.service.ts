@@ -37,7 +37,7 @@ export class UserService {
     });
   }
 
-  public async update(id: User['id'], dto: UpdateUserDto): Promise<User> {
+  public async update(id: User['id'], dto: Omit<UpdateUserDto, 'id'>): Promise<User> {
     await this.userRepo.update(id, dto);
     return this.findOne(id);
   }

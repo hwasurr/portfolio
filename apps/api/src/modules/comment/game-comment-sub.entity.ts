@@ -1,7 +1,9 @@
+import { ObjectType } from '@nestjs/graphql';
 import { Entity, ManyToOne } from 'typeorm';
-import { Content } from '../../database/base.entity';
+import { Content } from '../database/base.entity';
 import { GameComment } from './game-comment.entity';
 
+@ObjectType()
 @Entity()
 export class GameCommentSub extends Content {
   // 코멘트 - 일대다 - 서브코멘트 관계정의

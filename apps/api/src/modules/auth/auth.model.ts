@@ -1,6 +1,6 @@
 import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { Role } from '@my/common';
 import { LoginRes, UserProfile } from '../../interfaces/auth.profile';
-import { Role } from '../database/base.entity';
 
 @ObjectType()
 export class Login implements LoginRes {

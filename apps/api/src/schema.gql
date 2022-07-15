@@ -2,11 +2,9 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type User {
+type GameComment {
   id: Int!
-  loginId: String!
-  nickname: String
-  avatar: String
+  title: String!
   createDate: DateTime!
   updateDate: DateTime!
 }
@@ -15,6 +13,65 @@ type User {
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
+
+type GameImage {
+  id: Int!
+  name: String!
+  src: String!
+}
+
+type GameInformation {
+  id: Int!
+  howToPlay: String!
+  benefit: String!
+  availableSite: Site!
+  standingStyle: StandingStyle!
+  minNumberOfPeople: Int!
+  maxNumberOfPeople: Int!
+  minMinuteTaken: Int!
+  maxMinuteTaken: Int!
+}
+
+enum Site {
+  INDOOR
+  OUTDOOR
+  BOTH
+}
+
+enum StandingStyle {
+  SEDENTARY
+  STANDING
+}
+
+type Game {
+  id: Int!
+  title: String!
+  createDate: DateTime!
+  updateDate: DateTime!
+  titleEmoji: String!
+  gamename: String!
+  summary: String!
+  images: [GameImage]!
+  information: GameInformation!
+  comments: [GameComment]!
+  reactions: [GameReaction]!
+}
+
+type GameReaction {
+  id: Int!
+  reactionEmoji: String!
+}
+
+type User {
+  id: Int!
+  loginId: String!
+  nickname: String
+  avatar: String
+  role: String
+  createDate: DateTime!
+  updateDate: DateTime!
+  reactions: [GameReaction]!
+}
 
 type Login {
   accessToken: String!
@@ -33,11 +90,20 @@ enum Role {
   EDITOR
 }
 
+type GameCommentSub {
+  id: Int!
+  title: String!
+  createDate: DateTime!
+  updateDate: DateTime!
+}
+
 type Query {
   login(loginId: String!, password: String!): Login!
   profile: Me!
   user(id: Int!): User
   users(pagination: PaginationDto!): [User!]
+  game(id: Float!): Game
+  games: [Game!]!
 }
 
 input PaginationDto {
@@ -49,6 +115,9 @@ type Mutation {
   createUser(data: CreateUserDto!): User!
   updateUser(data: UpdateUserDto!): User!
   deleteUser(id: Int!): Boolean!
+  createGame(data: CreateGameDto!): Game!
+  updateGame(data: UpdateGameDto!): Game!
+  deleteGame(id: Float!): Boolean!
 }
 
 input CreateUserDto {
@@ -63,4 +132,47 @@ input UpdateUserDto {
   nickname: String
   avatar: String
   id: Int!
+}
+
+input CreateGameDto {
+  title: String!
+  titleEmoji: String!
+  gamename: String!
+  summary: String!
+  images: [CreateGameImageDto!]!
+  information: CreateGameInformationDto!
+}
+
+input CreateGameImageDto {
+  id: Int
+  gameId: Int
+  name: String!
+  src: String!
+}
+
+input CreateGameInformationDto {
+  howToPlay: String!
+  benefit: String
+  availableSite: Site
+  standingStyle: StandingStyle
+  minNumberOfPeople: Int!
+  maxNumberOfPeople: Int!
+  minMinuteTaken: Int!
+  maxMinuteTaken: Int!
+}
+
+input UpdateGameDto {
+  title: String
+  titleEmoji: String
+  summary: String
+  information: CreateGameInformationDto
+  id: Int!
+  images: [UpdateGameImageDto!]!
+}
+
+input UpdateGameImageDto {
+  id: Int
+  gameId: Int
+  name: String!
+  src: String!
 }

@@ -2,7 +2,7 @@ import { CreateUserDto, PaginationDto, UpdateUserDto } from '@my/common';
 import { ParseIntPipe, UseGuards } from '@nestjs/common';
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GqlJwtGuard } from '../core/guards/gql-jwt.guard';
-import { User } from './user.model';
+import { User } from './user.entity';
 import { UserService } from './user.service';
 
 @Resolver(() => User)
@@ -28,8 +28,9 @@ export class UserResolver {
 
   @UseGuards(GqlJwtGuard)
   @Mutation(() => User, { name: 'updateUser' })
-  public async updateUser(@Args('data') args: UpdateUserDto): Promise<User> {
-    return this.userService.update(args.id, args);
+  public async updateUser(@Args('data') dto: UpdateUserDto): Promise<User> {
+    const { id, ..._dto } = dto;
+    return this.userService.update(id, _dto);
   }
 
   @UseGuards(GqlJwtGuard)

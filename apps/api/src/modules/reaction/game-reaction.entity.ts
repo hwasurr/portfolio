@@ -1,11 +1,18 @@
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { User } from '../../user/user.entity';
-import { Game } from './game.entity';
+import { Game } from '../game/entities/game.entity';
+import { User } from '../user/user.entity';
 
+@ObjectType()
 @Entity()
 export class GameReaction {
-  @PrimaryGeneratedColumn() id: number;
-  @Column({ comment: '리액션 이모지', length: 1, type: 'char' }) reactionEmoji: string;
+  @Field(() => Int)
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Field()
+  @Column({ comment: '리액션 이모지', length: 1, type: 'char' })
+  reactionEmoji: string;
 
   // 게임 - 다대다 - 유저 -> 리액션 관계정의
   @ManyToOne(() => User, (user) => user.reactions, { cascade: true })

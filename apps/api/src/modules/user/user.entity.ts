@@ -1,3 +1,5 @@
+import { Role } from '@my/common';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 import {
   Column,
   CreateDateColumn,
@@ -7,22 +9,44 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Role } from '../database/base.entity';
-import { GameReaction } from '../game/entities/game-reaction.entity';
+import { GameReaction } from '../reaction/game-reaction.entity';
 
+@ObjectType()
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn() readonly id!: number;
-  @Index({ unique: true }) @Column() loginId: string;
-  @Column() password: string;
-  @Column({ nullable: true }) nickname?: string;
-  @Column({ nullable: true }) avatar?: string;
-  @Column({ type: 'enum', enum: Role, default: Role.GUEST }) role?: Role;
+  @Field(() => Int)
+  @PrimaryGeneratedColumn()
+  readonly id!: number;
 
-  @CreateDateColumn() readonly createDate!: Date;
-  @UpdateDateColumn() readonly updateDate!: Date;
+  @Field()
+  @Index({ unique: true })
+  @Column()
+  loginId: string;
+
+  @Column() password: string;
+
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  nickname?: string;
+
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  avatar?: string;
+
+  @Field({ nullable: true, defaultValue: 'enum' })
+  @Column({ type: 'enum', enum: Role, default: Role.GUEST })
+  role?: Role;
+
+  @Field()
+  @CreateDateColumn()
+  readonly createDate!: Date;
+
+  @Field()
+  @UpdateDateColumn()
+  readonly updateDate!: Date;
 
   // 관계
+  @Field(() => [GameReaction], { nullable: 'items' })
   @OneToMany(() => GameReaction, (reaction) => reaction.user, {
     onDelete: 'CASCADE',
     nullable: true,

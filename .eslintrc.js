@@ -60,7 +60,7 @@ module.exports = {
           },
         ],
         '@typescript-eslint/no-var-requires': 'warn',
-        '@typescript-eslint/no-use-before-define': 2,
+        '@typescript-eslint/no-use-before-define': 0,
         '@typescript-eslint/no-shadow': 'error',
         '@typescript-eslint/explicit-function-return-type': [
           'error',
