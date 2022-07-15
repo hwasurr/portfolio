@@ -55,3 +55,6 @@ Thumbs.db
 *.xlsx
 
 __generated__
+
+.yarn/unplugged
+.yarn/build-state.yml
