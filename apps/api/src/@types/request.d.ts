@@ -1,3 +1,5 @@
+import type { UserProfile } from '../interfaces/auth.profile';
+
 declare global {
   namespace Express {
     export interface Request {
@@ -5,9 +7,6 @@ declare global {
       // csrfToken(): string;
     }
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
-    interface User {
-      userId: string;
-      loginId: string;
-    }
+    interface User extends UserProfile {}
   }
 }

@@ -7,9 +7,10 @@ export class GraphQLModuleSetting implements GqlOptionsFactory<ApolloDriverConfi
   async createGqlOptions(): Promise<Omit<ApolloDriverConfig, 'driver'>> {
     return {
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      plugins: [ApolloServerPluginLandingPageLocalDefault()],
+      plugins: [ApolloServerPluginLandingPageLocalDefault({ includeCookies: true })],
       playground: false,
       debug: true,
+      context: ({ req, res }) => ({ req, res }),
     };
   }
 }

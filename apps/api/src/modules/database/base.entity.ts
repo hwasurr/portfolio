@@ -34,3 +34,10 @@ export enum StandingStyle {
   SEDENTARY = 'SEDENTARY',
   STANDING = 'STANDING',
 }
+
+/** 사용자 권한역할 */
+export enum Role {
+  ADMIN = 'ADMIN',
+  GUEST = 'GUEST',
+  EDITOR = 'EDITOR',
+}

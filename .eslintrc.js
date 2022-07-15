@@ -51,47 +51,47 @@ module.exports = {
     {
       files: ['*.ts', '*.tsx'],
       rules: {
-        "@typescript-eslint/no-unused-vars": [
+        '@typescript-eslint/no-unused-vars': [
           1,
           {
-            "args": "all",
-            "argsIgnorePattern": "^_",
-            "varsIgnorePattern": "^__"
-          }
+            args: 'all',
+            argsIgnorePattern: '^_',
+            varsIgnorePattern: '^__',
+          },
         ],
-        "@typescript-eslint/no-var-requires": "warn",
-        "@typescript-eslint/no-use-before-define": 2,
-        "@typescript-eslint/no-shadow": "error",
-        "@typescript-eslint/explicit-function-return-type": [
-          "error",
+        '@typescript-eslint/no-var-requires': 'warn',
+        '@typescript-eslint/no-use-before-define': 2,
+        '@typescript-eslint/no-shadow': 'error',
+        '@typescript-eslint/explicit-function-return-type': [
+          'error',
           {
-            "allowExpressions": true
-          }
-        ]
-      }
+            allowExpressions: true,
+          },
+        ],
+      },
     },
     // Typescript specific rules
     {
       files: ['*.ts'],
       rules: {
         '@typescript-eslint/interface-name-prefix': 'off',
-        '@typescript-eslint/explicit-function-return-type': 'off',
+        '@typescript-eslint/explicit-function-return-type': 'error',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
-        "no-useless-constructor": "off",
-        "lines-between-class-members": [
-          "error",
-          "always",
+        'no-useless-constructor': 'off',
+        'lines-between-class-members': [
+          'error',
+          'always',
           {
-            "exceptAfterSingleLine": true
-          }
+            exceptAfterSingleLine: true,
+          },
         ],
-        "no-use-before-define": "off",
-        "no-shadow": "off",
-        "max-classes-per-file": "off",
-        "class-methods-use-this": "off",
-        "import/newline-after-import": "error",
-        "import/prefer-default-export": "off",
+        'no-use-before-define': 'off',
+        'no-shadow': 'off',
+        'max-classes-per-file': 'off',
+        'class-methods-use-this': 'off',
+        'import/newline-after-import': 'error',
+        'import/prefer-default-export': 'off',
       },
     },
     // React(jsx,tsx)  specific rules
@@ -132,8 +132,8 @@ module.exports = {
     {
       files: ['index.ts', 'index.js'],
       rules: {
-        'import/prefer-default-export': 'off'
-      }
-    }
-  ]
+        'import/prefer-default-export': 'off',
+      },
+    },
+  ],
 };

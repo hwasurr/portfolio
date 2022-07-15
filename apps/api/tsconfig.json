@@ -23,5 +23,5 @@
     "allowUmdGlobalAccess": true,
     "esModuleInterop": true,
   },
-  "include": ["@types/*"]
+  "include": ["@types/*", "src"]
 }

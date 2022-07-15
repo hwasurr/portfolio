@@ -12,7 +12,7 @@ export class AppSetting {
     private readonly configService: ConfigService,
   ) {}
 
-  public initialize() {
+  public initialize(): NestExpressApplication {
     // Some API settings are located here.
 
     this.app.use(
@@ -28,7 +28,7 @@ export class AppSetting {
     this.app.use(
       cookieParser(this.configService.get('COOKIE_SECRET') || 'COOKIE_SECRET'),
     );
-    this.app.use(morgan('common'));
+    // this.app.use(morgan('common'));
     return this.app;
   }
 }

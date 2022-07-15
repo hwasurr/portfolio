@@ -1,4 +1,4 @@
-import { CreateUserDto, PaginationDto, UpdateUserDto } from '@my/common/dist/src';
+import { CreateUserDto, PaginationDto, UpdateUserDto } from '@my/common';
 import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import argon2 from 'argon2';

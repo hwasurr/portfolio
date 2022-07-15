@@ -5,8 +5,8 @@
     "outDir": "dist",
     "composite": true,
     "declaration": true,
-    "target": "ES6",
-    "module": "commonjs"
+    "target": "es2022",
+    "module": "CommonJS"
   },
   "include": [
     "src/**/*",

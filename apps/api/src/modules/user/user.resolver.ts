@@ -1,4 +1,4 @@
-import { CreateUserDto, PaginationDto, UpdateUserDto } from '@my/common/dist/src';
+import { CreateUserDto, PaginationDto, UpdateUserDto } from '@my/common';
 import { ParseIntPipe, UseGuards } from '@nestjs/common';
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GqlJwtGuard } from '../core/guards/gql-jwt.guard';
@@ -32,6 +32,7 @@ export class UserResolver {
     return this.userService.update(args.id, args);
   }
 
+  @UseGuards(GqlJwtGuard)
   @Mutation(() => Boolean, { name: 'deleteUser' })
   public async deleteUser(
     @Args('id', { type: () => Int }, ParseIntPipe) id: number,
