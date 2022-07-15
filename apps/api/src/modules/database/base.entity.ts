@@ -2,6 +2,7 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 import {
   Column,
   CreateDateColumn,
+  Index,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -12,7 +13,7 @@ import {
 @ObjectType()
 export abstract class Content {
   @Field(() => Int) @PrimaryGeneratedColumn() readonly id!: number;
-  @Field() @Column({ comment: '제목' }) title: string;
+  @Index({ unique: true }) @Field() @Column({ comment: '제목' }) title: string;
 
   @Field(() => Date)
   @CreateDateColumn({ comment: '생성일' })

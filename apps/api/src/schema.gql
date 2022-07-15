@@ -90,6 +90,15 @@ enum Role {
   EDITOR
 }
 
+type Tag {
+  id: Int!
+  title: String!
+  createDate: DateTime!
+  updateDate: DateTime!
+  color: String!
+  description: String!
+}
+
 type GameCommentSub {
   id: Int!
   title: String!
@@ -102,8 +111,10 @@ type Query {
   profile: Me!
   user(id: Int!): User
   users(pagination: PaginationDto!): [User!]
-  game(id: Float!): Game
+  game(id: Int!): Game
   games: [Game!]!
+  tag(id: Int!): Tag!
+  tags: [Tag]!
 }
 
 input PaginationDto {
@@ -117,7 +128,10 @@ type Mutation {
   deleteUser(id: Int!): Boolean!
   createGame(data: CreateGameDto!): Game!
   updateGame(data: UpdateGameDto!): Game!
-  deleteGame(id: Float!): Boolean!
+  deleteGame(id: Int!): Boolean!
+  createTag(data: CreateTagDto!): Tag!
+  updateTag(data: UpdateTagDto!): Tag!
+  deleteTag(id: Int!): Boolean!
 }
 
 input CreateUserDto {
@@ -175,4 +189,17 @@ input UpdateGameImageDto {
   gameId: Int
   name: String!
   src: String!
+}
+
+input CreateTagDto {
+  title: String!
+  color: String!
+  description: String!
+}
+
+input UpdateTagDto {
+  title: String
+  color: String
+  description: String
+  id: Float!
 }

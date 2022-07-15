@@ -1,6 +1,14 @@
 import { CreateGameDto, UpdateGameDto } from '@my/common';
 import { ParseIntPipe, ValidationPipe } from '@nestjs/common';
-import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  Int,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
 import { CommentService } from '../comment/comment.service';
 import { GameComment } from '../comment/game-comment.entity';
 import { GameReaction } from '../reaction/game-reaction.entity';
@@ -19,7 +27,9 @@ export class GameResolver {
   ) {}
 
   @Query(() => Game, { name: 'game', nullable: true })
-  public async findGame(@Args('id', ParseIntPipe) gameId: number): Promise<Game | null> {
+  public async findGame(
+    @Args('id', { type: () => Int }, ParseIntPipe) gameId: number,
+  ): Promise<Game | null> {
     return this.gameService.findOne(gameId);
   }
 
@@ -64,7 +74,9 @@ export class GameResolver {
   }
 
   @Mutation(() => Boolean, { name: 'deleteGame' })
-  public async deleteGame(@Args('id', ParseIntPipe) gameId: number): Promise<boolean> {
+  public async deleteGame(
+    @Args('id', { type: () => Int }, ParseIntPipe) gameId: number,
+  ): Promise<boolean> {
     return this.gameService.delete(gameId);
   }
 }
