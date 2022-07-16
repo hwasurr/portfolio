@@ -4,3 +4,4 @@ export * from './dto/game.dto';
 export * from './dto/tag.dto';
 export * from './dto/user.dto';
 export * from './enum/enums';
+export * from './dto/comment.dto';

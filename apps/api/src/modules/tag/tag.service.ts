@@ -1,6 +1,6 @@
 import { CreateTagDto, UpdateTagDto } from '@my/common';
 import { Inject, Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Repository, In } from 'typeorm';
 import { TAG_REPOSITORY } from '../../constants/inject-keys/tag.repository';
 import { Tag } from './tag.entity';
 
@@ -15,7 +15,9 @@ export class TagService {
     return this.tagRepo.findOne({ where: { id } });
   }
 
-  public async findAll(): Promise<Tag[]> {
+  public async findAll(tagIds?: Tag['id'][]): Promise<Tag[]> {
+    if (tagIds && tagIds.length > 0)
+      return this.tagRepo.find({ where: { id: In(tagIds) } });
     return this.tagRepo.find();
   }
 
@@ -30,6 +32,6 @@ export class TagService {
 
   public async delete(id: Tag['id']): Promise<boolean> {
     const result = await this.tagRepo.delete(id);
-    return !!result;
+    return !!result.affected;
   }
 }

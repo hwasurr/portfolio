@@ -1,4 +1,4 @@
-import { CreateGameDto, UpdateGameDto } from '@my/common';
+import { AddOrRemoveGameTagDto, CreateGameDto, UpdateGameDto } from '@my/common';
 import { ParseIntPipe, ValidationPipe } from '@nestjs/common';
 import {
   Args,
@@ -13,9 +13,11 @@ import { CommentService } from '../comment/comment.service';
 import { GameComment } from '../comment/game-comment.entity';
 import { GameReaction } from '../reaction/game-reaction.entity';
 import { ReactionService } from '../reaction/reaction.service';
+import { Tag } from '../tag/tag.entity';
 import { GameImage } from './entities/game-image.entity';
 import { GameInformation } from './entities/game-information.entity';
 import { Game } from './entities/game.entity';
+import { GameTagService } from './game-tag.service';
 import { GameService } from './game.service';
 
 @Resolver(() => Game)
@@ -24,6 +26,7 @@ export class GameResolver {
     private readonly gameService: GameService,
     private readonly commentService: CommentService,
     private readonly reactionService: ReactionService,
+    private readonly gametagService: GameTagService,
   ) {}
 
   @Query(() => Game, { name: 'game', nullable: true })
@@ -78,5 +81,21 @@ export class GameResolver {
     @Args('id', { type: () => Int }, ParseIntPipe) gameId: number,
   ): Promise<boolean> {
     return this.gameService.delete(gameId);
+  }
+
+  @Mutation(() => Game, { name: 'addGameTag' })
+  public async addGameTag(
+    @Args(ValidationPipe) dto: AddOrRemoveGameTagDto,
+  ): Promise<Game> {
+    const { gameId, tagId } = dto;
+    return this.gametagService.addGameTag(gameId, tagId);
+  }
+
+  @Mutation(() => Game, { name: 'removeGameTag' })
+  public async removeGameTag(
+    @Args(ValidationPipe) dto: AddOrRemoveGameTagDto,
+  ): Promise<Game> {
+    const { gameId, tagId } = dto;
+    return this.gametagService.removeGameTag(gameId, tagId);
   }
 }

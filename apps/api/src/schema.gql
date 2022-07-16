@@ -2,17 +2,36 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type GameComment {
+type GameCommentSub {
   id: Int!
   title: String!
   createDate: DateTime!
   updateDate: DateTime!
+  conetnts: String!
 }
 
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
+
+type GameComment {
+  id: Int!
+  title: String!
+  createDate: DateTime!
+  updateDate: DateTime!
+  conetnts: String!
+  subComments(id: Int!): [GameCommentSub]
+}
+
+type Tag {
+  id: Int!
+  title: String!
+  createDate: DateTime!
+  updateDate: DateTime!
+  color: String!
+  description: String!
+}
 
 type GameImage {
   id: Int!
@@ -90,22 +109,6 @@ enum Role {
   EDITOR
 }
 
-type Tag {
-  id: Int!
-  title: String!
-  createDate: DateTime!
-  updateDate: DateTime!
-  color: String!
-  description: String!
-}
-
-type GameCommentSub {
-  id: Int!
-  title: String!
-  createDate: DateTime!
-  updateDate: DateTime!
-}
-
 type Query {
   login(loginId: String!, password: String!): Login!
   profile: Me!
@@ -113,6 +116,10 @@ type Query {
   users(pagination: PaginationDto!): [User!]
   game(id: Int!): Game
   games: [Game!]!
+  comments(gameId: Int!): [GameComment]!
+  comment(id: Int!): GameComment
+  subComments(commentId: Int!): [GameCommentSub]
+  reactions(gameId: Int!): [GameReaction!]!
   tag(id: Int!): Tag!
   tags: [Tag]!
 }
@@ -129,6 +136,16 @@ type Mutation {
   createGame(data: CreateGameDto!): Game!
   updateGame(data: UpdateGameDto!): Game!
   deleteGame(id: Int!): Boolean!
+  addGameTag(gameId: Int!, tagId: Int!): Game!
+  removeGameTag(gameId: Int!, tagId: Int!): Game!
+  createComment(data: CreateCommentDto!): GameComment!
+  updateComment(data: UpdateCommentDto!): GameComment!
+  deleteComment(id: Int!): Boolean!
+  createSubComment(data: CreateSubCommentDto!): GameCommentSub!
+  updateSubComment(data: UpdateSubCommentDto!): GameCommentSub!
+  deleteSubComment(id: Int!): Boolean!
+  addGameReaction(gameId: Int!, tagId: Int!): GameReaction!
+  removeGameReaction(id: Int!): GameReaction!
   createTag(data: CreateTagDto!): Tag!
   updateTag(data: UpdateTagDto!): Tag!
   deleteTag(id: Int!): Boolean!
@@ -153,6 +170,7 @@ input CreateGameDto {
   titleEmoji: String!
   gamename: String!
   summary: String!
+  tagIds: [Int!]!
   images: [CreateGameImageDto!]!
   information: CreateGameInformationDto!
 }
@@ -182,6 +200,7 @@ input UpdateGameDto {
   information: CreateGameInformationDto
   id: Int!
   images: [UpdateGameImageDto!]!
+  tags: [UpdateTagDto!]!
 }
 
 input UpdateGameImageDto {
@@ -191,15 +210,39 @@ input UpdateGameImageDto {
   src: String!
 }
 
-input CreateTagDto {
-  title: String!
-  color: String!
-  description: String!
-}
-
 input UpdateTagDto {
   title: String
   color: String
   description: String
   id: Float!
+}
+
+input CreateCommentDto {
+  title: String!
+  conetnts: String!
+}
+
+input UpdateCommentDto {
+  title: String
+  conetnts: String
+  id: Float!
+}
+
+input CreateSubCommentDto {
+  title: String!
+  conetnts: String!
+  commentId: Float!
+}
+
+input UpdateSubCommentDto {
+  title: String
+  conetnts: String
+  commentId: Float
+  id: Float!
+}
+
+input CreateTagDto {
+  title: String!
+  color: String!
+  description: String!
 }

@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { Field, InputType, Int, OmitType, PartialType } from '@nestjs/graphql';
+import { ArgsType, Field, InputType, Int, OmitType, PartialType } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
 import { IsEnum, IsNumber, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { Site, StandingStyle } from '../enum/enums';
+import { UpdateTagDto } from './tag.dto';
 
 @InputType()
 export class CreateGameInformationDto {
@@ -43,6 +44,7 @@ export class CreateGameDto {
   @Field() @IsString() titleEmoji: string;
   @Field() @IsString() gamename: string;
   @Field() @IsString() summary: string;
+  @Field(() => [Int]) @IsNumber({}, { each: true }) tagIds: number[];
 
   @Field(() => [CreateGameImageDto])
   @Type(() => CreateGameImageDto)
@@ -60,7 +62,7 @@ export class UpdateGameImageDto extends CreateGameImageDto {}
 
 @InputType()
 export class UpdateGameDto extends PartialType(
-  OmitType(CreateGameDto, ['gamename', 'images']),
+  OmitType(CreateGameDto, ['gamename', 'images', 'tagIds']),
 ) {
   @IsNumber() @Field(() => Int) id: number;
 
@@ -68,4 +70,18 @@ export class UpdateGameDto extends PartialType(
   @Type(() => UpdateGameImageDto)
   @ValidateNested({ each: true })
   images: UpdateGameImageDto[];
+
+  @Field(() => [UpdateTagDto])
+  @Type(() => UpdateTagDto)
+  @ValidateNested({ each: true })
+  tags: UpdateTagDto[];
 }
+
+@ArgsType()
+export class AddOrRemoveGameTagDto {
+  @Field(() => Int) @IsNumber() gameId: number;
+  @Field(() => Int) @IsNumber() tagId: number;
+}
+
+@ArgsType()
+export class AddGameReactionDto extends AddOrRemoveGameTagDto {}

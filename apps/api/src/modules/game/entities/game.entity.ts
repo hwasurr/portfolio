@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, Index, OneToMany, OneToOne } from 'typeorm';
+import { Column, Entity, Index, ManyToMany, OneToMany, OneToOne } from 'typeorm';
 import { GameComment } from '../../comment/game-comment.entity';
 import { Content } from '../../database/base.entity';
 import { GameReaction } from '../../reaction/game-reaction.entity';
+import { Tag } from '../../tag/tag.entity';
 import { GameImage } from './game-image.entity';
 import { GameInformation } from './game-information.entity';
 
@@ -46,13 +47,17 @@ export class Game extends Content {
   })
   comments: GameComment[];
 
-  // 게임 - 다대다 - 유저 -> 리액션 관계정의
+  // 게임 - 다대다(리액션) - 유저 관계정의
   @Field(() => [GameReaction], { nullable: 'items' })
   @OneToMany(() => GameReaction, (reaction) => reaction.game, {
     onDelete: 'CASCADE',
     nullable: true,
   })
   reactions: GameReaction[];
+
+  // 게임 - 다대다 - 태그
+  @ManyToMany(() => Tag, { cascade: true })
+  tags: Tag[];
 }
 
 // TODO 제보 (유저 등록 게임)

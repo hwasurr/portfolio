@@ -1,11 +1,8 @@
+import { CreateCommentDto, UpdateCommentDto } from '@my/common';
 import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import {
-  GAME_COMMENT_REPOSITORY,
-  GAME_COMMENT_SUB_REPOSITORY,
-} from '../../constants/inject-keys/comment.repository';
+import { GAME_COMMENT_REPOSITORY } from '../../constants/inject-keys/comment.repository';
 import { Game } from '../game/entities/game.entity';
-import { GameCommentSub } from './game-comment-sub.entity';
 import { GameComment } from './game-comment.entity';
 
 @Injectable()
@@ -13,27 +10,34 @@ export class CommentService {
   constructor(
     @Inject(GAME_COMMENT_REPOSITORY)
     private readonly commentRepo: Repository<GameComment>,
-    @Inject(GAME_COMMENT_SUB_REPOSITORY)
-    private readonly subCommentRepo: Repository<GameCommentSub>,
   ) {}
 
-  findOne(id: GameComment['id']): Promise<GameComment> {
+  public async findOne(id: GameComment['id']): Promise<GameComment> {
     return this.commentRepo.findOne({ where: { id } });
   }
 
-  findAll(): Promise<GameComment[]> {
+  public async findAll(): Promise<GameComment[]> {
     return this.commentRepo.find();
   }
 
-  findAllByGameId(gameId: Game['id']): Promise<GameComment[]> {
+  public async findAllByGameId(gameId: Game['id']): Promise<GameComment[]> {
     return this.commentRepo.find({ where: { game: { id: gameId } } });
   }
 
-  // create() {};
-  // update() {};
-  // delete() {};
+  public async create(dto: CreateCommentDto): Promise<GameComment> {
+    return this.commentRepo.save(dto);
+  }
 
-  findSubComments(commentId: GameComment['id']): Promise<GameCommentSub[]> {
-    return this.subCommentRepo.find({ where: { comment: { id: commentId } } });
+  public async update(
+    id: GameComment['id'],
+    dto: Omit<UpdateCommentDto, 'id'>,
+  ): Promise<GameComment> {
+    await this.commentRepo.update(id, dto);
+    return this.findOne(id);
+  }
+
+  public async delete(id: GameComment['id']): Promise<boolean> {
+    const result = await this.commentRepo.delete(id);
+    return !!result.affected;
   }
 }

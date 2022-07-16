@@ -1,12 +1,15 @@
 import { CreateGameDto, UpdateGameDto } from '@my/common';
 import { Inject, Injectable, InternalServerErrorException } from '@nestjs/common';
-import { DataSource, Repository } from 'typeorm';
+import { DataSource, In, Repository } from 'typeorm';
 import { DATA_SOURCE } from '../../constants/inject-keys/datasource';
 import {
   GAME_IMAGE_REPOSITORY,
   GAME_INFORMATION_REPOSITORY,
   GAME_REPOSITORY,
 } from '../../constants/inject-keys/game.repository';
+import { TAG_REPOSITORY } from '../../constants/inject-keys/tag.repository';
+import { Tag } from '../tag/tag.entity';
+import { TagService } from '../tag/tag.service';
 import { GameImage } from './entities/game-image.entity';
 import { GameInformation } from './entities/game-information.entity';
 import { Game } from './entities/game.entity';
@@ -21,6 +24,7 @@ export class GameService {
     private readonly gameImageRepo: Repository<GameImage>,
     @Inject(GAME_INFORMATION_REPOSITORY)
     private readonly gameInfoRepo: Repository<GameInformation>,
+    private readonly tagService: TagService,
   ) {}
 
   public async findOne(id: number): Promise<Game | null> {
@@ -32,7 +36,10 @@ export class GameService {
   }
 
   public async create(dto: CreateGameDto): Promise<Game> {
-    return this.gameRepo.save(dto);
+    const { tagIds, ..._dto } = dto;
+    const tags = await this.tagService.findAll(tagIds);
+    const newGame = this.gameRepo.create({ ..._dto, tags });
+    return this.gameRepo.save(newGame);
   }
 
   public async update(id: number, dto: Omit<UpdateGameDto, 'id'>): Promise<Game> {
@@ -62,7 +69,7 @@ export class GameService {
 
   public async delete(id: Game['id']): Promise<boolean> {
     const result = await this.gameRepo.delete(id);
-    return !!result;
+    return !!result.affected;
   }
 
   public async findImages(gameId: number): Promise<GameImage[]> {
