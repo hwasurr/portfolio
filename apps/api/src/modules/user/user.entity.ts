@@ -30,7 +30,7 @@ export class User {
   nickname?: string;
 
   @Field({ nullable: true })
-  @Column({ nullable: true })
+  @Column({ nullable: true, comment: '아바타 이모지', length: 1, type: 'char' })
   avatar?: string;
 
   @Field({ nullable: true, defaultValue: 'enum' })

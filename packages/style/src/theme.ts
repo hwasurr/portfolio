@@ -218,7 +218,7 @@ export const palette: IPalette = {
     dark: '#fff',
   },
   gray: {
-    light: '#EDF2F7',
+    light: '#E2E8F0',
     medium: '#A0AEC0',
     dark: '#718096',
   },

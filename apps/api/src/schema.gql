@@ -20,7 +20,7 @@ type GameComment {
   title: String!
   createDate: DateTime!
   updateDate: DateTime!
-  conetnts: String!
+  contents: String!
   subComments(id: Int!): [GameCommentSub]
 }
 
@@ -219,24 +219,24 @@ input UpdateTagDto {
 
 input CreateCommentDto {
   title: String!
-  conetnts: String!
+  contents: String!
 }
 
 input UpdateCommentDto {
   title: String
-  conetnts: String
+  contents: String
   id: Float!
 }
 
 input CreateSubCommentDto {
   title: String!
-  conetnts: String!
+  contents: String!
   commentId: Float!
 }
 
 input UpdateSubCommentDto {
   title: String
-  conetnts: String
+  contents: String
   commentId: Float
   id: Float!
 }

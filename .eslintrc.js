@@ -68,6 +68,13 @@ module.exports = {
             allowExpressions: true,
           },
         ],
+        'lines-between-class-members': [
+          'error',
+          'always',
+          {
+            exceptAfterSingleLine: true,
+          },
+        ],
       },
     },
     // Typescript specific rules
@@ -79,13 +86,6 @@ module.exports = {
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
         'no-useless-constructor': 'off',
-        'lines-between-class-members': [
-          'error',
-          'always',
-          {
-            exceptAfterSingleLine: true,
-          },
-        ],
         'no-use-before-define': 'off',
         'no-shadow': 'off',
         'max-classes-per-file': 'off',

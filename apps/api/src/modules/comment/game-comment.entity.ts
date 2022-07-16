@@ -7,7 +7,7 @@ import { GameCommentSub } from './game-comment-sub.entity';
 @ObjectType()
 @Entity()
 export class GameComment extends Content {
-  @Field() conetnts: string;
+  @Field() contents: string;
   // 게임 - 일대다 - 코멘트 관계정의
   @ManyToOne(() => Game, (game) => game.comments, { cascade: true })
   game: Game;

@@ -1,8 +1,9 @@
 import { css, Interpolation, useTheme } from '@emotion/react';
 import { IPaletteChromaticColors, ITheme } from '@my/style';
-import { PropsWithChildren, useMemo } from 'react';
+import { HTMLProps, useMemo } from 'react';
 
-export interface ButtonProps extends PropsWithChildren {
+type HTMLButtonProps = Omit<HTMLProps<HTMLButtonElement>, 'size'>;
+export interface ButtonProps extends HTMLButtonProps {
   onClick?: () => void;
   type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
   size?: 'sm' | 'md' | 'lg';
@@ -19,6 +20,7 @@ export function Button({
   variant = 'solid',
   sx,
   onClick,
+  ...props
 }: ButtonProps): JSX.Element {
   const theme = useTheme();
   const realSize = useMemo((): string => {
@@ -56,10 +58,19 @@ export function Button({
     borderRadius: theme.borderRadius.lg,
     color: theme.palette.white.medium,
     fontWeight: theme.fontWeight.semiBold,
-    transition: '0.3s background-color, 0.2s color',
-    ':hover': {
+    transition: '0.3s background-color, 0.2s color, 0.1s transform',
+    ':hover:not(:disabled)': {
       backgroundColor: theme.palette[color].dark,
       color: theme.palette.white.medium,
+    },
+    ':active:not(:disabled)': {
+      transform: 'translateY(0.125rem)',
+    },
+    ':disabled': {
+      cursor: 'not-allowed',
+      opacity: 0.4,
+      ':hover': { backgroundColor: undefined, color: undefined },
+      ':active': { transform: undefined },
     },
   });
   return (
@@ -72,6 +83,7 @@ export function Button({
         sx,
       ]}
       onClick={onClick}
+      {...props}
     >
       {children}
     </button>

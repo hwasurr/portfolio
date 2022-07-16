@@ -4,7 +4,7 @@ import { IsNumber, IsString } from 'class-validator';
 @InputType()
 export class CreateCommentDto {
   @IsString() @Field() title: string;
-  @IsString() @Field() conetnts: string;
+  @IsString() @Field() contents: string;
 }
 
 @InputType()

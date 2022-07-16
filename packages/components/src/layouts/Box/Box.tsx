@@ -30,7 +30,16 @@ export interface BoxProps extends PropsWithChildren {
   marginY?: ISpacingKey;
   gap?: ISpacingKey;
   rounded?: IBorderRadiusKey;
-  as?: 'div' | 'section' | 'article' | 'aside' | 'main' | 'header' | 'footer' | 'span';
+  as?:
+    | 'div'
+    | 'section'
+    | 'article'
+    | 'aside'
+    | 'main'
+    | 'header'
+    | 'footer'
+    | 'span'
+    | 'form';
   sx?: Interpolation<ITheme>;
 }
 
