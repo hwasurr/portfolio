@@ -1,6 +1,6 @@
-import { AddGameReactionDto } from '@my/common';
 import { ParseIntPipe, ValidationPipe } from '@nestjs/common';
 import { Resolver, Query, Args, Int, Mutation } from '@nestjs/graphql';
+import { AddGameReactionDto } from '../../dto/game.dto';
 import { GameReaction } from './game-reaction.entity';
 import { ReactionService } from './reaction.service';
 

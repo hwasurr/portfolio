@@ -1,0 +1,8 @@
+query Profile {
+    profile {
+        sub
+        loginId
+        userId
+        role
+    }
+}

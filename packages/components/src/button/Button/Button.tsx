@@ -51,7 +51,7 @@ export function Button({
   });
 
   const btnCss = css({
-    display: 'inline-block',
+    display: fullWidth ? 'block' : 'inline-block',
     cursor: 'pointer',
     width: fullWidth ? '100%' : undefined,
     lineHeight: 1,

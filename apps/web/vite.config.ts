@@ -15,12 +15,12 @@ export default defineConfig({
   esbuild: {
     logOverride: { 'this-is-undefined-in-esm': 'silent' }
   },
-  // optimizeDeps: {
-  //   include: ['@my/common'],
-  // },
-  // build: {
-  //   commonjsOptions: {
-  //     include: [/packages\/common/]
-  //   }
-  // }
+  optimizeDeps: {
+    include: ['@my/common'],
+  },
+  build: {
+    commonjsOptions: {
+      include: [/packages\/common/, '@my/common']
+    }
+  }
 });

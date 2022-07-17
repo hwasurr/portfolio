@@ -1,6 +1,6 @@
-import { CreateTagDto, UpdateTagDto } from '@my/common';
 import { ParseIntPipe, ValidationPipe } from '@nestjs/common';
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { CreateTagDto, UpdateTagDto } from '../../dto/tag.dto';
 import { Tag } from './tag.entity';
 import { TagService } from './tag.service';
 

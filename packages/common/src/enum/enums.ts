@@ -1,5 +1,3 @@
-import { registerEnumType } from '@nestjs/graphql';
-
 /** 실내/외 구분 */
 export enum Site {
   INDOOR = 'INDOOR',
@@ -19,7 +17,3 @@ export enum Role {
   GUEST = 'GUEST',
   EDITOR = 'EDITOR',
 }
-
-registerEnumType(Site, { name: 'Site' });
-registerEnumType(StandingStyle, { name: 'StandingStyle' });
-registerEnumType(Role, { name: 'Role' });

@@ -11,7 +11,7 @@ import Heading from '../../layouts/Heading/Heading';
 export interface AvatarProps {
   size?: 'sm' | 'md' | 'lg' | Property.Width;
   sx?: Interpolation<ITheme>;
-  emoji?: string;
+  emoji?: string | null;
 }
 export function Avatar({ size = 'md', emoji = '🦄', sx }: AvatarProps): JSX.Element {
   const theme = useTheme();
@@ -40,7 +40,7 @@ export function Avatar({ size = 'md', emoji = '🦄', sx }: AvatarProps): JSX.El
       height={wORh}
       sx={[avatarCss, sx]}
     >
-      <Heading.H5>{emoji}</Heading.H5>
+      <Heading.H5>{emoji ?? '🦄'}</Heading.H5>
     </Box.Flex>
   );
 }

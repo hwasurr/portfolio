@@ -1,7 +1,7 @@
-import { CreateSubCommentDto, UpdateSubCommentDto } from '@my/common';
 import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { GAME_COMMENT_SUB_REPOSITORY } from '../../constants/inject-keys/comment.repository';
+import { CreateSubCommentDto, UpdateSubCommentDto } from '../../dto/comment.dto';
 import { GameCommentSub } from './game-comment-sub.entity';
 import { GameComment } from './game-comment.entity';
 

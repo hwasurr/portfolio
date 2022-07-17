@@ -1,0 +1,12 @@
+query User($userId: Int) {
+    user(id: $userId) {
+        id
+        loginId
+        nickname
+        avatar
+        role
+        email
+        createDate
+        updateDate
+    }
+}

@@ -1,12 +1,35 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { ArgsType, Field, InputType, Int, OmitType, PartialType } from '@nestjs/graphql';
+import {
+  IAddGameReactionDto,
+  IAddOrRemoveGameTagDto,
+  ICreateGameDto,
+  ICreateGameImageDto,
+  ICreateGameInformationDto,
+  IUpdateGameDto,
+  IUpdateGameImageDto,
+  Role,
+  Site,
+  StandingStyle,
+} from '@my/common';
+import {
+  ArgsType,
+  Field,
+  InputType,
+  Int,
+  OmitType,
+  PartialType,
+  registerEnumType,
+} from '@nestjs/graphql';
 import { Type } from 'class-transformer';
 import { IsEnum, IsNumber, IsOptional, IsString, ValidateNested } from 'class-validator';
-import { Site, StandingStyle } from '../enum/enums';
 import { UpdateTagDto } from './tag.dto';
 
+registerEnumType(Site, { name: 'Site' });
+registerEnumType(StandingStyle, { name: 'StandingStyle' });
+registerEnumType(Role, { name: 'Role' });
+
 @InputType()
-export class CreateGameInformationDto {
+export class CreateGameInformationDto implements ICreateGameInformationDto {
   @Field() @IsString() howToPlay: string;
 
   @Field({ nullable: true })
@@ -31,7 +54,7 @@ export class CreateGameInformationDto {
 }
 
 @InputType()
-export class CreateGameImageDto {
+export class CreateGameImageDto implements ICreateGameImageDto {
   @IsOptional() @IsNumber() @Field(() => Int, { nullable: true }) id?: number;
   @IsOptional() @IsNumber() @Field(() => Int, { nullable: true }) gameId?: number;
   @Field() @IsString() name: string;
@@ -39,7 +62,7 @@ export class CreateGameImageDto {
 }
 
 @InputType()
-export class CreateGameDto {
+export class CreateGameDto implements ICreateGameDto {
   @Field() @IsString() title: string;
   @Field() @IsString() titleEmoji: string;
   @Field() @IsString() gamename: string;
@@ -58,12 +81,15 @@ export class CreateGameDto {
 }
 
 @InputType()
-export class UpdateGameImageDto extends CreateGameImageDto {}
+export class UpdateGameImageDto
+  extends CreateGameImageDto
+  implements IUpdateGameImageDto {}
 
 @InputType()
-export class UpdateGameDto extends PartialType(
-  OmitType(CreateGameDto, ['gamename', 'images', 'tagIds']),
-) {
+export class UpdateGameDto
+  extends PartialType(OmitType(CreateGameDto, ['gamename', 'images', 'tagIds']))
+  implements IUpdateGameDto
+{
   @IsNumber() @Field(() => Int) id: number;
 
   @Field(() => [UpdateGameImageDto])
@@ -78,10 +104,12 @@ export class UpdateGameDto extends PartialType(
 }
 
 @ArgsType()
-export class AddOrRemoveGameTagDto {
+export class AddOrRemoveGameTagDto implements IAddOrRemoveGameTagDto {
   @Field(() => Int) @IsNumber() gameId: number;
   @Field(() => Int) @IsNumber() tagId: number;
 }
 
 @ArgsType()
-export class AddGameReactionDto extends AddOrRemoveGameTagDto {}
+export class AddGameReactionDto
+  extends AddOrRemoveGameTagDto
+  implements IAddGameReactionDto {}

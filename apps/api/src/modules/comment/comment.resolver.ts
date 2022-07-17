@@ -1,6 +1,6 @@
-import { CreateCommentDto, UpdateCommentDto } from '@my/common';
 import { ParseIntPipe, ValidationPipe } from '@nestjs/common';
 import { Args, Int, Mutation, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { CreateCommentDto, UpdateCommentDto } from '../../dto/comment.dto';
 import { CommentService } from './comment.service';
 import { GameCommentSub } from './game-comment-sub.entity';
 import { GameComment } from './game-comment.entity';

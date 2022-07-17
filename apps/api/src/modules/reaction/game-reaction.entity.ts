@@ -11,7 +11,7 @@ export class GameReaction {
   id: number;
 
   @Field()
-  @Column({ comment: '리액션 이모지', length: 1, type: 'char' })
+  @Column({ comment: '리액션 이모지', length: 4, type: 'char' })
   reactionEmoji: string;
 
   // 게임 - 다대다 - 유저 -> 리액션 관계정의

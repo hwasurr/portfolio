@@ -1,6 +1,7 @@
-import { CreateUserDto, PaginationDto, UpdateUserDto } from '@my/common';
 import { ParseIntPipe, UseGuards } from '@nestjs/common';
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { PaginationDto } from '../../dto/cursor-pagination.dto';
+import { CreateUserDto, UpdateUserDto } from '../../dto/user.dto';
 import { GqlJwtGuard } from '../core/guards/gql-jwt.guard';
 import { User } from './user.entity';
 import { UserService } from './user.service';
@@ -11,7 +12,7 @@ export class UserResolver {
 
   @Query(() => User, { nullable: true, name: 'user' })
   public async findUser(
-    @Args('id', { type: () => Int }) id: number,
+    @Args('id', { type: () => Int, nullable: true }) id: number,
   ): Promise<User | null> {
     return this.userService.findOne(id);
   }

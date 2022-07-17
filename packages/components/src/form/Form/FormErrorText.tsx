@@ -10,6 +10,7 @@ export function FormErrorText({
   ...props
 }: FormErrorTextProps): JSX.Element | null {
   if (!isError) return null;
+  if (!props.children) return null;
   return <Text color={color} fontSize={fontSize} {...props} />;
 }
 

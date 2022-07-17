@@ -1,6 +1,6 @@
-import { LoninArgs } from '@my/common';
 import { UseGuards, ValidationPipe } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { LoninArgs } from '../../dto/auth.dto';
 import { UserProfile } from '../../interfaces/auth.profile';
 import { CurrentUser } from '../core/decorators/current-user.decorator';
 import { GqlJwtGuard } from '../core/guards/gql-jwt.guard';

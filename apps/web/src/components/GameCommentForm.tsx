@@ -42,7 +42,7 @@ export function GameCommentForm(): JSX.Element {
       </Box.Flex>
 
       <Box textAlign="right" marginY={2}>
-        <Button type="submit" isLoading={isSubmitting}>
+        <Button type="submit" isLoading={isSubmitting} sx={{ display: 'inline-block' }}>
           <Text>댓글 작성</Text>
         </Button>
       </Box>

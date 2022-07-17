@@ -12,7 +12,7 @@ import { GameInformation } from './game-information.entity';
 @Entity()
 export class Game extends Content {
   @Field()
-  @Column({ comment: '대표 이모지', length: 1, type: 'char' })
+  @Column({ comment: '대표 이모지' })
   titleEmoji: string;
 
   @Field()

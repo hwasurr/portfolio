@@ -1,4 +1,3 @@
-import { AddOrRemoveGameTagDto, CreateGameDto, UpdateGameDto } from '@my/common';
 import { ParseIntPipe, ValidationPipe } from '@nestjs/common';
 import {
   Args,
@@ -9,6 +8,7 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
+import { CreateGameDto, UpdateGameDto, AddOrRemoveGameTagDto } from '../../dto/game.dto';
 import { CommentService } from '../comment/comment.service';
 import { GameComment } from '../comment/game-comment.entity';
 import { GameReaction } from '../reaction/game-reaction.entity';

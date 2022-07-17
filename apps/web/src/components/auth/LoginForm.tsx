@@ -1,3 +1,4 @@
+import { ILoginArgs } from '@my/common';
 import { classValidatorResolver } from '@hookform/resolvers/class-validator';
 import {
   Box,
@@ -12,8 +13,9 @@ import { IsString, MinLength } from 'class-validator';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../../__generated__/graphql';
+import { TokenManager } from '../../utils/token-manager/tokenManager';
 
-class LoginDto {
+class LoginDto implements ILoginArgs {
   @MinLength(1, { message: '아이디를 입력해주세요.' })
   @IsString()
   loginId: string;
@@ -25,7 +27,10 @@ class LoginDto {
 const hookFormResolver = classValidatorResolver(LoginDto);
 export function LoginForm(): JSX.Element {
   const navigate = useNavigate();
-  const { handleSubmit, formState, register } = useForm<LoginDto>({
+  const navigateToSignup = (): void => {
+    navigate('/signup');
+  };
+  const { handleSubmit, formState, register, setValue, setFocus } = useForm<LoginDto>({
     resolver: hookFormResolver,
   });
   const [__, executeLogin] = useLoginMutation();
@@ -34,11 +39,13 @@ export function LoginForm(): JSX.Element {
       .then((result) => {
         if (result.error) {
           console.log(result.error.message);
+          setValue('password', '');
+          setFocus('password');
           // TODO noti toast render
           return alert('login 실패');
         }
         if (!result.data?.login) return alert('login 실패');
-        localStorage.setItem('AT', result.data?.login.accessToken || '');
+        TokenManager.setAccessToken(result.data.login.accessToken);
         return navigate('/', { replace: true });
       })
       .catch((err) => {
@@ -70,14 +77,14 @@ export function LoginForm(): JSX.Element {
           {formState.errors.password?.message}
         </FormErrorText>
 
-        <Button fullWidth size="lg" type="submit">
-          <Text>로그인</Text>
-        </Button>
-        <CustomLink to="/signup">
-          <Button fullWidth size="lg" variant="outline">
+        <Box.Flex gap={2}>
+          <Button fullWidth size="lg" type="submit">
+            <Text>로그인</Text>
+          </Button>
+          <Button fullWidth size="lg" variant="outline" onClick={navigateToSignup}>
             <Text> 회원가입</Text>
           </Button>
-        </CustomLink>
+        </Box.Flex>
       </Box.Flex>
     </Form>
   );

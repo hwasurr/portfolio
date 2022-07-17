@@ -77,6 +77,7 @@ module.exports = {
         ],
         'max-classes-per-file': 0,
         'class-methods-use-this': 'off',
+        'no-use-before-define': 'off',
       },
     },
     // Typescript specific rules
@@ -88,7 +89,6 @@ module.exports = {
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
         'no-useless-constructor': 'off',
-        'no-use-before-define': 'off',
         'no-shadow': 'off',
         'max-classes-per-file': 'off',
         'import/newline-after-import': 'error',

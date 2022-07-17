@@ -1,7 +1,7 @@
-import { CreateCommentDto, UpdateCommentDto } from '@my/common';
 import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { GAME_COMMENT_REPOSITORY } from '../../constants/inject-keys/comment.repository';
+import { CreateCommentDto, UpdateCommentDto } from '../../dto/comment.dto';
 import { Game } from '../game/entities/game.entity';
 import { GameComment } from './game-comment.entity';
 

@@ -30,12 +30,16 @@ export class User {
   nickname?: string;
 
   @Field({ nullable: true })
-  @Column({ nullable: true, comment: '아바타 이모지', length: 1, type: 'char' })
+  @Column({ nullable: true, comment: '아바타 이모지' })
   avatar?: string;
 
   @Field({ nullable: true, defaultValue: 'enum' })
   @Column({ type: 'enum', enum: Role, default: Role.GUEST })
   role?: Role;
+
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  email?: string;
 
   @Field()
   @CreateDateColumn()

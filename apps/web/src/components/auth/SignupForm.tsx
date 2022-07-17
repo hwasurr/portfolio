@@ -1,7 +1,7 @@
 import { classValidatorResolver } from '@hookform/resolvers/class-validator';
+import { ICreateUserDto } from '@my/common';
 import { Box, Button, Form, FormErrorText, Text, TextInput } from '@my/components';
 import {
-  IsEmail,
   IsString,
   MinLength,
   Validate,
@@ -11,7 +11,8 @@ import {
 } from 'class-validator';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useLoginMutation, useSignupMutation } from '../../__generated__/graphql';
+import { getRandomEmoji } from '../../utils/getRandomEmoji';
+import { useSignupMutation } from '../../__generated__/graphql';
 
 @ValidatorConstraint({ name: 'CustomMatchPasswords', async: false })
 export class CustomMatchPasswords implements ValidatorConstraintInterface {
@@ -24,7 +25,7 @@ export class CustomMatchPasswords implements ValidatorConstraintInterface {
     return '비밀번호가 일치하지 않습니다.';
   }
 }
-class SignupDto {
+class SignupDto implements ICreateUserDto {
   @MinLength(1, { message: '아이디를 입력해주세요.' })
   @IsString()
   loginId: string;
@@ -37,13 +38,9 @@ class SignupDto {
   @IsString()
   @Validate(CustomMatchPasswords, ['password'])
   passwordMatch: string;
-
-  @MinLength(1, { message: '이메일을 입력해주세요.' })
-  @IsString()
-  @IsEmail({}, { message: '이메일을 올바르게 입력해주세요.' })
-  email: string;
 }
 const hookFormResolver = classValidatorResolver(SignupDto);
+
 export function SignupForm(): JSX.Element {
   const navigate = useNavigate();
   const { handleSubmit, formState, register } = useForm<SignupDto>({
@@ -52,16 +49,19 @@ export function SignupForm(): JSX.Element {
   const [__, executeSignup] = useSignupMutation();
   const onSubmit = async (formData: SignupDto): Promise<void> => {
     return executeSignup({
-      data: { loginId: formData.loginId, password: formData.password },
+      data: {
+        loginId: formData.loginId,
+        password: formData.password,
+        avatar: getRandomEmoji(),
+      },
     })
       .then((result) => {
         if (result.error) {
-          console.log(result.error.message);
+          console.log(result.error);
           // TODO noti toast render
           return alert('signup 실패');
         }
-        if (!result.data?.createUser) return alert('login 실패');
-        return navigate('/', { replace: true });
+        return navigate('/signup', { replace: true });
       })
       .catch((err) => {
         console.log(err.message);
@@ -103,7 +103,7 @@ export function SignupForm(): JSX.Element {
           {formState.errors.passwordMatch?.message}
         </FormErrorText>
 
-        <TextInput
+        {/* <TextInput
           fullWidth
           placeholder="이메일"
           type="email"
@@ -118,9 +118,9 @@ export function SignupForm(): JSX.Element {
           <Text fontSize="xs" color="gray">
             이메일은 잊은 비밀번호를 확인할 때 사용됩니다.
           </Text>
-        )}
+        )} */}
 
-        <Button fullWidth size="lg" type="submit">
+        <Button fullWidth size="lg" type="submit" isLoading={formState.isSubmitting}>
           <Text>회원가입</Text>
         </Button>
       </Box.Flex>

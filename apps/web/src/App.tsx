@@ -6,6 +6,7 @@ import { urqlClient } from './client/urqlClient';
 import Index from './pages';
 import GameDetail from './pages/games/[gamename]';
 import Login from './pages/login';
+import Mypage from './pages/mypage';
 import Signup from './pages/signup';
 
 export function App(): JSX.Element {
@@ -19,6 +20,7 @@ export function App(): JSX.Element {
             <Route path="/" element={<Index />} />
             <Route path="/games" element={<Index />} />
             <Route path="/games/:gamename" element={<GameDetail />} />
+            <Route path="/mypage" element={<Mypage />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

@@ -1,14 +1,20 @@
+/* eslint-disable no-use-before-define */
 import { css, useTheme } from '@emotion/react';
-import { Box, Button, CustomLink, Text } from '@my/components';
+import { Avatar, Box, Button, CustomLink, Text } from '@my/components';
+import { useMemo } from 'react';
+import { useProfileQuery, useUserQuery } from '../__generated__/graphql';
 import Logo from './Logo';
 
 export const NavbarHeight = '60px';
 export function Navbar(): JSX.Element {
   const theme = useTheme();
   const navbarCss = css({
+    zIndex: theme.zIndex.banner,
     backgroundColor: theme.palette.white.medium,
     borderBottom: `${theme.borderWidth.thin} solid ${theme.palette.gray.light}`,
   });
+  const [{ data: profile }] = useProfileQuery();
+
   return (
     <Box.Flex
       as="header"
@@ -33,11 +39,16 @@ export function Navbar(): JSX.Element {
           <Button>
             <Text>공유하기</Text>
           </Button>
-          <CustomLink to="/login">
-            <Button variant="ghost-outline">
-              <Text>로그인</Text>
-            </Button>
-          </CustomLink>
+
+          {profile?.profile ? (
+            <NavbarActions userId={profile.profile.userId} />
+          ) : (
+            <CustomLink to="/login">
+              <Button variant="ghost-outline">
+                <Text>로그인</Text>
+              </Button>
+            </CustomLink>
+          )}
         </Box.Flex>
       </Box.Flex>
     </Box.Flex>
@@ -45,3 +56,33 @@ export function Navbar(): JSX.Element {
 }
 
 export default Navbar;
+
+interface NavbarActionsProps {
+  userId?: number;
+}
+function NavbarActions({ userId }: NavbarActionsProps): JSX.Element {
+  const [{ data: user }] = useUserQuery({
+    pause: !userId,
+    variables: { userId },
+  });
+
+  const loginLink = useMemo(
+    () => (
+      <CustomLink to="/login">
+        <Button variant="ghost-outline">
+          <Text>로그인</Text>
+        </Button>
+      </CustomLink>
+    ),
+    [],
+  );
+
+  if (!user) return loginLink;
+  return (
+    <CustomLink to="/mypage">
+      <Box position="relative">
+        <Avatar emoji={user.user?.avatar || undefined} />
+      </Box>
+    </CustomLink>
+  );
+}

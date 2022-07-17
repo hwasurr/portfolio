@@ -1,14 +1,12 @@
-import { CreateGameDto, UpdateGameDto } from '@my/common';
 import { Inject, Injectable, InternalServerErrorException } from '@nestjs/common';
-import { DataSource, In, Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { DATA_SOURCE } from '../../constants/inject-keys/datasource';
 import {
   GAME_IMAGE_REPOSITORY,
   GAME_INFORMATION_REPOSITORY,
   GAME_REPOSITORY,
 } from '../../constants/inject-keys/game.repository';
-import { TAG_REPOSITORY } from '../../constants/inject-keys/tag.repository';
-import { Tag } from '../tag/tag.entity';
+import { CreateGameDto, UpdateGameDto } from '../../dto/game.dto';
 import { TagService } from '../tag/tag.service';
 import { GameImage } from './entities/game-image.entity';
 import { GameInformation } from './entities/game-information.entity';

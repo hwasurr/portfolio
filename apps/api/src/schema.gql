@@ -87,6 +87,7 @@ type User {
   nickname: String
   avatar: String
   role: String
+  email: String
   createDate: DateTime!
   updateDate: DateTime!
   reactions: [GameReaction]!
@@ -111,7 +112,7 @@ enum Role {
 
 type Query {
   profile: Me!
-  user(id: Int!): User
+  user(id: Int): User
   users(pagination: PaginationDto!): [User!]
   game(id: Int!): Game
   games: [Game!]!

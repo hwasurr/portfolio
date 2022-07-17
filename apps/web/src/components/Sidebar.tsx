@@ -46,11 +46,6 @@ export function Sidebar(): JSX.Element {
                 공유하기
               </Button>
             </Box>
-            <Box>
-              <Button size="lg" color="gray" variant="outline" fullWidth>
-                시작하기
-              </Button>
-            </Box>
           </Box.Flex>
         </Box>
 
