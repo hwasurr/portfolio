@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
     "@emotion/react": "^11.9.3",
@@ -14,15 +15,24 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "csstype": "^3.1.0",
+    "graphql": "^16.5.0",
+    "graphql-tag": "^2.12.6",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-hook-form": "^7.33.1",
     "react-router-dom": "6",
     "reflect-metadata": "^0.1.13",
-    "tslib": "^2.4.0"
+    "tslib": "^2.4.0",
+    "urql": "^2.2.2"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.9.2",
+    "@graphql-codegen/cli": "2.8.1",
+    "@graphql-codegen/introspection": "2.2.0",
+    "@graphql-codegen/typescript": "2.7.1",
+    "@graphql-codegen/typescript-operations": "2.5.1",
+    "@graphql-codegen/typescript-urql": "^3.6.1",
+    "@graphql-codegen/urql-introspection": "2.2.0",
     "@types/node": "^18.0.5",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",

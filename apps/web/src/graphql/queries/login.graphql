@@ -1,0 +1,5 @@
+query Login($loginId: String!, $password: String!) {
+    login(loginId: $loginId, password: $password) {
+        accessToken
+    }
+}

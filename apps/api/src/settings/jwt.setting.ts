@@ -10,7 +10,7 @@ export class JwtSetting implements JwtOptionsFactory {
     return {
       secret,
       signOptions: {
-        expiresIn: this.configService.get('NODE_ENV') === 'production' ? '5m' : '12h',
+        expiresIn: this.configService.get('NODE_ENV') === 'production' ? '5m' : '30day',
       },
     };
   }

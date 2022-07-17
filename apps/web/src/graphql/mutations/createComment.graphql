@@ -1,0 +1,9 @@
+mutation CreateComment($data: CreateCommentDto!) {
+    createComment(data: $data) {
+        id
+        title
+        createDate
+        updateDate
+        contents
+    }
+}
