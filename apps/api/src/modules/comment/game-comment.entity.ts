@@ -1,5 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Entity, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { Content } from '../database/base.entity';
 import { Game } from '../game/entities/game.entity';
 import { GameCommentSub } from './game-comment-sub.entity';
@@ -7,7 +7,7 @@ import { GameCommentSub } from './game-comment-sub.entity';
 @ObjectType()
 @Entity()
 export class GameComment extends Content {
-  @Field() contents: string;
+  @Field() @Column({ type: 'longtext' }) contents: string;
   // 게임 - 일대다 - 코멘트 관계정의
   @ManyToOne(() => Game, (game) => game.comments, { cascade: true })
   game: Game;

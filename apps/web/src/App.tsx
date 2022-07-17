@@ -5,6 +5,8 @@ import { Provider as UrqlProvider } from 'urql';
 import { urqlClient } from './client/urqlClient';
 import Index from './pages';
 import GameDetail from './pages/games/[gamename]';
+import Login from './pages/login';
+import Signup from './pages/signup';
 
 export function App(): JSX.Element {
   return (
@@ -12,6 +14,8 @@ export function App(): JSX.Element {
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
             <Route path="/" element={<Index />} />
             <Route path="/games" element={<Index />} />
             <Route path="/games/:gamename" element={<GameDetail />} />

@@ -4,6 +4,7 @@ export * from './display/Avatar/Avatar';
 export * from './display/Badge/Badge';
 export * from './display/Card/Card';
 export * from './form/Form/Form';
+export * from './form/Form/FormErrorText';
 export * from './form/Input/TextArea';
 export * from './form/Input/TextInput';
 export { default as Box } from './layouts/Box/Box';

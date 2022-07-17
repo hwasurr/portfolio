@@ -2609,6 +2609,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hookform/resolvers@npm:^2.9.6":
+  version: 2.9.6
+  resolution: "@hookform/resolvers@npm:2.9.6"
+  peerDependencies:
+    react-hook-form: ^7.0.0
+  checksum: 23463eab50f4081b8ae0d9a7475b7cad7454c8b94a5685036455c0b6dfe7bc3e0c33cba2cb1956d2358eadcb12b3e3afebb4b16e3ca974ccfa91026a14e44455
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.9.2":
   version: 0.9.5
   resolution: "@humanwhocodes/config-array@npm:0.9.5"
@@ -13922,6 +13931,7 @@ __metadata:
     "@graphql-codegen/typescript-operations": 2.5.1
     "@graphql-codegen/typescript-urql": ^3.6.1
     "@graphql-codegen/urql-introspection": 2.2.0
+    "@hookform/resolvers": ^2.9.6
     "@my/common": "workspace:*"
     "@my/components": "workspace:*"
     "@my/style": "workspace:*"

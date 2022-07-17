@@ -4578,6 +4578,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@hookform/resolvers", [\
+        ["npm:2.9.6", {\
+          "packageLocation": "./.yarn/cache/@hookform-resolvers-npm-2.9.6-ceb9e315a3-23463eab50.zip/node_modules/@hookform/resolvers/",\
+          "packageDependencies": [\
+            ["@hookform/resolvers", "npm:2.9.6"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:e293270790bda2411a3626e57e15862403457209cbe755a222c752c37c8f53870ac5708914fca9c46ad11f81505a4af613c8b5e4bba765909191bb5f14d3b656#npm:2.9.6", {\
+          "packageLocation": "./.yarn/__virtual__/@hookform-resolvers-virtual-7419e8c0d9/0/cache/@hookform-resolvers-npm-2.9.6-ceb9e315a3-23463eab50.zip/node_modules/@hookform/resolvers/",\
+          "packageDependencies": [\
+            ["@hookform/resolvers", "virtual:e293270790bda2411a3626e57e15862403457209cbe755a222c752c37c8f53870ac5708914fca9c46ad11f81505a4af613c8b5e4bba765909191bb5f14d3b656#npm:2.9.6"],\
+            ["@types/react-hook-form", null],\
+            ["react-hook-form", "virtual:e293270790bda2411a3626e57e15862403457209cbe755a222c752c37c8f53870ac5708914fca9c46ad11f81505a4af613c8b5e4bba765909191bb5f14d3b656#npm:7.33.1"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-hook-form",\
+            "react-hook-form"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@humanwhocodes/config-array", [\
         ["npm:0.9.5", {\
           "packageLocation": "./.yarn/cache/@humanwhocodes-config-array-npm-0.9.5-030a025eae-8ba6281bc0.zip/node_modules/@humanwhocodes/config-array/",\
@@ -18303,6 +18325,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-codegen/typescript-operations", "virtual:e293270790bda2411a3626e57e15862403457209cbe755a222c752c37c8f53870ac5708914fca9c46ad11f81505a4af613c8b5e4bba765909191bb5f14d3b656#npm:2.5.1"],\
             ["@graphql-codegen/typescript-urql", "virtual:e293270790bda2411a3626e57e15862403457209cbe755a222c752c37c8f53870ac5708914fca9c46ad11f81505a4af613c8b5e4bba765909191bb5f14d3b656#npm:3.6.1"],\
             ["@graphql-codegen/urql-introspection", "virtual:e293270790bda2411a3626e57e15862403457209cbe755a222c752c37c8f53870ac5708914fca9c46ad11f81505a4af613c8b5e4bba765909191bb5f14d3b656#npm:2.2.0"],\
+            ["@hookform/resolvers", "virtual:e293270790bda2411a3626e57e15862403457209cbe755a222c752c37c8f53870ac5708914fca9c46ad11f81505a4af613c8b5e4bba765909191bb5f14d3b656#npm:2.9.6"],\
             ["@my/common", "workspace:packages/common"],\
             ["@my/components", "workspace:packages/components"],\
             ["@my/style", "workspace:packages/style"],\

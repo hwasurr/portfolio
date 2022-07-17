@@ -1,5 +1,5 @@
 import { css, useTheme } from '@emotion/react';
-import { Box, Button, Text } from '@my/components';
+import { Box, Button, CustomLink, Text } from '@my/components';
 import Logo from './Logo';
 
 export const NavbarHeight = '60px';
@@ -33,9 +33,11 @@ export function Navbar(): JSX.Element {
           <Button>
             <Text>공유하기</Text>
           </Button>
-          <Button variant="ghost-outline">
-            <Text>로그인</Text>
-          </Button>
+          <CustomLink to="/login">
+            <Button variant="ghost-outline">
+              <Text>로그인</Text>
+            </Button>
+          </CustomLink>
         </Box.Flex>
       </Box.Flex>
     </Box.Flex>

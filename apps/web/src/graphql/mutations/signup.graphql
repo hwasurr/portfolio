@@ -1,0 +1,11 @@
+mutation Signup($data: CreateUserDto!) {
+    createUser(data: $data) {
+        id
+        loginId
+        nickname
+        avatar
+        role
+        createDate
+        updateDate
+    }
+}

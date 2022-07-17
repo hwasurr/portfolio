@@ -1,6 +1,7 @@
 import { css, Interpolation, useTheme } from '@emotion/react';
 import { IPaletteChromaticColors, ITheme } from '@my/style';
 import { HTMLProps, useMemo } from 'react';
+import { Text } from '../../layouts/Text/Text';
 
 type HTMLButtonProps = Omit<HTMLProps<HTMLButtonElement>, 'size'>;
 export interface ButtonProps extends HTMLButtonProps {
@@ -10,6 +11,8 @@ export interface ButtonProps extends HTMLButtonProps {
   color?: IPaletteChromaticColors;
   fullWidth?: boolean;
   variant?: 'outline' | 'solid' | 'ghost-outline';
+  isLoading?: boolean;
+  loadingMessage?: string;
   sx?: Interpolation<ITheme>;
 }
 export function Button({
@@ -18,8 +21,10 @@ export function Button({
   color = 'primary',
   fullWidth = false,
   variant = 'solid',
+  isLoading = false,
   sx,
   onClick,
+  loadingMessage = '로딩중..',
   ...props
 }: ButtonProps): JSX.Element {
   const theme = useTheme();
@@ -38,10 +43,10 @@ export function Button({
   const outlineGhostBtnCss = css({
     background: 'transparent',
     color: theme.palette.black.medium,
-    ':hover': {
+    ':hover:not(:disabled)': {
       border: `1px solid ${theme.palette[color].medium}`,
       color: theme.palette.black.medium,
-      backgroundColor: `${theme.palette[color].light}30`, // 30 mean transparent
+      backgroundColor: `${theme.palette[color].light}30`, // 30 means transparent
     },
   });
 
@@ -73,19 +78,28 @@ export function Button({
       ':active': { transform: undefined },
     },
   });
+  const loadingCss = css({
+    cursor: 'not-allowed',
+    opacity: 0.4,
+    ':hover:disabled': { backgroundColor: undefined, color: undefined },
+    ':active:disabled': { transform: undefined },
+  });
+
   return (
     <button
       type="button"
       css={[
         btnCss,
+        isLoading ? loadingCss : undefined,
         variant === 'outline' ? outlineBtnCss : undefined,
         variant === 'ghost-outline' ? outlineGhostBtnCss : undefined,
         sx,
       ]}
       onClick={onClick}
+      disabled={isLoading || props.disabled}
       {...props}
     >
-      {children}
+      {isLoading ? <Text>{loadingMessage}</Text> : children}
     </button>
   );
 }

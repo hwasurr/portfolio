@@ -1,6 +1,6 @@
 import { LoninArgs } from '@my/common';
 import { UseGuards, ValidationPipe } from '@nestjs/common';
-import { Args, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UserProfile } from '../../interfaces/auth.profile';
 import { CurrentUser } from '../core/decorators/current-user.decorator';
 import { GqlJwtGuard } from '../core/guards/gql-jwt.guard';
@@ -11,7 +11,7 @@ import { AuthService } from './auth.service';
 export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
-  @Query(() => Login, { name: 'login' })
+  @Mutation(() => Login, { name: 'login' })
   public async login(@Args(ValidationPipe) loginArgs: LoninArgs): Promise<Login> {
     const { loginId, password } = loginArgs;
     const validated = await this.authService.validateUser(loginId, password);

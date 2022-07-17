@@ -25,7 +25,12 @@ export class CommentService {
   }
 
   public async create(dto: CreateCommentDto): Promise<GameComment> {
-    return this.commentRepo.save(dto);
+    const { gameId, ..._dto } = dto;
+    const newCommnet = this.commentRepo.create({
+      game: { id: gameId },
+      ..._dto,
+    });
+    return this.commentRepo.save(newCommnet);
   }
 
   public async update(

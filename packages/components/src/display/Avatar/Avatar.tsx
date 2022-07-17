@@ -7,13 +7,13 @@ import type { Property } from 'csstype';
 import { useMemo } from 'react';
 import Box from '../../layouts/Box/Box';
 import Heading from '../../layouts/Heading/Heading';
-import avatarEmojis from './avatar-emojis';
 
 export interface AvatarProps {
   size?: 'sm' | 'md' | 'lg' | Property.Width;
   sx?: Interpolation<ITheme>;
+  emoji?: string;
 }
-export function Avatar({ size = 'md', sx }: AvatarProps): JSX.Element {
+export function Avatar({ size = 'md', emoji = '🦄', sx }: AvatarProps): JSX.Element {
   const theme = useTheme();
   const wORh = useMemo(
     () =>
@@ -28,8 +28,6 @@ export function Avatar({ size = 'md', sx }: AvatarProps): JSX.Element {
     userSelect: 'none',
   });
 
-  const random = Math.floor(Math.random() * avatarEmojis.length);
-  const emoji = avatarEmojis[random];
   return (
     <Box.Flex
       display="inline-flex"

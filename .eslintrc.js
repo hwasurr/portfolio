@@ -75,6 +75,8 @@ module.exports = {
             exceptAfterSingleLine: true,
           },
         ],
+        'max-classes-per-file': 0,
+        'class-methods-use-this': 'off',
       },
     },
     // Typescript specific rules
@@ -89,7 +91,6 @@ module.exports = {
         'no-use-before-define': 'off',
         'no-shadow': 'off',
         'max-classes-per-file': 'off',
-        'class-methods-use-this': 'off',
         'import/newline-after-import': 'error',
         'import/prefer-default-export': 'off',
       },

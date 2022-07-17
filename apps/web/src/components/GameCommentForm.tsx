@@ -1,7 +1,6 @@
 import { Form, Box, Avatar, TextArea, Text, Button } from '@my/components';
 import { useForm } from 'react-hook-form';
 import { IsString } from 'class-validator';
-import { useQuery } from 'urql';
 import { useCreateCommentMutation } from '../__generated__/graphql';
 
 class CreateCommentDto {
@@ -12,19 +11,18 @@ export function GameCommentForm(): JSX.Element {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<CreateCommentDto>({
-    defaultValues: {
-      title: `${new Date().getTime()}`,
-    },
-  });
+    formState: { errors, isSubmitting },
+  } = useForm<CreateCommentDto>({});
 
-  const [_, mutation] = useCreateCommentMutation();
+  const [{ error }, mutation] = useCreateCommentMutation();
   const onSubmit = async (formData: CreateCommentDto): Promise<void> => {
     // Graphql request
-    const result = await mutation({ data: formData });
+    const result = await mutation({
+      data: { ...formData, title: `${new Date().getTime()}`, gameId: 1 },
+    });
     console.log(result.data);
   };
+  console.log(error);
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Box.Flex gap={2}>
@@ -44,7 +42,7 @@ export function GameCommentForm(): JSX.Element {
       </Box.Flex>
 
       <Box textAlign="right" marginY={2}>
-        <Button type="submit">
+        <Button type="submit" isLoading={isSubmitting}>
           <Text>댓글 작성</Text>
         </Button>
       </Box>

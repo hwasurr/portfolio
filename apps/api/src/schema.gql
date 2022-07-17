@@ -7,7 +7,7 @@ type GameCommentSub {
   title: String!
   createDate: DateTime!
   updateDate: DateTime!
-  conetnts: String!
+  contents: String!
 }
 
 """
@@ -110,7 +110,6 @@ enum Role {
 }
 
 type Query {
-  login(loginId: String!, password: String!): Login!
   profile: Me!
   user(id: Int!): User
   users(pagination: PaginationDto!): [User!]
@@ -130,6 +129,7 @@ input PaginationDto {
 }
 
 type Mutation {
+  login(loginId: String!, password: String!): Login!
   createUser(data: CreateUserDto!): User!
   updateUser(data: UpdateUserDto!): User!
   deleteUser(id: Int!): Boolean!
@@ -214,31 +214,35 @@ input UpdateTagDto {
   title: String
   color: String
   description: String
-  id: Float!
+  id: Int!
 }
 
 input CreateCommentDto {
+  gameId: Int!
   title: String!
   contents: String!
 }
 
 input UpdateCommentDto {
+  gameId: Int
   title: String
   contents: String
-  id: Float!
+  id: Int!
 }
 
 input CreateSubCommentDto {
+  gameId: Int!
   title: String!
   contents: String!
-  commentId: Float!
+  commentId: Int!
 }
 
 input UpdateSubCommentDto {
+  gameId: Int
   title: String
   contents: String
-  commentId: Float
-  id: Float!
+  commentId: Int
+  id: Int!
 }
 
 input CreateTagDto {

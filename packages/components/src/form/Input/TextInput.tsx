@@ -10,6 +10,7 @@ export interface TextInputProps extends HTMLInputProps {
   size?: TextInputSize;
   fontSize?: IFontSizeKey;
   fullWidth?: boolean;
+  isError?: boolean;
   sx?: Interpolation<ITheme>;
 }
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function TextInput(
@@ -20,6 +21,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function T
     fontSize,
     fullWidth,
     sx,
+    isError = false,
     ...props
   },
   ref,
@@ -31,13 +33,20 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function T
     fontSize,
     width: fullWidth ? '100%' : undefined,
   });
+  const errorCss = css({ borderColor: theme.palette.error.medium });
 
   const sizeCss: Record<TextInputSize, Interpolation<ITheme>> = {
     sm: css({ fontSize: theme.fontSize.sm, padding: theme.spacing[1.5] }),
     md: css({ fontSize: theme.fontSize.md, padding: theme.spacing[2] }),
     lg: css({ fontSize: theme.fontSize.lg, padding: theme.spacing[3] }),
   };
-  return <input css={[inputCss, sizeCss[size], sx]} {...props} ref={ref} />;
+  return (
+    <input
+      css={[inputCss, sizeCss[size], isError ? errorCss : undefined, sx]}
+      {...props}
+      ref={ref}
+    />
+  );
 });
 
 export default TextInput;

@@ -35,7 +35,7 @@ export function Sidebar(): JSX.Element {
                 <Text fontSize="sm">술자리 게임 먼저 배워 다 이겨먹기.</Text>
               </List.Item>
               <List.Item>
-                <Text fontSize="sm">애자일 프로세스를 적용한 팀.</Text>
+                <Text fontSize="sm">애자일 프로세스 팀활동.</Text>
               </List.Item>
             </List>
           </Box>
