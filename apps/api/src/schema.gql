@@ -154,7 +154,7 @@ type Mutation {
   addGameReaction(gameId: Int!, reactionEmoji: String!): GameReaction
   removeGameReaction(id: Int!): Boolean!
   createTag(data: CreateTagDto!): Tag!
-  updateTag(data: UpdateTagDto!): Tag!
+  updateTag(data: UpdateTagDto!): Tag
   deleteTag(id: Int!): Boolean!
 }
 

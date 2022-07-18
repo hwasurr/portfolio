@@ -37,7 +37,7 @@ export class GameService {
   public async create(dto: CreateGameDto): Promise<Game> {
     const { tagIds, ..._dto } = dto;
     let tags: Tag[] = [];
-    if (tagIds) {
+    if (tagIds && tagIds.length > 0) {
       tags = await this.tagService.findAll(tagIds);
     }
     const newGame = this.gameRepo.create({ ..._dto, tags });

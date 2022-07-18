@@ -25,7 +25,7 @@ export class TagResolver {
     return this.tagService.create(dto);
   }
 
-  @Mutation(() => Tag, { name: 'updateTag' })
+  @Mutation(() => Tag, { name: 'updateTag', nullable: true })
   public async update(@Args('data', ValidationPipe) dto: UpdateTagDto): Promise<Tag> {
     const { id, ..._dto } = dto;
     return this.tagService.update(id, _dto);

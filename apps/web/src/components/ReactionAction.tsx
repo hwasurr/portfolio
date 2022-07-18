@@ -1,6 +1,7 @@
 import { Box, Button } from '@my/components';
 import { useState } from 'react';
 import { VscReactions } from 'react-icons/vsc';
+import useDisclosure from '../hooks/useToggle';
 import {
   GameReaction,
   useAddGameReactionMutation,
@@ -9,15 +10,11 @@ import {
 
 export const reactionEmoji = ['💖', '👏', '👍', '👎', '💯', '👀', '🚀'];
 export function ReactionAction(): JSX.Element {
-  const [toggle, setToggle] = useState(false);
-  const handleToggle = (): void => {
-    setToggle(!toggle);
-  };
-
+  const { open, onToggle } = useDisclosure();
   const [__, addReaction] = useAddGameReactionMutation();
   const onReactionClicked = (targetEmoji: string): void => {
     addReaction({ gameId: 8, reactionEmoji: targetEmoji }).then(() => {
-      handleToggle();
+      onToggle();
     });
   };
 
@@ -28,11 +25,11 @@ export function ReactionAction(): JSX.Element {
 
   return (
     <Box>
-      <Button variant="outline" onClick={handleToggle}>
+      <Button variant="outline" onClick={onToggle}>
         <VscReactions size={20} />
       </Button>
 
-      {!toggle ? null : (
+      {!open ? null : (
         <Box.Flex gap={2} marginY={1}>
           {reactionEmoji.map((emoji) => (
             <ReactionButton key={emoji} emoji={emoji} onClick={onReactionClicked} />

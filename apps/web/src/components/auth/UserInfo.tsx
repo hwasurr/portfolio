@@ -5,6 +5,7 @@ import { IsString, MinLength } from 'class-validator';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import useDisclosure from '../../hooks/useToggle';
 import getRandomEmoji from '../../utils/getRandomEmoji';
 import {
   InputMaybe,
@@ -88,15 +89,7 @@ function UserInfoAvatar({ user }: UserInfoProps): JSX.Element {
 }
 
 function UserInfoNickname({ user }: UserInfoProps): JSX.Element {
-  const [toggle, setToggle] = useState(false);
-  const onToggle = (targetToggle?: boolean): void => {
-    setToggle(targetToggle || !toggle);
-  };
-
-  const handleNicknameSuccess = (): void => {
-    onToggle(false);
-  };
-
+  const { open: toggle, onClose, onToggle } = useDisclosure();
   return (
     <Box.Flex gap={2} flexDir="column">
       <Box.Flex gap={2}>
@@ -106,9 +99,7 @@ function UserInfoNickname({ user }: UserInfoProps): JSX.Element {
         </Button>
       </Box.Flex>
 
-      {toggle ? (
-        <UserInfoNicknameForm user={user} onSuccess={handleNicknameSuccess} />
-      ) : null}
+      {toggle ? <UserInfoNicknameForm user={user} onSuccess={onClose} /> : null}
     </Box.Flex>
   );
 }

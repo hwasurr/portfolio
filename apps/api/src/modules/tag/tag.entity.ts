@@ -1,5 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Entity, Column, ManyToMany, JoinTable } from 'typeorm';
+import { Column, Entity, ManyToMany } from 'typeorm';
 import { Content } from '../database/base.entity';
 import { Game } from '../game/entities/game.entity';
 
@@ -10,6 +10,5 @@ export class Tag extends Content {
   @Field() @Column({ comment: '태그 설명' }) description: string;
 
   @ManyToMany(() => Game, { cascade: true })
-  @JoinTable()
   games: Game[];
 }

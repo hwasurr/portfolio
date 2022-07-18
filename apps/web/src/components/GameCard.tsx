@@ -18,7 +18,7 @@ export function GameCard({ gameData }: GameCardProps): JSX.Element {
           <Box.Flex gap={2}>
             {gameData.tags.slice(0, 5).map((tag) => (
               <Badge key={tag.title} variant="outline" color={tag.color}>
-                {tag.title}
+                #{tag.title}
               </Badge>
             ))}
           </Box.Flex>
