@@ -1,0 +1,28 @@
+mutation CreateGame($data: CreateGameDto!) {
+  createGame(data: $data) {
+    id
+    title
+    createDate
+    updateDate
+    titleEmoji
+    gamename
+    summary
+    images {
+      id
+      name
+      src
+    }
+    information {
+      id
+      howToPlay
+      benefit
+      availableSite
+      standingStyle
+      minNumberOfPeople
+      maxNumberOfPeople
+      minMinuteTaken
+      maxMinuteTaken
+    }
+    
+  }
+}

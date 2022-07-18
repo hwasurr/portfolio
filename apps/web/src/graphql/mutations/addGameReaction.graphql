@@ -1,0 +1,6 @@
+mutation AddGameReaction($gameId: Int!, $reactionEmoji: String!) {
+  addGameReaction(gameId: $gameId, reactionEmoji: $reactionEmoji) {
+    reactionEmoji
+    id
+  }
+}

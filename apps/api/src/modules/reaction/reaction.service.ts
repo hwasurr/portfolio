@@ -2,6 +2,7 @@ import { BadRequestException, Inject } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { GAME_REACTION_REPOSITORY } from '../../constants/inject-keys/game.repository';
 import { Game } from '../game/entities/game.entity';
+import { GameReactionResult } from '../game/game-reactions.model';
 import { GameService } from '../game/game.service';
 import { User } from '../user/user.entity';
 import { UserService } from '../user/user.service';
@@ -27,6 +28,24 @@ export class ReactionService {
     return this.reactionRepo.find({ where: { game: { id: gameId } } });
   }
 
+  public async findGroupByEmoji(
+    gameId: Game['id'],
+    userId?: User['id'],
+  ): Promise<GameReactionResult[]> {
+    const queryResult = await this.reactionRepo
+      .createQueryBuilder()
+      .select('reactionEmoji, COUNT(*) AS count, GROUP_CONCAT(userId) as userIds')
+      .groupBy('reactionEmoji')
+      .where('gameId = :gameId', { gameId })
+      .getRawMany();
+    const result = queryResult.map((res) => ({
+      count: res.count,
+      reactionEmoji: res.reactionEmoji,
+      reactedByMe: !userId ? false : res.userIds.split(',').some((id) => id === userId),
+    }));
+    return result;
+  }
+
   private async findGame(id: Game['id']): Promise<Game> {
     const targetGame = await this.gameService.findOne(id);
     if (!targetGame) throw new BadRequestException(`Game:${id} is not exists`);
@@ -42,10 +61,23 @@ export class ReactionService {
   public async addGameReaction(
     gameId: Game['id'],
     userId: User['id'],
-  ): Promise<GameReaction> {
+    emoji: GameReaction['reactionEmoji'],
+  ): Promise<GameReaction | null> {
     const targetUser = await this.findUser(userId);
     const targetGame = await this.findGame(gameId);
-    const newReaction = this.reactionRepo.create({ game: targetGame, user: targetUser });
+    const already = await this.reactionRepo.findOne({
+      where: {
+        game: { id: targetGame.id },
+        user: { id: targetUser.id },
+        reactionEmoji: emoji,
+      },
+    });
+    if (already) return null;
+    const newReaction = this.reactionRepo.create({
+      game: targetGame,
+      user: targetUser,
+      reactionEmoji: emoji,
+    });
     return this.reactionRepo.save(newReaction);
   }
 

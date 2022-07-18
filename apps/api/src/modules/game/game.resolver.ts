@@ -8,15 +8,14 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
-import { CreateGameDto, UpdateGameDto, AddOrRemoveGameTagDto } from '../../dto/game.dto';
+import { AddOrRemoveGameTagDto, CreateGameDto, UpdateGameDto } from '../../dto/game.dto';
 import { CommentService } from '../comment/comment.service';
 import { GameComment } from '../comment/game-comment.entity';
-import { GameReaction } from '../reaction/game-reaction.entity';
 import { ReactionService } from '../reaction/reaction.service';
-import { Tag } from '../tag/tag.entity';
 import { GameImage } from './entities/game-image.entity';
 import { GameInformation } from './entities/game-information.entity';
 import { Game } from './entities/game.entity';
+import { GameReactionResult } from './game-reactions.model';
 import { GameTagService } from './game-tag.service';
 import { GameService } from './game.service';
 
@@ -56,9 +55,9 @@ export class GameResolver {
     return this.commentService.findAllByGameId(game.id);
   }
 
-  @ResolveField(() => [GameReaction], { name: 'reactions' })
-  public async reactions(@Parent() game: Game): Promise<GameReaction[]> {
-    return this.reactionService.findAllByGameId(game.id);
+  @ResolveField(() => [GameReactionResult], { name: 'reactions', nullable: 'items' })
+  public async reactions(@Parent() game: Game): Promise<GameReactionResult[]> {
+    return this.reactionService.findGroupByEmoji(game.id);
   }
 
   @Mutation(() => Game, { name: 'createGame' })

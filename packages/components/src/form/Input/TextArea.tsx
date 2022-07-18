@@ -35,6 +35,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(function 
   const textareaCss = css({
     borderRadius: theme.borderRadius[rounded],
     borderWidth: theme.borderWidth[borderWidth],
+    borderColor: theme.palette.gray.medium,
     display: 'block',
     maxHeight,
     minWidth: '0px',

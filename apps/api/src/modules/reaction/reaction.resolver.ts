@@ -8,21 +8,21 @@ import { ReactionService } from './reaction.service';
 export class ReactionResolver {
   constructor(private readonly reactionService: ReactionService) {}
 
-  @Query(() => [GameReaction], { name: 'reactions' })
+  @Query(() => [GameReaction], { name: 'reactions', nullable: 'items' })
   public async reactions(
     @Args('gameId', { type: () => Int }, ParseIntPipe) gameId: number,
   ): Promise<GameReaction[]> {
     return this.reactionService.findAllByGameId(gameId);
   }
 
-  @Mutation(() => GameReaction, { name: 'addGameReaction' })
+  @Mutation(() => GameReaction, { name: 'addGameReaction', nullable: true })
   public async createGameReaction(
     @Args(ValidationPipe) dto: AddGameReactionDto,
   ): Promise<GameReaction> {
-    return this.reactionService.addGameReaction(dto.gameId, dto.tagId);
+    return this.reactionService.addGameReaction(dto.gameId, 1, dto.reactionEmoji);
   }
 
-  @Mutation(() => GameReaction, { name: 'removeGameReaction' })
+  @Mutation(() => Boolean, { name: 'removeGameReaction' })
   public async removeGameReaction(
     @Args('id', { type: () => Int }, ParseIntPipe) id: number,
   ): Promise<boolean> {

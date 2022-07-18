@@ -18,7 +18,7 @@ export function GameCommentForm(): JSX.Element {
   const onSubmit = async (formData: CreateCommentDto): Promise<void> => {
     // Graphql request
     const result = await mutation({
-      data: { ...formData, title: `${new Date().getTime()}`, gameId: 1 },
+      data: { ...formData, title: `${new Date().getTime()}`, gameId: 8 },
     });
     console.log(result.data);
   };

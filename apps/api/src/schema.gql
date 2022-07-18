@@ -73,7 +73,7 @@ type Game {
   images: [GameImage]!
   information: GameInformation!
   comments: [GameComment]!
-  reactions: [GameReaction]!
+  reactions: [GameReactionResult]!
 }
 
 type GameReaction {
@@ -110,6 +110,12 @@ enum Role {
   EDITOR
 }
 
+type GameReactionResult {
+  count: Int!
+  reactionEmoji: String!
+  reactedByMe: Boolean
+}
+
 type Query {
   profile: Me!
   user(id: Int): User
@@ -119,9 +125,9 @@ type Query {
   comments(gameId: Int!): [GameComment]!
   comment(id: Int!): GameComment
   subComments(commentId: Int!): [GameCommentSub]
-  reactions(gameId: Int!): [GameReaction!]!
+  reactions(gameId: Int!): [GameReaction]!
   tag(id: Int!): Tag!
-  tags: [Tag]!
+  tags: [Tag!]!
 }
 
 input PaginationDto {
@@ -145,8 +151,8 @@ type Mutation {
   createSubComment(data: CreateSubCommentDto!): GameCommentSub!
   updateSubComment(data: UpdateSubCommentDto!): GameCommentSub!
   deleteSubComment(id: Int!): Boolean!
-  addGameReaction(gameId: Int!, tagId: Int!): GameReaction!
-  removeGameReaction(id: Int!): GameReaction!
+  addGameReaction(gameId: Int!, reactionEmoji: String!): GameReaction
+  removeGameReaction(id: Int!): Boolean!
   createTag(data: CreateTagDto!): Tag!
   updateTag(data: UpdateTagDto!): Tag!
   deleteTag(id: Int!): Boolean!

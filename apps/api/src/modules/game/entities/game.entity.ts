@@ -1,6 +1,14 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, Index, ManyToMany, OneToMany, OneToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Index,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  OneToOne,
+} from 'typeorm';
 import { GameComment } from '../../comment/game-comment.entity';
 import { Content } from '../../database/base.entity';
 import { GameReaction } from '../../reaction/game-reaction.entity';
@@ -48,7 +56,6 @@ export class Game extends Content {
   comments: GameComment[];
 
   // 게임 - 다대다(리액션) - 유저 관계정의
-  @Field(() => [GameReaction], { nullable: 'items' })
   @OneToMany(() => GameReaction, (reaction) => reaction.game, {
     onDelete: 'CASCADE',
     nullable: true,
@@ -57,6 +64,7 @@ export class Game extends Content {
 
   // 게임 - 다대다 - 태그
   @ManyToMany(() => Tag, { cascade: true })
+  @JoinTable()
   tags: Tag[];
 }
 

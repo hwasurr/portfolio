@@ -1,0 +1,10 @@
+query Tags {
+  tags {
+    id
+    title
+    createDate
+    updateDate
+    color
+    description
+  }
+}

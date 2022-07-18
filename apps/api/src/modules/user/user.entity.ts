@@ -33,7 +33,7 @@ export class User {
   @Column({ nullable: true, comment: '아바타 이모지' })
   avatar?: string;
 
-  @Field({ nullable: true, defaultValue: 'enum' })
+  @Field({ nullable: true, defaultValue: Role.GUEST })
   @Column({ type: 'enum', enum: Role, default: Role.GUEST })
   role?: Role;
 

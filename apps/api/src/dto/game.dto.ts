@@ -40,12 +40,12 @@ export class CreateGameInformationDto implements ICreateGameInformationDto {
   @Field(() => Site, { nullable: true })
   @IsOptional()
   @IsEnum(Site)
-  availableSite?: Site;
+  availableSite?: Site | null;
 
   @Field(() => StandingStyle, { nullable: true })
   @IsOptional()
   @IsEnum(StandingStyle)
-  standingStyle?: StandingStyle;
+  standingStyle?: StandingStyle | null;
 
   @Field(() => Int) @IsNumber() minNumberOfPeople: number;
   @Field(() => Int) @IsNumber() maxNumberOfPeople: number;
@@ -110,6 +110,7 @@ export class AddOrRemoveGameTagDto implements IAddOrRemoveGameTagDto {
 }
 
 @ArgsType()
-export class AddGameReactionDto
-  extends AddOrRemoveGameTagDto
-  implements IAddGameReactionDto {}
+export class AddGameReactionDto implements IAddGameReactionDto {
+  @Field(() => Int) @IsNumber() gameId: number;
+  @Field() @IsString() reactionEmoji: string;
+}

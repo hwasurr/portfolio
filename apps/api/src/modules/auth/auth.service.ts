@@ -12,8 +12,8 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  private userToProfile(user: Pick<User, 'loginId' | 'id'>): UserProfile {
-    return { sub: user.loginId, loginId: user.loginId, userId: user.id };
+  private userToProfile(user: Pick<User, 'loginId' | 'id' | 'role'>): UserProfile {
+    return { sub: user.loginId, loginId: user.loginId, userId: user.id, role: user.role };
   }
 
   public async validateUser(

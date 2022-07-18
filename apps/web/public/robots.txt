@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin
+Disallow: /admin/user
+Disallow: /admin/game
+Disallow: /admin/tag

@@ -15,7 +15,7 @@ export class TagResolver {
     return this.tagService.findOne(id);
   }
 
-  @Query(() => [Tag], { name: 'tags', nullable: 'items' })
+  @Query(() => [Tag], { name: 'tags' })
   public async tags(): Promise<Tag[]> {
     return this.tagService.findAll();
   }

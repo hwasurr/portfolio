@@ -1,0 +1,10 @@
+mutation UpdateTag($dto: UpdateTagDto!) {
+  updateTag(data: $dto) {
+    id
+    title
+    createDate
+    updateDate
+    color
+    description
+  }
+}

@@ -1,12 +1,11 @@
 import { useTheme } from '@emotion/react';
-import { Avatar, Box, Button, Card, Form, Heading, Text, TextArea } from '@my/components';
-import { PropsWithChildren } from 'react';
+import { Avatar, Box, Button, Card, Heading, Text } from '@my/components';
 import { useParams } from 'react-router-dom';
 import GameCommentForm from '../../components/GameCommentForm';
 import GlobalLayout from '../../components/layouts/GlobalLayout';
 import { NavbarHeight } from '../../components/Navbar';
+import ReactionAction from '../../components/ReactionAction';
 import { dummyGames, IGameCard } from '../../data/dummy.data';
-import useScrollToTop from '../../hooks/useScrollToTop';
 
 export function GameDetailActions(): JSX.Element {
   return (
@@ -103,12 +102,13 @@ export function GameDetailDescription({ game }: { game: IGameCard }): JSX.Elemen
           </Text>
         </Box>
 
-        {/* <Box>
-          <Text>온라인가능게임의 경우</Text>
+        <Box>
+          <ReactionAction />
+          {/* <Text>온라인가능게임의 경우</Text>
           <Button fullWidth>
             <Heading.H6>진행하기</Heading.H6>
-          </Button>
-        </Box> */}
+          </Button> */}
+        </Box>
       </Card.Body>
     </Card>
   );

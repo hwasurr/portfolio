@@ -6,3 +6,4 @@ export * from './interfaces/tag.interface';
 export * from './interfaces/user.interface';
 export * from './enum/enums';
 export * from './data/emoji';
+export * from './data/reactionEmoji';

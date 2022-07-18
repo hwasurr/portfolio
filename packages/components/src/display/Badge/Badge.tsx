@@ -12,7 +12,7 @@ export interface BadgeProps extends PropsWithChildren {
 export function Badge({
   children,
   color = 'primary',
-  variant = 'solid',
+  variant = 'outline',
 }: BadgeProps): JSX.Element {
   const theme = useTheme();
   const badgeCss = css({

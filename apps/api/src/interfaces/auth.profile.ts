@@ -4,7 +4,7 @@ export interface UserProfile {
   sub: string;
   userId: number;
   loginId: string;
-  role?: Role; // todo: Create Role enum and use here
+  role?: Role;
 }
 
 export interface LoginRes {

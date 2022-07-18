@@ -6,9 +6,9 @@ export interface ICreateGameInformationDto {
 
   benefit?: string;
 
-  availableSite?: Site;
+  availableSite?: Site | null;
 
-  standingStyle?: StandingStyle;
+  standingStyle?: StandingStyle | null;
 
   minNumberOfPeople: number;
   maxNumberOfPeople: number;
@@ -49,4 +49,7 @@ export interface IAddOrRemoveGameTagDto {
   tagId: number;
 }
 
-export type IAddGameReactionDto = IAddOrRemoveGameTagDto;
+export interface IAddGameReactionDto {
+  gameId: number;
+  reactionEmoji: string;
+}

@@ -1,0 +1,3 @@
+mutation RemoveGameReaction($removeGameReactionId: Int!) {
+  removeGameReaction(id: $removeGameReactionId)
+}

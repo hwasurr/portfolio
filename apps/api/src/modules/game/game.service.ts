@@ -7,6 +7,7 @@ import {
   GAME_REPOSITORY,
 } from '../../constants/inject-keys/game.repository';
 import { CreateGameDto, UpdateGameDto } from '../../dto/game.dto';
+import { Tag } from '../tag/tag.entity';
 import { TagService } from '../tag/tag.service';
 import { GameImage } from './entities/game-image.entity';
 import { GameInformation } from './entities/game-information.entity';
@@ -35,7 +36,10 @@ export class GameService {
 
   public async create(dto: CreateGameDto): Promise<Game> {
     const { tagIds, ..._dto } = dto;
-    const tags = await this.tagService.findAll(tagIds);
+    let tags: Tag[] = [];
+    if (tagIds) {
+      tags = await this.tagService.findAll(tagIds);
+    }
     const newGame = this.gameRepo.create({ ..._dto, tags });
     return this.gameRepo.save(newGame);
   }

@@ -30,6 +30,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function T
   const inputCss = css({
     borderRadius: theme.borderRadius[rounded],
     borderWidth: theme.borderWidth[borderWidth],
+    borderColor: theme.palette.gray.medium,
     fontSize,
     width: fullWidth ? '100%' : undefined,
   });
