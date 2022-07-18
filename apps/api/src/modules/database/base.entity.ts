@@ -10,7 +10,7 @@ import {
 /**
  * Game, Question, Post, Worldcup 등 컨텐츠에 공통적으로 해당되는 정보 클래스
  */
-@ObjectType()
+@ObjectType({ isAbstract: true })
 export abstract class Content {
   @Field(() => Int) @PrimaryGeneratedColumn() readonly id!: number;
   @Index({ unique: true }) @Field() @Column({ comment: '제목' }) title: string;
