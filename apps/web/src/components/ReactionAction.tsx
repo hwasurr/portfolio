@@ -36,7 +36,7 @@ export function ReactionAction({ gameId }: ReactionActionProps): JSX.Element {
   return (
     <div ref={ref}>
       <Box position="relative">
-        <Button variant="outline" onClick={onToggle}>
+        <Button size="sm" variant="outline" onClick={onToggle}>
           <VscReactions size={20} />
         </Button>
 
@@ -53,7 +53,12 @@ export function ReactionAction({ gameId }: ReactionActionProps): JSX.Element {
             sx={{ backgroundColor: 'white' }}
           >
             {reactionEmoji.map((emoji) => (
-              <ReactionButton key={emoji} emoji={emoji} onClick={onReactionClicked} />
+              <ReactionButton
+                size="sm"
+                key={emoji}
+                emoji={emoji}
+                onClick={onReactionClicked}
+              />
             ))}
           </Card>
         )}
