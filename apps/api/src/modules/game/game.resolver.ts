@@ -1,4 +1,4 @@
-import { ParseIntPipe, ValidationPipe } from '@nestjs/common';
+import { ParseIntPipe, UseGuards, ValidationPipe } from '@nestjs/common';
 import {
   Args,
   Int,
@@ -9,8 +9,11 @@ import {
   Resolver,
 } from '@nestjs/graphql';
 import { AddOrRemoveGameTagDto, CreateGameDto, UpdateGameDto } from '../../dto/game.dto';
+import { UserProfile } from '../../interfaces/auth.profile';
 import { CommentService } from '../comment/comment.service';
 import { GameComment } from '../comment/game-comment.entity';
+import { CurrentUser } from '../core/decorators/current-user.decorator';
+import { GqlJwtGuard } from '../core/guards/gql-jwt.guard';
 import { ReactionService } from '../reaction/reaction.service';
 import { Tag } from '../tag/tag.entity';
 import { GameImage } from './entities/game-image.entity';
@@ -29,6 +32,7 @@ export class GameResolver {
     private readonly gametagService: GameTagService,
   ) {}
 
+  @UseGuards(GqlJwtGuard)
   @Query(() => Game, { name: 'game', nullable: true })
   public async findGame(
     @Args('id', { type: () => Int, nullable: true }) gameId?: number,
@@ -39,6 +43,7 @@ export class GameResolver {
     return null;
   }
 
+  @UseGuards(GqlJwtGuard)
   @Query(() => [Game], { name: 'games' })
   public async games(): Promise<Game[]> {
     return this.gameService.findAll();
@@ -60,8 +65,11 @@ export class GameResolver {
   }
 
   @ResolveField(() => [GameReactionResult], { name: 'reactions', nullable: 'items' })
-  public async reactions(@Parent() game: Game): Promise<GameReactionResult[]> {
-    return this.reactionService.findGroupByEmoji(game.id);
+  public async reactions(
+    @Parent() game: Game,
+    @CurrentUser() user?: UserProfile,
+  ): Promise<GameReactionResult[]> {
+    return this.reactionService.findGroupByEmoji(game.id, user?.userId);
   }
 
   @ResolveField(() => [Tag], { name: 'tags', nullable: 'itemsAndList' })

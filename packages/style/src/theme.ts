@@ -223,9 +223,9 @@ export const palette: IPalette = {
     dark: '#718096',
   },
   primary: {
-    light: '#4FD1C5',
-    medium: '#38B2AC',
-    dark: '#319795',
+    light: '#54bbcd',
+    medium: '#0a9eb8',
+    dark: '#098ea6',
   },
   secondary: {
     light: '#4FD1C5',

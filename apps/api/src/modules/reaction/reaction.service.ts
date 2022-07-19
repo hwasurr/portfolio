@@ -41,7 +41,9 @@ export class ReactionService {
     const result = queryResult.map((res) => ({
       count: res.count,
       reactionEmoji: res.reactionEmoji,
-      reactedByMe: !userId ? false : res.userIds.split(',').some((id) => id === userId),
+      reactedByMe: !userId
+        ? false
+        : res.userIds.split(',').some((id: string) => id === userId.toString()),
     }));
     return result;
   }

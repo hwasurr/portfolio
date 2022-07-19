@@ -1,4 +1,5 @@
 import { useTheme } from '@emotion/react';
+import { MdOutlineShare } from 'react-icons/md';
 import { Avatar, Box, Button, Card, Heading, Text } from '@my/components';
 import dayjs from 'dayjs';
 import ReactMarkdown from 'react-markdown';
@@ -31,7 +32,7 @@ export function GameDetail(): JSX.Element | null {
           top={`calc(${theme.spacing[4]} + ${NavbarHeight})`}
           left={0}
         >
-          <GameDetailActions />
+          <GameDetailActions reactions={game.game.reactions} />
         </Box>
       </Box>
 
@@ -77,26 +78,23 @@ export function GameDetail(): JSX.Element | null {
 
 export default GameDetail;
 
-export function GameDetailActions(): JSX.Element {
+interface GameDetailActionsProps {
+  reactions: NonNullable<GameQuery['game']>['reactions'];
+}
+export function GameDetailActions({ reactions }: GameDetailActionsProps): JSX.Element {
   return (
-    <Box.Flex flexDir="column" gap={2}>
+    <Box.Flex flexDir="column" gap={2} justify="center" align="center">
+      {/* {reactions?.map((reaction) => (
+        <Button key={reaction.reactionEmoji} size="sm" variant="ghost-outline" fullWidth>
+          <Box.Flex align="center" gap={2} justify="center">
+            <Text fontSize="lg">{reaction?.reactionEmoji}</Text>
+            <Text color="gray">{reaction?.count}</Text>
+          </Box.Flex>
+        </Button>
+      ))} */}
       <Button size="sm" variant="ghost-outline" fullWidth>
-        <Text fontSize="lg">💖</Text>
-        <Text color="gray">13</Text>
-      </Button>
-      <Button size="sm" variant="ghost-outline" fullWidth>
-        <Text fontSize="lg">👏</Text>
-        <Text color="gray">7</Text>
-      </Button>
-      <Button size="sm" variant="ghost-outline" fullWidth>
-        <Text fontSize="lg">👍</Text>
-        <Text color="gray">4</Text>
-      </Button>
-      <Button size="sm" variant="ghost-outline" fullWidth>
-        <Text fontSize="lg">📎</Text>
-        <Text color="gray" fontSize="sm">
-          공유
-        </Text>
+        <MdOutlineShare fontSize={23} />
+        <Text fontSize="sm">공유</Text>
       </Button>
     </Box.Flex>
   );
@@ -129,7 +127,8 @@ export function GameDetailDescription({
   game,
 }: {
   game: GameQuery['game'];
-}): JSX.Element {
+}): JSX.Element | null {
+  if (!game) return null;
   return (
     <Card>
       <Card.Image
@@ -168,11 +167,12 @@ export function GameDetailDescription({
 
         <Box.Flex gap={1}>
           <Box>
-            <ReactionAction />
+            <ReactionAction gameId={game?.id} />
           </Box>
-          {game?.reactions.map((reaction) => (
+          {game?.reactions?.map((reaction) => (
             <ReactionButton
-              variant={reaction?.reactedByMe ? 'solid' : 'outline'}
+              reactedByMe={!!reaction?.reactedByMe}
+              reactedCount={reaction?.count}
               key={reaction?.reactionEmoji}
               emoji={reaction?.reactionEmoji || ''}
               onClick={console.log}

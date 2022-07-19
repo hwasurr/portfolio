@@ -1,6 +1,8 @@
+import { useTheme } from '@emotion/react';
 import { Box, Button, ButtonProps, Card } from '@my/components';
-import { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { VscReactions } from 'react-icons/vsc';
+import useOutsideClick from '../hooks/useOutsideClick';
 import useDisclosure from '../hooks/useToggle';
 import {
   GameReaction,
@@ -8,13 +10,18 @@ import {
   useRemoveGameReactionMutation,
 } from '../__generated__/graphql';
 
+export interface ReactionActionProps {
+  gameId: number;
+}
+
 export const reactionEmoji = ['💖', '👏', '👍', '👎', '💯', '👀', '🚀'];
-export function ReactionAction(): JSX.Element {
-  const { open, onToggle } = useDisclosure();
+export function ReactionAction({ gameId }: ReactionActionProps): JSX.Element {
+  const { open, onToggle, onClose } = useDisclosure();
   const [__, addReaction] = useAddGameReactionMutation();
   const onReactionClicked = (targetEmoji: string): void => {
-    addReaction({ gameId: 8, reactionEmoji: targetEmoji }).then(() => {
-      onToggle();
+    addReaction({ gameId, reactionEmoji: targetEmoji }).then((res) => {
+      console.log(res);
+      onClose();
     });
   };
 
@@ -23,53 +30,71 @@ export function ReactionAction(): JSX.Element {
     removeReaction({ removeGameReactionId: reaction.id });
   };
 
-  return (
-    <Box position="relative">
-      <Button variant="outline" onClick={onToggle}>
-        <VscReactions size={20} />
-      </Button>
+  const ref = useRef<HTMLDivElement>(null);
+  useOutsideClick(ref, onClose);
 
-      {!open ? null : (
-        <Card
-          display="flex"
-          padding={2}
-          gap={2}
-          marginY={1}
-          position="absolute"
-          border="md"
-          rounded="md"
-          shadow={{ base: 'sm', hover: 'sm' }}
-          sx={{ backgroundColor: 'white' }}
-        >
-          {reactionEmoji.map((emoji) => (
-            <ReactionButton key={emoji} emoji={emoji} onClick={onReactionClicked} />
-          ))}
-        </Card>
-      )}
-    </Box>
+  return (
+    <div ref={ref}>
+      <Box position="relative">
+        <Button variant="outline" onClick={onToggle}>
+          <VscReactions size={20} />
+        </Button>
+
+        {!open ? null : (
+          <Card
+            display="flex"
+            padding={2}
+            gap={2}
+            marginY={1}
+            position="absolute"
+            border="md"
+            rounded="md"
+            shadow={{ base: 'sm', hover: 'sm' }}
+            sx={{ backgroundColor: 'white' }}
+          >
+            {reactionEmoji.map((emoji) => (
+              <ReactionButton key={emoji} emoji={emoji} onClick={onReactionClicked} />
+            ))}
+          </Card>
+        )}
+      </Box>
+    </div>
   );
 }
 
 export default ReactionAction;
 
-interface ReactionButtonProps {
+interface ReactionButtonProps extends Omit<ButtonProps, 'onClick'> {
   emoji: string;
-  variant?: ButtonProps['variant'];
-  onClick: (emoji: string) => void;
+  reactedCount?: number;
+  reactedByMe?: boolean;
+  onClick?: (emoji: string) => void;
 }
 export function ReactionButton({
   emoji,
   onClick,
-  variant = 'outline',
+  reactedCount,
+  reactedByMe,
+  size,
+  ...rest
 }: ReactionButtonProps): JSX.Element {
+  const theme = useTheme();
+  const onReactionClick: React.MouseEventHandler<HTMLButtonElement> = (): void => {
+    onClick?.(emoji);
+  };
   return (
     <Button
       key={emoji}
-      variant={variant}
-      sx={{ fontSize: 20 }}
-      onClick={() => onClick(emoji)}
+      variant="outline"
+      sx={{
+        fontSize: size === 'sm' ? 14 : 16,
+        backgroundColor: reactedByMe ? `${theme.palette.primary.light}30` : undefined,
+      }}
+      onClick={onReactionClick}
+      size={size}
+      {...rest}
     >
-      {emoji}
+      {emoji} {reactedCount}
     </Button>
   );
 }

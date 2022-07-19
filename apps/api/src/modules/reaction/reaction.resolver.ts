@@ -1,6 +1,9 @@
-import { ParseIntPipe, ValidationPipe } from '@nestjs/common';
+import { ParseIntPipe, UseGuards, ValidationPipe } from '@nestjs/common';
 import { Resolver, Query, Args, Int, Mutation } from '@nestjs/graphql';
 import { AddGameReactionDto } from '../../dto/game.dto';
+import { UserProfile } from '../../interfaces/auth.profile';
+import { CurrentUser } from '../core/decorators/current-user.decorator';
+import { GqlJwtGuard } from '../core/guards/gql-jwt.guard';
 import { GameReaction } from './game-reaction.entity';
 import { ReactionService } from './reaction.service';
 
@@ -15,11 +18,18 @@ export class ReactionResolver {
     return this.reactionService.findAllByGameId(gameId);
   }
 
+  @UseGuards(GqlJwtGuard)
   @Mutation(() => GameReaction, { name: 'addGameReaction', nullable: true })
   public async createGameReaction(
     @Args(ValidationPipe) dto: AddGameReactionDto,
+    @CurrentUser() user: UserProfile,
   ): Promise<GameReaction> {
-    return this.reactionService.addGameReaction(dto.gameId, 1, dto.reactionEmoji);
+    console.log(user);
+    return this.reactionService.addGameReaction(
+      dto.gameId,
+      user.userId,
+      dto.reactionEmoji,
+    );
   }
 
   @Mutation(() => Boolean, { name: 'removeGameReaction' })

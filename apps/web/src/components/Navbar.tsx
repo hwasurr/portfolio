@@ -13,6 +13,7 @@ export function Navbar(): JSX.Element {
     zIndex: theme.zIndex.banner,
     backgroundColor: theme.palette.white.medium,
     borderBottom: `${theme.borderWidth.thin} solid ${theme.palette.gray.light}`,
+    overflow: 'hidden',
   });
   const [{ data: profile }] = useProfileQuery();
 

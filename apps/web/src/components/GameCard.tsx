@@ -2,7 +2,9 @@ import { css } from '@emotion/react';
 import { Badge, Box, Button, Card, CustomLink, Heading, Text } from '@my/components';
 import dayjs from 'dayjs';
 import { useMemo } from 'react';
+import { VscReactions } from 'react-icons/vsc';
 import { GamesQuery, useGamesQuery } from '../__generated__/graphql';
+import ReactionAction, { ReactionButton } from './ReactionAction';
 
 export interface GameCardProps {
   game: GamesQuery['games'][number];
@@ -50,9 +52,18 @@ export function GameCard({ game }: GameCardProps): JSX.Element {
           </Box.Flex>
 
           <Box.Flex gap={2}>
-            <Button variant="outline">
-              {reactions?.reactionEmoji} {reactions?.count}
-            </Button>
+            {reactions?.reactionEmoji ? (
+              <ReactionButton
+                size="sm"
+                variant="outline"
+                emoji={reactions.reactionEmoji}
+                reactedCount={reactions.count}
+              />
+            ) : (
+              <Button size="sm" variant="outline" sx={{ alignItems: 'center' }}>
+                <VscReactions size={18} style={{ verticalAlign: 'text-top' }} /> {0}
+              </Button>
+            )}
             <Button variant="outline">💬 {game.commentCount}</Button>
           </Box.Flex>
 

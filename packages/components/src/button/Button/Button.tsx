@@ -1,11 +1,12 @@
 import { css, Interpolation, useTheme } from '@emotion/react';
 import { IPaletteChromaticColors, ITheme } from '@my/style';
+import * as React from 'react';
 import { HTMLProps, useMemo } from 'react';
 import { Text } from '../../layouts/Text/Text';
 
 type HTMLButtonProps = Omit<HTMLProps<HTMLButtonElement>, 'size'>;
 export interface ButtonProps extends HTMLButtonProps {
-  onClick?: () => void;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
   size?: 'sm' | 'md' | 'lg';
   color?: IPaletteChromaticColors;
