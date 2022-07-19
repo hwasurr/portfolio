@@ -12,6 +12,7 @@ import { AddOrRemoveGameTagDto, CreateGameDto, UpdateGameDto } from '../../dto/g
 import { CommentService } from '../comment/comment.service';
 import { GameComment } from '../comment/game-comment.entity';
 import { ReactionService } from '../reaction/reaction.service';
+import { Tag } from '../tag/tag.entity';
 import { GameImage } from './entities/game-image.entity';
 import { GameInformation } from './entities/game-information.entity';
 import { Game } from './entities/game.entity';
@@ -30,9 +31,12 @@ export class GameResolver {
 
   @Query(() => Game, { name: 'game', nullable: true })
   public async findGame(
-    @Args('id', { type: () => Int }, ParseIntPipe) gameId: number,
+    @Args('id', { type: () => Int, nullable: true }) gameId?: number,
+    @Args('gamename', { nullable: true }) gamename?: string,
   ): Promise<Game | null> {
-    return this.gameService.findOne(gameId);
+    if (gamename) return this.gameService.findOneByGamename(gamename);
+    if (gameId) return this.gameService.findOne(gameId);
+    return null;
   }
 
   @Query(() => [Game], { name: 'games' })
@@ -58,6 +62,16 @@ export class GameResolver {
   @ResolveField(() => [GameReactionResult], { name: 'reactions', nullable: 'items' })
   public async reactions(@Parent() game: Game): Promise<GameReactionResult[]> {
     return this.reactionService.findGroupByEmoji(game.id);
+  }
+
+  @ResolveField(() => [Tag], { name: 'tags', nullable: 'itemsAndList' })
+  public async tags(@Parent() game: Game): Promise<Tag[]> {
+    return this.gameService.findTags(game.id);
+  }
+
+  @ResolveField(() => Int, { name: 'commentCount' })
+  public async commentCount(@Parent() game: Game): Promise<number> {
+    return this.commentService.countAllByGameId(game.id);
   }
 
   @Mutation(() => Game, { name: 'createGame' })

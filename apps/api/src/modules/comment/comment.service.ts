@@ -24,6 +24,10 @@ export class CommentService {
     return this.commentRepo.find({ where: { game: { id: gameId } } });
   }
 
+  public async countAllByGameId(gameId: Game['id']): Promise<number> {
+    return this.commentRepo.count({ where: { game: { id: gameId } } });
+  }
+
   public async create(dto: CreateCommentDto): Promise<GameComment> {
     const { gameId, ..._dto } = dto;
     const newCommnet = this.commentRepo.create({

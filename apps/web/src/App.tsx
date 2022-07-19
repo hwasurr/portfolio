@@ -1,5 +1,8 @@
 import { ThemeProvider } from '@emotion/react';
 import { theme } from '@my/style';
+import dayjs from 'dayjs';
+import koLocale from 'dayjs/locale/ko';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Provider as UrqlProvider } from 'urql';
 import { urqlClient } from './client/urqlClient';
@@ -13,6 +16,8 @@ import Login from './pages/login';
 import Mypage from './pages/mypage';
 import Signup from './pages/signup';
 
+dayjs.locale(koLocale);
+dayjs.extend(relativeTime);
 export function App(): JSX.Element {
   return (
     <UrqlProvider value={urqlClient}>

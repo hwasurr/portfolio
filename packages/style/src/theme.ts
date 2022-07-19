@@ -254,6 +254,15 @@ export const palette: IPalette = {
   },
 };
 
+// border
+export type IBorderKey = 'sm' | 'md' | 'lg';
+export type IBorder = Record<IBorderKey, string>;
+const borders: IBorder = {
+  sm: `${borderWidth.thin} solid ${palette.gray.light}`,
+  md: `${borderWidth.medium} solid ${palette.gray.light}`,
+  lg: `${borderWidth.thick} solid ${palette.gray.light}`,
+};
+
 // zIndex
 export type IZIndexKeys =
   | 'hide'
@@ -300,6 +309,7 @@ export interface ITheme {
   palette: IPalette;
   borderRadius: IBorderRadius;
   borderWidth: IBorderWidth;
+  borders: IBorder;
   spacing: ISpacing;
   fonts: IFont;
   fontSize: IFontSize;
@@ -320,6 +330,7 @@ export const theme: ITheme = {
   fontSize: fontsizes,
   borderRadius,
   borderWidth,
+  borders,
   displaySize: displaySizes,
   displayMediaQueries,
   spacing,

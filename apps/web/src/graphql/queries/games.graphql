@@ -1,0 +1,26 @@
+query Games {
+  games {
+    id
+    title
+    createDate
+    titleEmoji
+    gamename
+    summary
+    images {
+      name
+      src
+    }
+    tags {
+      id
+      title
+      color
+      description
+    }
+    reactions {
+      count
+      reactionEmoji
+      reactedByMe
+    }
+    commentCount
+  }
+}

@@ -1,0 +1,48 @@
+query Game($gamename: String) {
+  game(gamename: $gamename) {
+    id
+    title
+    createDate
+    updateDate
+    titleEmoji
+    gamename
+    summary
+    images {
+      id
+      name
+      src
+    }
+    information {
+      id
+      howToPlay
+      benefit
+      availableSite
+      standingStyle
+      minNumberOfPeople
+      maxNumberOfPeople
+      minMinuteTaken
+      maxMinuteTaken
+    }
+    comments {
+      id
+      title
+      createDate
+      updateDate
+      contents
+    }
+    reactions {
+      count
+      reactionEmoji
+      reactedByMe
+    }
+    tags {
+      id
+      title
+      createDate
+      updateDate
+      color
+      description
+    }
+    commentCount
+  }
+}

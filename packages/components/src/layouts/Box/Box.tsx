@@ -1,5 +1,11 @@
 import { css, Interpolation, useTheme } from '@emotion/react';
-import { IBorderRadiusKey, IDisplaySizeKey, ISpacingKey, ITheme } from '@my/style';
+import {
+  IBorderKey,
+  IBorderRadiusKey,
+  IDisplaySizeKey,
+  ISpacingKey,
+  ITheme,
+} from '@my/style';
 import type * as CSSType from 'csstype';
 import { PropsWithChildren } from 'react';
 
@@ -15,7 +21,7 @@ export interface BoxProps extends PropsWithChildren {
   justify?: CSSType.Property.JustifyContent;
   align?: CSSType.Property.AlignItems;
   flexDir?: CSSType.Property.FlexDirection;
-  border?: CSSType.Property.Border;
+  border?: IBorderKey | string;
   display?: CSSType.Property.Display;
   position?: CSSType.Property.Position;
   top?: CSSType.Property.Top;
@@ -69,6 +75,7 @@ export function Box({
   height,
   minHeight,
   maxHeight,
+  border,
   gap,
   sx,
   ...rest
@@ -86,6 +93,7 @@ export function Box({
     marginRight: marginX ? theme.spacing[marginX] : undefined,
     marginTop: marginY ? theme.spacing[marginY] : undefined,
     marginBottom: marginY ? theme.spacing[marginY] : undefined,
+    border: Object.keys(theme.borders).includes(border) ? theme.borders[border] : border,
     borderRadius: theme.borderRadius[rounded],
     justifyContent: justify,
     alignItems: align,

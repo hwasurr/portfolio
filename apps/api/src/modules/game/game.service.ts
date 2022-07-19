@@ -30,6 +30,10 @@ export class GameService {
     return this.gameRepo.findOne({ where: { id } });
   }
 
+  public async findOneByGamename(gamename: string): Promise<Game | null> {
+    return this.gameRepo.findOne({ where: { gamename } });
+  }
+
   public async findAll(): Promise<Game[]> {
     return this.gameRepo.find({});
   }
@@ -80,5 +84,13 @@ export class GameService {
 
   public async findInformatoin(gameId: number): Promise<GameInformation> {
     return this.gameInfoRepo.findOne({ where: { game: { id: gameId } } });
+  }
+
+  public async findTags(gameId: number): Promise<Tag[]> {
+    const result = await this.gameRepo.findOne({
+      where: { id: gameId },
+      relations: ['tags'],
+    });
+    return result.tags;
   }
 }

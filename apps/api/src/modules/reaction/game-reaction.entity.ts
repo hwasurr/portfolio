@@ -15,11 +15,11 @@ export class GameReaction {
   reactionEmoji: string;
 
   // 게임 - 다대다 - 유저 -> 리액션 관계정의
-  @ManyToOne(() => User, (user) => user.reactions, { cascade: true })
+  @ManyToOne(() => User, (user) => user.reactions, { cascade: true, onDelete: 'CASCADE' })
   @Index()
   user: User;
 
-  @ManyToOne(() => Game, (game) => game.reactions, { cascade: true })
+  @ManyToOne(() => Game, (game) => game.reactions, { cascade: true, onDelete: 'CASCADE' })
   @Index()
   game: Game;
 }

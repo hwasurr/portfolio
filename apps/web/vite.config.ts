@@ -3,24 +3,26 @@ import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react({
-    jsxImportSource: '@emotion/react',
-    babel: {
-      plugins: ['@emotion/babel-plugin'],
-      parserOpts: {
-        plugins: ['decorators-legacy', 'classProperties']
-      }
-    },
-  })],
+  plugins: [
+    react({
+      jsxImportSource: '@emotion/react',
+      babel: {
+        plugins: ['@emotion/babel-plugin'],
+        parserOpts: {
+          plugins: ['decorators-legacy', 'classProperties'],
+        },
+      },
+    }),
+  ],
   esbuild: {
-    logOverride: { 'this-is-undefined-in-esm': 'silent' }
+    logOverride: { 'this-is-undefined-in-esm': 'silent' },
   },
   optimizeDeps: {
     include: ['@my/common'],
   },
   build: {
     commonjsOptions: {
-      include: [/packages\/common/, '@my/common']
-    }
-  }
+      include: [/packages\/common/, '@my/common'],
+    },
+  },
 });

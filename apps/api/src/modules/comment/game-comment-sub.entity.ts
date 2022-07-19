@@ -8,6 +8,9 @@ import { GameComment } from './game-comment.entity';
 export class GameCommentSub extends Content {
   @Field() @Column({ type: 'longtext' }) contents: string;
   // 코멘트 - 일대다 - 서브코멘트 관계정의
-  @ManyToOne(() => GameComment, (comment) => comment.subComments, { cascade: true })
+  @ManyToOne(() => GameComment, (comment) => comment.subComments, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
   comment: GameComment;
 }

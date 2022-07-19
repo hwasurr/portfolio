@@ -1,4 +1,4 @@
-import { Box, Button } from '@my/components';
+import { Box, Button, ButtonProps, Card } from '@my/components';
 import { useState } from 'react';
 import { VscReactions } from 'react-icons/vsc';
 import useDisclosure from '../hooks/useToggle';
@@ -24,17 +24,27 @@ export function ReactionAction(): JSX.Element {
   };
 
   return (
-    <Box>
+    <Box position="relative">
       <Button variant="outline" onClick={onToggle}>
         <VscReactions size={20} />
       </Button>
 
       {!open ? null : (
-        <Box.Flex gap={2} marginY={1}>
+        <Card
+          display="flex"
+          padding={2}
+          gap={2}
+          marginY={1}
+          position="absolute"
+          border="md"
+          rounded="md"
+          shadow={{ base: 'sm', hover: 'sm' }}
+          sx={{ backgroundColor: 'white' }}
+        >
           {reactionEmoji.map((emoji) => (
             <ReactionButton key={emoji} emoji={emoji} onClick={onReactionClicked} />
           ))}
-        </Box.Flex>
+        </Card>
       )}
     </Box>
   );
@@ -44,13 +54,18 @@ export default ReactionAction;
 
 interface ReactionButtonProps {
   emoji: string;
+  variant?: ButtonProps['variant'];
   onClick: (emoji: string) => void;
 }
-function ReactionButton({ emoji, onClick }: ReactionButtonProps): JSX.Element {
+export function ReactionButton({
+  emoji,
+  onClick,
+  variant = 'outline',
+}: ReactionButtonProps): JSX.Element {
   return (
     <Button
       key={emoji}
-      variant="outline"
+      variant={variant}
       sx={{ fontSize: 20 }}
       onClick={() => onClick(emoji)}
     >

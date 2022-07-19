@@ -74,6 +74,8 @@ type Game {
   information: GameInformation!
   comments: [GameComment]!
   reactions: [GameReactionResult]!
+  tags: [Tag]
+  commentCount: Int!
 }
 
 type GameReaction {
@@ -120,7 +122,7 @@ type Query {
   profile: Me!
   user(id: Int): User
   users(pagination: PaginationDto!): [User!]
-  game(id: Int!): Game
+  game(id: Int, gamename: String): Game
   games: [Game!]!
   comments(gameId: Int!): [GameComment]!
   comment(id: Int!): GameComment
