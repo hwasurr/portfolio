@@ -15,6 +15,9 @@ export const databaseProviders = [
         synchronize: !(process.env.NODE_ENV === 'production'),
         logging: true,
         logger: 'advanced-console',
+        migrations: ['dist/migrations/*{.ts,.js}'],
+        migrationsRun: true,
+        migrationsTableName: 'migrations',
       });
 
       return dataSource.initialize();

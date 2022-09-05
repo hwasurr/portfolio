@@ -1,6 +1,6 @@
 import { useTheme } from '@emotion/react';
 import { Box, Button, ButtonProps, Card } from '@my/components';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { VscReactions } from 'react-icons/vsc';
 import useOutsideClick from '../hooks/useOutsideClick';
 import useDisclosure from '../hooks/useToggle';

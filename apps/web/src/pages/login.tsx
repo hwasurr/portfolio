@@ -1,4 +1,4 @@
-import { Box, Text } from '@my/components';
+import { Box } from '@my/components';
 import LoginForm from '../components/auth/LoginForm';
 import NavbarLayout from '../components/layouts/NavbarLayout';
 import Logo from '../components/Logo';
@@ -13,9 +13,8 @@ export function Login(): JSX.Element {
         maxWidth="280px"
         margin="auto"
       >
-        <Box textAlign="center" marginY={2}>
+        <Box textAlign="center" marginY={6} marginX="auto">
           <Logo />
-          <Text>catch phrase</Text>
         </Box>
 
         <LoginForm />
