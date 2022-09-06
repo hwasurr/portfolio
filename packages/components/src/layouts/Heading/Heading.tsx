@@ -1,5 +1,6 @@
 import { css, Interpolation, SerializedStyles, useTheme } from '@emotion/react';
 import { IFontSizeKey, IFontWeightKey, IPaletteColors, ITheme } from '@my/style';
+import { motion, MotionProps } from 'framer-motion';
 import { PropsWithChildren } from 'react';
 
 export interface HeadingProps extends PropsWithChildren {
@@ -7,6 +8,7 @@ export interface HeadingProps extends PropsWithChildren {
   fontSize?: IFontSizeKey;
   fontWeight?: IFontWeightKey;
   sx?: Interpolation<ITheme>;
+  motionProps?: MotionProps;
 }
 const useHeadingCSS = ({
   color,
@@ -30,9 +32,14 @@ export function H1({
   fontSize = '6xl',
   fontWeight = 'bold',
   sx,
+  motionProps,
 }: HeadingProps): JSX.Element {
   const headingCss = useHeadingCSS({ color, fontSize, fontWeight });
-  return <h1 css={[headingCss, sx]}>{children}</h1>;
+  return (
+    <motion.h1 css={[headingCss, sx]} {...motionProps}>
+      {children}
+    </motion.h1>
+  );
 }
 
 export function H2({
@@ -41,9 +48,14 @@ export function H2({
   fontSize = '5xl',
   fontWeight = 'bold',
   sx,
+  motionProps,
 }: HeadingProps): JSX.Element {
   const headingCss = useHeadingCSS({ color, fontSize, fontWeight });
-  return <h2 css={[headingCss, sx]}>{children}</h2>;
+  return (
+    <motion.h2 css={[headingCss, sx]} {...motionProps}>
+      {children}
+    </motion.h2>
+  );
 }
 
 export function H3({
@@ -52,9 +64,14 @@ export function H3({
   fontSize = '4xl',
   fontWeight = 'bold',
   sx,
+  motionProps,
 }: HeadingProps): JSX.Element {
   const headingCss = useHeadingCSS({ color, fontSize, fontWeight });
-  return <h3 css={[headingCss, sx]}>{children}</h3>;
+  return (
+    <motion.h3 css={[headingCss, sx]} {...motionProps}>
+      {children}
+    </motion.h3>
+  );
 }
 
 export function H4({
@@ -63,9 +80,14 @@ export function H4({
   fontSize = '3xl',
   fontWeight = 'bold',
   sx,
+  motionProps,
 }: HeadingProps): JSX.Element {
   const headingCss = useHeadingCSS({ color, fontSize, fontWeight });
-  return <h4 css={[headingCss, sx]}>{children}</h4>;
+  return (
+    <motion.h4 css={[headingCss, sx]} {...motionProps}>
+      {children}
+    </motion.h4>
+  );
 }
 
 export function H5({
@@ -74,9 +96,14 @@ export function H5({
   fontSize = '2xl',
   fontWeight = 'bold',
   sx,
+  motionProps,
 }: HeadingProps): JSX.Element {
   const headingCss = useHeadingCSS({ color, fontSize, fontWeight });
-  return <h5 css={[headingCss, sx]}>{children}</h5>;
+  return (
+    <motion.h5 css={[headingCss, sx]} {...motionProps}>
+      {children}
+    </motion.h5>
+  );
 }
 
 export function H6({
@@ -85,9 +112,14 @@ export function H6({
   fontSize = 'xl',
   fontWeight = 'bold',
   sx,
+  motionProps,
 }: HeadingProps): JSX.Element {
   const headingCss = useHeadingCSS({ color, fontSize, fontWeight });
-  return <h6 css={[headingCss, sx]}>{children}</h6>;
+  return (
+    <motion.h6 css={[headingCss, sx]} {...motionProps}>
+      {children}
+    </motion.h6>
+  );
 }
 
 export default {

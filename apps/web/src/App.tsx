@@ -14,6 +14,7 @@ import UserManage from './pages/admin/user-manage';
 import GameDetail from './pages/games/[gamename]';
 import Login from './pages/login';
 import Mypage from './pages/mypage';
+import SandboxClone from './pages/sandbox-clone';
 import Signup from './pages/signup';
 
 dayjs.locale(koLocale);
@@ -34,6 +35,7 @@ export function App(): JSX.Element {
             <Route path="/games" element={<Index />} />
             <Route path="/games/:gamename" element={<GameDetail />} />
             <Route path="/mypage" element={<Mypage />} />
+            <Route path="/sandbox-clone" element={<SandboxClone />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

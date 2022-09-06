@@ -1,3 +1,4 @@
+import { motion, MotionProps } from 'framer-motion';
 import { css, Interpolation, useTheme } from '@emotion/react';
 import {
   IBorderKey,
@@ -45,8 +46,10 @@ export interface BoxProps extends PropsWithChildren {
     | 'header'
     | 'footer'
     | 'span'
-    | 'form';
+    | 'form'
+    | 'nav';
   sx?: Interpolation<ITheme>;
+  motionProps?: MotionProps;
 }
 
 const useSize = (wORh: CSSType.Property.Width | IDisplaySizeKey): string => {
@@ -78,6 +81,7 @@ export function Box({
   border,
   gap,
   sx,
+  motionProps,
   ...rest
 }: BoxProps): JSX.Element {
   const theme = useTheme();
@@ -107,9 +111,9 @@ export function Box({
     gap: theme.spacing[gap],
     ...rest,
   });
-  const Cmp = as;
+  const Cmp = motion[as];
   return (
-    <Cmp id={id} css={[boxStyle, sx]}>
+    <Cmp id={id} css={[boxStyle, sx]} {...motionProps}>
       {children}
     </Cmp>
   );
