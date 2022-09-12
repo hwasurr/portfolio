@@ -1,60 +1,20 @@
 import { MdMail, MdRssFeed } from 'react-icons/md';
 import { VscGithub } from 'react-icons/vsc';
-
-export interface PortfolioSectionBase {
-  title: string;
-  subtitle: string;
-}
-
-export interface AboutMeDescription {
-  name: string;
-  value: string;
-}
-export interface AboutMe extends PortfolioSectionBase {
-  descriptions: AboutMeDescription[];
-  introduceMyself: string;
-}
-
-export interface SkillSet {
-  type: 'Frontend' | 'Backend' | 'DevOps' | 'Tools and etc.';
-  items: string[];
-}
-export interface MySkills extends PortfolioSectionBase {
-  skillSet: SkillSet[];
-}
-
-export interface ExperienceService {
-  title: string;
-  startedAt: string;
-  endedAt: string;
-  services: { title: string; description: string }[];
-}
-export interface Experiences extends PortfolioSectionBase {
-  items: ExperienceService[];
-}
-
-export type WritingLink = { title: string; linkUrl: string };
-export interface Writings extends PortfolioSectionBase {
-  items: WritingLink[];
-}
-
-export type ContactLink = { icon: JSX.Element; title: string; linkUrl: string };
-export interface ContactMe extends PortfolioSectionBase {
-  items: ContactLink[];
-}
-
-export type PortfolioData = {
-  aboutme: AboutMe;
-  mySkills: MySkills;
-  experiences: Experiences;
-  writings: Writings;
-  contactMe: ContactMe;
-};
+import { PortfolioData } from './data.interface';
 
 export const data: PortfolioData = {
+  landingSection: {
+    title: '',
+    catchPhrase: [
+      'i create ',
+      { delay: 2000, words: ['readable', 'efficient', 'stable'] },
+      ' code.',
+    ],
+    subtitle: '웹서비스를 만듭니다',
+  },
   aboutme: {
     title: 'Who Am I',
-    subtitle: '소개합니다.',
+    subtitle: '저를 소개합니다.',
     descriptions: [
       { name: '이름', value: '강화수' },
       { name: '생년월', value: '1994년 09월' },
@@ -145,9 +105,11 @@ export const data: PortfolioData = {
     subtitle: '',
     items: [
       {
+        coverImageUrl: 'https://picsum.photos/300/300', // TODO: 향후 수정 필요
         title:
           'GraphQL과 타입스크립트로 개발하는 웹 서비스: 설계부터 개발, 배포까지 따라하며 완성하는 웹 풀스택 개발',
         linkUrl: '#',
+        description: '2022. 10. 출간예정',
       },
     ],
   },

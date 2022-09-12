@@ -1,4 +1,5 @@
 export * from './button/Button/Button';
+export * from './button/Link/A';
 export * from './button/Link/CustomLink';
 export * from './display/Avatar/Avatar';
 export * from './display/Badge/Badge';
