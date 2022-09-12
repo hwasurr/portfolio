@@ -16,7 +16,7 @@ import { PortfolioMotionVariant } from '../utils/type-utils/motion';
  * - [x] Writings
  * - [x] Contact me
  */
-export default function SandboxClone(): JSX.Element {
+export default function PortfolioPage(): JSX.Element {
   return (
     <SandboxLayout
       /* contents 1 - About me */

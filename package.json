@@ -12,7 +12,6 @@
     "prepare": "husky install",
     "components": "yarn workspace @my/components",
     "web": "yarn workspace web",
-    "api": "yarn workspace api",
     "common": "yarn workspace @my/common"
   },
   "devDependencies": {

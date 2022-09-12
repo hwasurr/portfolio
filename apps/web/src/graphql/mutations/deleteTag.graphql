@@ -1,3 +1,0 @@
-mutation DeleteTag($deleteTagId: Int!) {
-  deleteTag(id: $deleteTagId)
-}
