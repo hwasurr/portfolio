@@ -44,6 +44,7 @@ export interface Experiences extends PortfolioSectionBase {
 export type WritingLink = {
   coverImageUrl: string;
   title: string;
+  subtitle?: string;
   linkUrl: string;
   description?: string;
 };

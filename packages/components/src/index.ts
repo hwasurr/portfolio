@@ -4,6 +4,7 @@ export * from './button/Link/CustomLink';
 export * from './display/Avatar/Avatar';
 export * from './display/Badge/Badge';
 export * from './display/Card/Card';
+export * from './display/Image/MyImage';
 export * from './form/Form/Form';
 export * from './form/Form/FormErrorText';
 export * from './form/Input/TextArea';

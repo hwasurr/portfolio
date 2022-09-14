@@ -1,4 +1,5 @@
-import { Box, Heading } from '@my/components';
+import { useTheme } from '@emotion/react';
+import { Box } from '@my/components';
 import { AnimatePresence } from 'framer-motion';
 import { PropsWithChildren, useEffect, useMemo, useState } from 'react';
 import { PortfolioMotionVariant } from '../../utils/type-utils/motion';
@@ -12,6 +13,7 @@ export default function PortfolioLayout({
   landingSection,
   children,
 }: PortfolioLayoutProps): JSX.Element {
+  const theme = useTheme();
   const isHome = useMemo(() => window.location.pathname === '/', []);
   const [isLoading, setIsLoading] = useState(isHome);
   const handleLoadingEnd = (): void => {
@@ -52,7 +54,7 @@ export default function PortfolioLayout({
             id="main-section"
             sx={{
               position: 'relative',
-              backgroundColor: '#1D1DC5',
+              backgroundColor: theme.palette.primary.medium,
               minHeight: 3800,
               overflowY: 'hidden',
               overflowX: 'hidden',
@@ -70,9 +72,10 @@ export default function PortfolioLayout({
             <Box
               sx={{
                 position: 'absolute',
+                background: theme.palette.secondary.medium,
                 top: 0,
-                background: '#d03251',
                 right: 0,
+                minHeight: 400,
                 width: '200%',
                 transformOrigin: '-25% 100%',
                 display: 'inline-block',
@@ -87,7 +90,7 @@ export default function PortfolioLayout({
               sx={{
                 position: 'absolute',
                 top: 800,
-                background: '#ffc200',
+                background: theme.palette.warn.medium,
                 minHeight: 1400,
                 left: 0,
                 width: '100%',
@@ -102,10 +105,10 @@ export default function PortfolioLayout({
               sx={{
                 position: 'absolute',
                 top: 3600,
-                background: '#000',
+                background: theme.palette.black.medium,
                 left: 0,
                 width: '100%',
-                minHeight: 800,
+                minHeight: 1000,
                 transformOrigin: 'top center',
                 display: 'inline-block',
                 paddingTop: '60%',

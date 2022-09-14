@@ -1,5 +1,5 @@
-import { css } from '@emotion/react';
-import { Box, Heading, Text } from '@my/components';
+import { css, useTheme } from '@emotion/react';
+import { Box, Text } from '@my/components';
 import { TypeAnimation } from 'react-type-animation';
 import Section from '../components/section/Section';
 import { CatchPhrase } from '../data/data.interface';
@@ -7,8 +7,9 @@ import data from '../data/data.ko';
 import { PortfolioMotionVariant } from '../utils/type-utils/motion';
 
 export default function LandingSection(): JSX.Element {
+  const theme = useTheme();
   const landingSectionCss = css({
-    minHeight: 800,
+    minHeight: '100vh',
     width: '100%',
     paddingTop: 140,
     background: 'transparent',
@@ -17,7 +18,8 @@ export default function LandingSection(): JSX.Element {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
     margin: '0 auto',
-    width: 960,
+    maxWidth: 960,
+    width: '100%',
     color: 'white',
     position: 'relative',
     gap: 12,
@@ -36,30 +38,45 @@ export default function LandingSection(): JSX.Element {
   return (
     <Box id="landing-section" sx={landingSectionCss}>
       <Box sx={landingWrapperCss}>
-        <Box sx={{ maxWidth: 450 }}>
-          <Section.CatchPhrase
-            emphasis
-            text={
-              <EmphasisSequentialText catchPhrase={data.landingSection.catchPhrase} />
-            }
-            motionProps={{ variants }}
-          />
-          <Heading.H3 motionProps={{ variants }}>웹 서비스를 만듭니다.</Heading.H3>
-        </Box>
-
-        <Box
+        <Section
           sx={{
-            width: 480,
-            height: 550,
-            backgroundImage: 'url("/images/me1-recover.png")',
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
+            marginTop: 0,
+            marginBottom: 0,
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            width: theme.displaySize.lg,
+            [theme.displayMediaQueries.md]: {
+              flexDirection: 'column',
+              width: '100vw',
+            },
           }}
-          motionProps={{
-            variants: imgVariants,
-            transition: { duration: 0.75, stiffness: 0, bounce: 0, damping: 0 },
-          }}
-        />
+        >
+          <Box sx={{ maxWidth: 450 }}>
+            <Section.CatchPhrase
+              emphasis
+              text={
+                <EmphasisSequentialText catchPhrase={data.landingSection.catchPhrase} />
+              }
+              subText="잘 동작하는 웹 서비스를 만듭니다."
+              motionProps={{ variants }}
+            />
+          </Box>
+
+          <Box
+            sx={{
+              width: 480,
+              height: 550,
+              backgroundImage: 'url("/images/me1-recover.png")',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+            }}
+            motionProps={{
+              variants: imgVariants,
+              transition: { duration: 0.75, stiffness: 0, bounce: 0, damping: 0 },
+            }}
+          />
+        </Section>
       </Box>
     </Box>
   );

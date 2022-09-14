@@ -72,11 +72,11 @@ const displaySizes: IDisplaySize = {
 export type displayMediaQueryKey = Exclude<IDisplaySizeKey, '2xl'> | 'base';
 export type IDisplayMediaQuery = Record<displayMediaQueryKey, string>;
 export const displayMediaQueries: IDisplayMediaQuery = {
-  base: `@meda (min-width: ${displaySizes.sm}`,
-  sm: `@meda (min-width: ${displaySizes.md}`,
-  md: `@meda (min-width: ${displaySizes.lg}`,
-  lg: `@meda (min-width: ${displaySizes.xl}`,
-  xl: `@meda (min-width: ${displaySizes['2xl']}`,
+  base: `@media (max-width: ${displaySizes.sm})`,
+  sm: `@media (max-width: ${displaySizes.md})`,
+  md: `@media (max-width: ${displaySizes.lg})`,
+  lg: `@media (max-width: ${displaySizes.xl})`,
+  xl: `@media (max-width: ${displaySizes['2xl']})`,
 };
 
 // Spacing
@@ -223,14 +223,14 @@ export const palette: IPalette = {
     dark: '#718096',
   },
   primary: {
-    light: '#54bbcd',
-    medium: '#0a9eb8',
-    dark: '#098ea6',
+    light: '#1D3DC5',
+    medium: '#1D1DC5',
+    dark: '#1A0DC5',
   },
   secondary: {
-    light: '#4FD1C5',
-    medium: '#38B2AC',
-    dark: '#319795',
+    light: '#E3114E',
+    medium: '#E3114E',
+    dark: '#E3114E',
   },
   success: {
     light: '#68D391',
@@ -238,9 +238,9 @@ export const palette: IPalette = {
     dark: '#38A169',
   },
   warn: {
-    light: '#F6AD55',
-    medium: '#ED8936',
-    dark: '#DD6B20',
+    light: '#ffc200',
+    medium: '#ffc200',
+    dark: '#ffc200',
   },
   info: {
     light: '#63B3ED',

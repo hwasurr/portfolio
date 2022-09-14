@@ -105,9 +105,10 @@ export const data: PortfolioData = {
     subtitle: '',
     items: [
       {
-        coverImageUrl: 'https://picsum.photos/300/300', // TODO: 향후 수정 필요
-        title:
-          'GraphQL과 타입스크립트로 개발하는 웹 서비스: 설계부터 개발, 배포까지 따라하며 완성하는 웹 풀스택 개발',
+        coverImageUrl:
+          'https://img.itch.zone/aW1nLzgxNzU0MDUucG5n/300x240%23c/f%2BVlsD.png', // TODO: 향후 수정 필요
+        title: 'GraphQL과 타입스크립트로 개발하는 웹 서비스',
+        subtitle: '설계부터 개발, 배포까지 따라하며 완성하는 웹 풀스택 개발',
         linkUrl: '#',
         description: '2022. 10. 출간예정',
       },

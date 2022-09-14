@@ -22,6 +22,7 @@ export interface BoxProps extends PropsWithChildren {
   justify?: CSSType.Property.JustifyContent;
   align?: CSSType.Property.AlignItems;
   flexDir?: CSSType.Property.FlexDirection;
+  flexWrap?: CSSType.Property.FlexWrap;
   border?: IBorderKey | string;
   display?: CSSType.Property.Display;
   position?: CSSType.Property.Position;
@@ -72,6 +73,7 @@ export function Box({
   justify,
   align,
   flexDir,
+  flexWrap,
   width,
   minWidth,
   maxWidth,
@@ -102,6 +104,7 @@ export function Box({
     justifyContent: justify,
     alignItems: align,
     flexDirection: flexDir,
+    flexWrap,
     width: useSize(width),
     minWidth: useSize(minWidth),
     maxWidth: useSize(maxWidth),

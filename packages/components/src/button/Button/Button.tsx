@@ -66,7 +66,7 @@ export function Button({
     fontWeight: theme.fontWeight.semiBold,
     transition: '0.3s background-color, 0.2s color, 0.1s transform',
     ':hover:not(:disabled)': {
-      backgroundColor: theme.palette[color].dark,
+      backgroundColor: 'transparent',
       color: theme.palette.white.medium,
     },
     ':active:not(:disabled)': {
