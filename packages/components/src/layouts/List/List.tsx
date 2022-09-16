@@ -6,9 +6,11 @@ export function List({ children }: ListProps): JSX.Element {
   return <ul>{children}</ul>;
 }
 
-export type ListItemProps = PropsWithChildren;
-export function ListItem({ children }: ListItemProps): JSX.Element {
-  return <li css={css({ listStyle: 'none' })}>{children}</li>;
+export interface ListItemProps extends PropsWithChildren {
+  listStyle?: 'inside' | 'none' | 'outside';
+}
+export function ListItem({ children, listStyle = 'none' }: ListItemProps): JSX.Element {
+  return <li css={css({ listStyle })}>{children}</li>;
 }
 
 List.Item = ListItem;

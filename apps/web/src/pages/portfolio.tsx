@@ -2,6 +2,7 @@ import DefaultLayout from '../components/layouts/DefaultLayout';
 import AboutMe from '../organisms/AboutMe';
 import ContactMe from '../organisms/ContactMe';
 import Experiences from '../organisms/Experiences';
+import Footer from '../organisms/Footer';
 import LandingSection from '../organisms/LandingSection';
 import MySkills from '../organisms/MySkills';
 import Writings from '../organisms/Writings';
@@ -35,6 +36,9 @@ export default function PortfolioPage(): JSX.Element {
 
       {/* 섹션 5 - Contact Me */}
       <ContactMe />
+
+      {/* Footer */}
+      <Footer />
     </DefaultLayout>
   );
 }

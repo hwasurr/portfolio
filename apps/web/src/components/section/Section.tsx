@@ -21,10 +21,14 @@ export function Section({ id, sx, children }: SectionProps): JSX.Element {
         {
           maxWidth: theme.displaySize.lg,
           width: '100%',
-          minHeight: 600,
+          minHeight: 400,
           color: 'white',
           position: 'relative',
           background: 'transparent',
+          [theme.displayMediaQueries.sm]: {
+            height: '100%',
+            minHeight: 'unset',
+          },
         },
         sx,
       ]}
@@ -97,6 +101,7 @@ export function SectionTitle({ title, subtitle }: SectionTitleProps): JSX.Elemen
           motionProps={{
             initial: { opacity: 0, x: -25 },
             whileInView: { opacity: 1, x: 0 },
+            viewport: { once: true, amount: 0.5 },
           }}
         >
           <H1
@@ -108,7 +113,7 @@ export function SectionTitle({ title, subtitle }: SectionTitleProps): JSX.Elemen
               lineHeight: 1.2,
               [theme.displayMediaQueries.lg]: { fontSize: '3.75rem' },
               [theme.displayMediaQueries.md]: { fontSize: '3.25rem' },
-              [theme.displayMediaQueries.base]: { fontSize: '2.5rem' },
+              [theme.displayMediaQueries.base]: { fontSize: '2.25rem' },
             }}
           >
             {title}
@@ -121,17 +126,63 @@ export function SectionTitle({ title, subtitle }: SectionTitleProps): JSX.Elemen
             transition: { delay: 0.3, duration: 0.4 },
             initial: { opacity: 0, x: 200 },
             whileInView: { opacity: 1, x: 0 },
+            viewport: { once: true, amount: 0.5 },
           }}
         />
       </Box.Flex>
-      <Heading.H6>{subtitle}</Heading.H6>
+
+      <Box
+        sx={{
+          flexShrink: 0,
+          transition:
+            'transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1), -webkit-transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1)',
+        }}
+        motionProps={{
+          initial: { opacity: 0, x: -25 },
+          whileInView: { opacity: 1, x: 0 },
+          viewport: { once: true, amount: 0.5 },
+        }}
+      >
+        <Heading.H6
+          sx={{
+            [theme.displayMediaQueries.base]: { fontSize: theme.fontSize.lg },
+          }}
+        >
+          {subtitle}
+        </Heading.H6>
+      </Box>
     </>
   );
 }
 
-type SectionBodyProps = BoxProps;
-export function SectionBody({ ...rest }: SectionBodyProps): JSX.Element {
-  return <Box {...rest} />;
+interface SectionBodyProps extends BoxProps {
+  enableAnimation?: boolean;
+}
+export function SectionBody({
+  enableAnimation = true,
+  ...rest
+}: SectionBodyProps): JSX.Element {
+  const variants = {
+    whileInView: { y: 0, opacity: 1 },
+    initial: { y: 30, opacity: 0 },
+  };
+  return (
+    <Box
+      motionProps={
+        enableAnimation
+          ? {
+              transition: { duration: 0.5, staggerChildren: 0.3 },
+              variants,
+              whileInView: 'whileInView',
+              initial: 'initial',
+              viewport: { once: true, amount: 0.5 },
+              ...rest.motionProps,
+            }
+          : rest.motionProps
+      }
+      {...rest}
+    />
+  );
 }
 
 Section.Title = SectionTitle;

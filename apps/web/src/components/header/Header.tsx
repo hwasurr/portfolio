@@ -61,8 +61,8 @@ export default function PortfolioLayoutHeader(): JSX.Element {
       <Box
         motionProps={{
           variants: {
-            initial: { opacity: 0, y: -60, display: 'none' },
-            show: { opacity: 1, y: 0, display: 'block' },
+            initial: { opacity: 0, y: -30, display: 'none' },
+            show: { opacity: 1, y: 0, display: 'block', transition: { duration: 0.5 } },
           },
         }}
       >

@@ -1,6 +1,7 @@
 import { useTheme } from '@emotion/react';
 import { Box, Heading, List, ListItem, Text } from '@my/components';
 import Section from '../components/section/Section';
+import { SkillSet } from '../data/data.interface';
 import data from '../data/data.ko';
 import { toLowerDashedCase } from '../utils/toLowerDashedCase';
 
@@ -11,6 +12,7 @@ export default function MySkills(): JSX.Element {
     <Section id={toLowerDashedCase(data.mySkills.title)}>
       <Section.Title title={data.mySkills.title} subtitle={data.mySkills.subtitle} />
       <Section.Body
+        enableAnimation={false}
         marginY={12}
         sx={{
           display: 'grid',
@@ -22,25 +24,50 @@ export default function MySkills(): JSX.Element {
         }}
       >
         {data.mySkills.skillSet.map((skill) => (
-          <Box.Flex
-            key={skill.type}
-            flexDir="column"
-            justify="space-between"
-            padding={8}
-            // rounded="md"
-            sx={{ backgroundColor: 'white', height: 350, color: 'rgba(0,0,0,0.85)' }}
-          >
-            <Heading.H6>{skill.type}</Heading.H6>
-            <List>
-              {skill.items.map((skillItem) => (
-                <ListItem key={skillItem}>
-                  <Text>{skillItem}</Text>
-                </ListItem>
-              ))}
-            </List>
-          </Box.Flex>
+          <SkillItem key={skill.type} {...skill} />
         ))}
       </Section.Body>
     </Section>
+  );
+}
+
+function SkillItem(skill: SkillSet): JSX.Element {
+  const theme = useTheme();
+  const variants = {
+    whileInView: { y: 0, opacity: 1 },
+    initial: { y: 30, opacity: 0 },
+  };
+  return (
+    <Box.Flex
+      key={skill.type}
+      flexDir="column"
+      justify="space-between"
+      padding={8}
+      sx={{
+        backgroundColor: 'white',
+        height: 350,
+        color: 'rgba(0,0,0,0.85)',
+        [theme.displayMediaQueries.base]: {
+          height: '100%',
+        },
+      }}
+      motionProps={{
+        variants,
+        whileInView: 'whileInView',
+        initial: 'initial',
+        viewport: { once: true, amount: 0.5 },
+      }}
+    >
+      <Heading.H6>{skill.type}</Heading.H6>
+      <Box marginY={4}>
+        <List>
+          {skill.items.map((skillItem) => (
+            <ListItem key={skillItem} listStyle="outside">
+              <Text>{skillItem}</Text>
+            </ListItem>
+          ))}
+        </List>
+      </Box>
+    </Box.Flex>
   );
 }

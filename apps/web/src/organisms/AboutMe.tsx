@@ -39,10 +39,20 @@ interface AboutMeDescriptionProps {
   value: string;
 }
 function AboutMeDescription({ name, value }: AboutMeDescriptionProps): JSX.Element {
+  const theme = useTheme();
   return (
     <Box.Flex gap={4} align="center">
       <Text fontWeight="bold">{name}</Text>
-      <Text>{value}</Text>
+      <Text
+        sx={{
+          fontSize: theme.fontSize.md,
+          [theme.displayMediaQueries.base]: {
+            fontSize: theme.fontSize.sm,
+          },
+        }}
+      >
+        {value}
+      </Text>
     </Box.Flex>
   );
 }
