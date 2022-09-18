@@ -127,7 +127,7 @@ export default function PortfolioLayout({
 function PageTransitionBase({ delay }: { delay: number }): JSX.Element {
   const variants: PortfolioMotionVariant = {
     initial: { left: '100vw' },
-    show: { left: '-200vw' },
+    show: { left: '-4000px' },
   };
   return (
     <Box
@@ -137,8 +137,8 @@ function PageTransitionBase({ delay }: { delay: number }): JSX.Element {
         top: 0,
         left: '100vw',
         zIndex: 10,
-        width: '200vw',
-        height: '250vh',
+        width: '4000px',
+        height: '2000px',
         overflow: 'hidden',
       }}
       motionProps={{

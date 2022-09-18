@@ -223,14 +223,14 @@ export const palette: IPalette = {
     dark: '#718096',
   },
   primary: {
-    light: '#1D3DC5',
+    light: '#4a4ad1',
     medium: '#1D1DC5',
-    dark: '#1A0DC5',
+    dark: '#17179e',
   },
   secondary: {
-    light: '#E3114E',
+    light: '#e94171',
     medium: '#E3114E',
-    dark: '#E3114E',
+    dark: '#b60e3e',
   },
   success: {
     light: '#68D391',
@@ -238,9 +238,9 @@ export const palette: IPalette = {
     dark: '#38A169',
   },
   warn: {
-    light: '#ffc200',
+    light: '#ffd44d',
     medium: '#ffc200',
-    dark: '#ffc200',
+    dark: '#cc9b00',
   },
   info: {
     light: '#63B3ED',

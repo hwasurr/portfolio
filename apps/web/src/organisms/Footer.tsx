@@ -1,9 +1,13 @@
 import { useTheme } from '@emotion/react';
-import { Box, Text } from '@my/components';
-import Section from '../components/section/Section';
+import { Box, CustomLink, Text } from '@my/components';
+import React from 'react';
 
 export default function Footer(): JSX.Element {
   const theme = useTheme();
+  const mailTo = (e: React.MouseEvent): void => {
+    e.preventDefault();
+    window.location.href = 'mailto:iamsupermazinga@gmail.com';
+  };
   return (
     <Box.Flex
       marginY={12}
@@ -17,8 +21,18 @@ export default function Footer(): JSX.Element {
       }}
     >
       <Box textAlign="center">
-        <Text>Created by Hwasurr</Text>
-        <Text>Design inspired by Sandbox</Text>
+        <Text>
+          Created by{' '}
+          <CustomLink to="#" onClick={mailTo}>
+            Hwasurr
+          </CustomLink>
+        </Text>
+        <Text>
+          Design inspired by{' '}
+          <CustomLink isExternal to="https://sandbox.co.kr/index.html">
+            Sandbox
+          </CustomLink>
+        </Text>
       </Box>
     </Box.Flex>
   );

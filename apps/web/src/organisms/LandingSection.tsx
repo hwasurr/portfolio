@@ -89,7 +89,7 @@ function EmphasisSequentialText({
   catchPhrase,
 }: EmphasisSequentialTextProps): JSX.Element {
   return (
-    <Text lineHeight="inherit">
+    <Box>
       {catchPhrase.map((c) => {
         if (typeof c === 'string') return c;
         const sequence = c.words.reduce<Array<string | number>>(
@@ -105,6 +105,6 @@ function EmphasisSequentialText({
           />
         );
       })}
-    </Text>
+    </Box>
   );
 }

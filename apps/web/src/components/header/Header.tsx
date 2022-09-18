@@ -1,9 +1,8 @@
-import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
-import { GiHamburgerMenu } from 'react-icons/gi';
 import { css, useTheme } from '@emotion/react';
 import { Box, Button, CustomLink } from '@my/components';
 import { useScroll } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { PortfolioData } from '../../data/data.interface';
 import data from '../../data/data.ko';
 import useDisclosure from '../../hooks/useToggle';
@@ -12,12 +11,6 @@ import Logo from '../logo/Logo';
 
 const HEADER_HEIGHT = 80;
 export default function PortfolioLayoutHeader(): JSX.Element {
-  const scrollToSection = (targetsection: string): void => {
-    const section = document.getElementById(targetsection);
-    if (!section) return;
-    section.scrollIntoView();
-  };
-
   const [headerVisible, setHeaderVisible] = useState(true);
   const [headerBackdrop, setHeaderBackdrop] = useState(false);
   const [headerMarginTop, setHeaderMarginTop] = useState(16);
@@ -76,7 +69,7 @@ export default function PortfolioLayoutHeader(): JSX.Element {
 
 function Navigation(): JSX.Element {
   const theme = useTheme();
-  const { onToggle, open } = useDisclosure();
+  const { onToggle, open, onClose } = useDisclosure();
 
   const asideVariant = {
     closed: { opacity: 0, x: '100%' },
@@ -118,7 +111,7 @@ function Navigation(): JSX.Element {
             width: 'min(75vw, 400px)',
             height: '100vh',
             outline: '0px',
-            backgroundColor: theme.palette.primary.light,
+            backgroundColor: theme.palette.primary.dark,
             boxShadow: `-10px 0px 30px -15px ${theme.palette.black.medium}`,
             zIndex: 10,
             transform: 'translateX(0vw)',
@@ -126,13 +119,13 @@ function Navigation(): JSX.Element {
           },
         }}
       >
-        <NavigationList />
+        <NavigationList onClick={onClose} />
       </Box>
     </>
   );
 }
 
-function NavigationList(): JSX.Element {
+function NavigationList({ onClick }: { onClick?: () => void }): JSX.Element {
   const theme = useTheme();
   const sections = (Object.keys(data) as Array<keyof PortfolioData>).map((key) =>
     toLowerDashedCase(data[key].title),
@@ -159,6 +152,12 @@ function NavigationList(): JSX.Element {
     },
   };
 
+  const scrollToSection = (targetsection: string): void => {
+    const section = document.getElementById(targetsection);
+    if (!section) return;
+    window.scrollTo({ left: 0, top: section.offsetTop, behavior: 'smooth' });
+  };
+
   return (
     <Box as="nav" paddingX={12} sx={navItem} motionProps={{ variants: navVariants }}>
       {sections.map((section) => (
@@ -170,7 +169,11 @@ function NavigationList(): JSX.Element {
         >
           <CustomLink
             to={`#${section}`}
-            color="warn"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection(section);
+              if (onClick) onClick();
+            }}
             sx={{
               color: 'white',
               background: 'transparent',

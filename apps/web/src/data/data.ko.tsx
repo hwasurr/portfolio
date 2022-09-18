@@ -121,17 +121,17 @@ export const data: PortfolioData = {
       {
         icon: <VscGithub />,
         title: '깃허브',
-        linkUrl: '#',
+        linkUrl: 'https://github.com/hwasurr',
       },
       {
         icon: <MdRssFeed />,
         title: '블로그',
-        linkUrl: '#',
+        linkUrl: 'https://hwasurr.io',
       },
       {
         icon: <MdMail />,
         title: '이메일',
-        linkUrl: '#',
+        linkUrl: 'mailto:iamsupermazinga@gmail.com',
       },
     ],
   },
