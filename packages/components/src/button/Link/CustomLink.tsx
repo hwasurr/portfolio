@@ -6,21 +6,47 @@ import { Link, LinkProps } from 'react-router-dom';
 export interface CustomLinkProps extends LinkProps {
   sx?: Interpolation<ITheme>;
   isExternal?: boolean;
+  defaultColored?: boolean;
+  enableUnderlineAnimation?: boolean;
 }
 export function CustomLink({
   sx,
   color,
   to,
   isExternal,
+  defaultColored = false,
+  enableUnderlineAnimation = false,
   ...rest
 }: CustomLinkProps): JSX.Element {
   const theme = useTheme();
   const customLinkCss = css({
+    position: 'relative',
     textDecoration: 'none',
-    color: 'inherit',
+    color: defaultColored
+      ? theme.palette[color]?.light || theme.palette.primary.light
+      : 'inherit',
     cursor: 'pointer',
     ':hover,:active,:focus': {
       color: theme.palette[color]?.light || theme.palette.primary.light,
+    },
+  });
+
+  const linkUnderlineAnimation = css({
+    ':after': {
+      content: '""',
+      position: 'absolute',
+      width: '100%',
+      height: '2px',
+      left: 0,
+      bottom: 0,
+      backgroundColor: theme.palette[color]?.light || theme.palette.primary.light,
+      transform: 'scaleX(0)',
+      transformOrigin: 'bottom right',
+      transition: 'transform 0.25s ease-out',
+    },
+    ':hover:after': {
+      transform: 'scaleX(1)',
+      transformOrigin: 'bottom left',
     },
   });
 
@@ -36,7 +62,11 @@ export function CustomLink({
       // eslint-disable-next-line jsx-a11y/anchor-is-valid
       <a
         href={isExternal ? '#' : to}
-        css={[customLinkCss, sx]}
+        css={[
+          customLinkCss,
+          enableUnderlineAnimation ? linkUnderlineAnimation : undefined,
+          sx,
+        ]}
         onClick={handleExternalLink(to)}
         {...rest}
       >
@@ -44,7 +74,17 @@ export function CustomLink({
       </a>
     );
   }
-  return <Link to={to} css={[customLinkCss, sx]} {...rest} />;
+  return (
+    <Link
+      to={to}
+      css={[
+        customLinkCss,
+        enableUnderlineAnimation ? linkUnderlineAnimation : undefined,
+        sx,
+      ]}
+      {...rest}
+    />
+  );
 }
 
 export default CustomLink;

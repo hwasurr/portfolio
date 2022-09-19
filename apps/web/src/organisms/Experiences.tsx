@@ -1,4 +1,4 @@
-import { Heading, List, ListItem, Text } from '@my/components';
+import { Box, Heading, List, ListItem, Text } from '@my/components';
 import { Fragment } from 'react';
 import Section from '../components/section/Section';
 import data from '../data/data.ko';
@@ -20,8 +20,10 @@ export default function Experiences(): JSX.Element {
             <List>
               {exp.services.map((serv) => (
                 <ListItem key={serv.title}>
-                  <Text>{serv.title}</Text>
-                  <Text>{serv.description}</Text>
+                  <Box marginY={2}>
+                    <Text>{serv.title}</Text>
+                    <Text>{serv.description}</Text>
+                  </Box>
                 </ListItem>
               ))}
             </List>

@@ -17,6 +17,7 @@ export interface LandingSection extends PortfolioSectionBase {
 export interface AboutMeDescription {
   name: string;
   value: string;
+  href?: string;
 }
 export interface AboutMe extends PortfolioSectionBase {
   descriptions: AboutMeDescription[];
@@ -47,6 +48,11 @@ export type WritingLink = {
   subtitle?: string;
   linkUrl: string;
   description?: string;
+  publisher: {
+    name: string;
+    nameInEn?: string;
+    publisherImageUrl?: string;
+  };
 };
 export interface Writings extends PortfolioSectionBase {
   items: WritingLink[];

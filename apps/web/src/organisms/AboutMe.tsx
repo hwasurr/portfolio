@@ -1,7 +1,8 @@
 import { useTheme } from '@emotion/react';
-import { Box, Text } from '@my/components';
+import { Box, CustomLink, Text } from '@my/components';
 import Section from '../components/section/Section';
 import data from '../data/data.ko';
+import type { AboutMeDescription as IAboutMeDescription } from '../data/data.interface';
 import { toLowerDashedCase } from '../utils/toLowerDashedCase';
 
 // 섹션 1 - About me
@@ -16,14 +17,17 @@ export default function AboutMe(): JSX.Element {
           display: 'grid',
           gridTemplateColumns: '1fr 2fr',
           gap: theme.spacing[4],
-          [theme.displayMediaQueries.sm]: {
-            gridTemplateColumns: '1fr',
-          },
+          [theme.displayMediaQueries.sm]: { gridTemplateColumns: '1fr' },
         }}
       >
         <Box.Flex flexDir="column" gap={2}>
           {data.aboutme.descriptions.map((desc) => (
-            <AboutMeDescription key={desc.name} name={desc.name} value={desc.value} />
+            <AboutMeDescription
+              key={desc.name}
+              name={desc.name}
+              value={desc.value}
+              href={desc.href}
+            />
           ))}
         </Box.Flex>
         <Box>
@@ -34,15 +38,13 @@ export default function AboutMe(): JSX.Element {
   );
 }
 
-interface AboutMeDescriptionProps {
-  name: string;
-  value: string;
-}
-function AboutMeDescription({ name, value }: AboutMeDescriptionProps): JSX.Element {
+type AboutMeDescriptionProps = IAboutMeDescription;
+function AboutMeDescription({ name, value, href }: AboutMeDescriptionProps): JSX.Element {
   const theme = useTheme();
   return (
     <Box.Flex gap={4} align="center">
       <Text fontWeight="bold">{name}</Text>
+
       <Text
         sx={{
           fontSize: theme.fontSize.md,
@@ -51,7 +53,13 @@ function AboutMeDescription({ name, value }: AboutMeDescriptionProps): JSX.Eleme
           },
         }}
       >
-        {value}
+        {href ? (
+          <CustomLink defaultColored enableUnderlineAnimation to={href}>
+            {value}
+          </CustomLink>
+        ) : (
+          value
+        )}
       </Text>
     </Box.Flex>
   );

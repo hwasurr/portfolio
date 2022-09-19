@@ -20,11 +20,11 @@ export default function Writings(): JSX.Element {
                   src={writing.coverImageUrl}
                   sx={{
                     borderRadius: theme.spacing[1],
-                    objectFit: 'cover',
+                    objectFit: 'contain',
                     width: 150,
-                    height: 150,
+                    height: 120,
                     [theme.displayMediaQueries.sm]: {
-                      width: 100,
+                      width: 120,
                       height: 100,
                     },
                   }}
@@ -33,6 +33,15 @@ export default function Writings(): JSX.Element {
                   <Text fontSize="sm">{writing.description}</Text>
                   <Text>{writing.title}</Text>
                   <Text color="gray">{writing.subtitle}</Text>
+                  <Box.Flex gap={1} marginY={1}>
+                    <img
+                      width="20"
+                      height="20"
+                      src={writing.publisher.publisherImageUrl}
+                      alt={writing.publisher.name}
+                    />
+                    <Text fontSize="sm">{writing.publisher.name}</Text>
+                  </Box.Flex>
                 </Box>
               </Box.Flex>
             </ListItem>

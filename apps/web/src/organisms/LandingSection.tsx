@@ -58,7 +58,7 @@ export default function LandingSection(): JSX.Element {
               text={
                 <EmphasisSequentialText catchPhrase={data.landingSection.catchPhrase} />
               }
-              subText="잘 동작하는 웹 서비스를 만듭니다."
+              subText={data.landingSection.subtitle}
               motionProps={{ variants }}
             />
           </Box>
