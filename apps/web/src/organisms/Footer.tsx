@@ -23,13 +23,17 @@ export default function Footer(): JSX.Element {
       <Box textAlign="center">
         <Text>
           Created by{' '}
-          <CustomLink to="#" onClick={mailTo}>
+          <CustomLink
+            enableUnderlineAnimation
+            to="mailto:iamsupermazinga@gmail.com"
+            onClick={mailTo}
+          >
             Hwasurr
           </CustomLink>
         </Text>
         <Text>
           Design inspired by{' '}
-          <CustomLink isExternal to="https://sandbox.co.kr/index.html">
+          <CustomLink enableUnderlineAnimation to="https://sandbox.co.kr/index.html">
             Sandbox
           </CustomLink>
         </Text>

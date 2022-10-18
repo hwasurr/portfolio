@@ -47,7 +47,7 @@ function SkillItem(skill: SkillSet): JSX.Element {
         backgroundColor: 'white',
         height: 350,
         color: 'rgba(0,0,0,0.85)',
-        [theme.displayMediaQueries.base]: {
+        [theme.displayMediaQueries.sm]: {
           height: '100%',
         },
       }}

@@ -5,7 +5,6 @@ import { Link, LinkProps } from 'react-router-dom';
 
 export interface CustomLinkProps extends LinkProps {
   sx?: Interpolation<ITheme>;
-  isExternal?: boolean;
   defaultColored?: boolean;
   enableUnderlineAnimation?: boolean;
 }
@@ -13,7 +12,6 @@ export function CustomLink({
   sx,
   color,
   to,
-  isExternal,
   defaultColored = false,
   enableUnderlineAnimation = false,
   ...rest
@@ -50,7 +48,7 @@ export function CustomLink({
     },
   });
 
-  if (typeof to === 'string' && to.includes('https://')) {
+  if (typeof to === 'string' && (to.includes('https://') || to.includes('mailto:'))) {
     const handleExternalLink =
       (link: string) =>
       (e: React.MouseEvent): void => {
@@ -61,7 +59,7 @@ export function CustomLink({
     return (
       // eslint-disable-next-line jsx-a11y/anchor-is-valid
       <a
-        href={isExternal ? '#' : to}
+        href={to}
         css={[
           customLinkCss,
           enableUnderlineAnimation ? linkUnderlineAnimation : undefined,
@@ -74,6 +72,7 @@ export function CustomLink({
       </a>
     );
   }
+
   return (
     <Link
       to={to}

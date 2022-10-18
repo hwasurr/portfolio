@@ -16,6 +16,7 @@ export default function Writings(): JSX.Element {
             <ListItem key={writing.title}>
               <Box.Flex gap={4}>
                 <MyImage
+                  draggable={false}
                   alt={writing.title}
                   src={writing.coverImageUrl}
                   sx={{
@@ -34,11 +35,12 @@ export default function Writings(): JSX.Element {
                   <Text>{writing.title}</Text>
                   <Text color="gray">{writing.subtitle}</Text>
                   <Box.Flex gap={1} marginY={1}>
-                    <img
+                    <MyImage
                       width="20"
                       height="20"
                       src={writing.publisher.publisherImageUrl}
                       alt={writing.publisher.name}
+                      draggable={false}
                     />
                     <Text fontSize="sm">{writing.publisher.name}</Text>
                   </Box.Flex>

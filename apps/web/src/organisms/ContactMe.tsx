@@ -29,7 +29,11 @@ export default function ContactMe(): JSX.Element {
           <Box marginY={4}>
             {data.contactMe.items.map((contact) => (
               <H4 key={contact.title}>
-                <CustomLink isExternal to={contact.linkUrl} sx={{ lineHeight: 1.2 }}>
+                <CustomLink
+                  enableUnderlineAnimation
+                  to={contact.linkUrl}
+                  sx={{ lineHeight: 1.2 }}
+                >
                   {contact.icon} {contact.title}
                 </CustomLink>
               </H4>

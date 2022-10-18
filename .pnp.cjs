@@ -9206,6 +9206,37 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["linkify-html", [\
+        ["npm:4.0.0", {\
+          "packageLocation": "./.yarn/cache/linkify-html-npm-4.0.0-fc5f6d6fad-00ae05f1d1.zip/node_modules/linkify-html/",\
+          "packageDependencies": [\
+            ["linkify-html", "npm:4.0.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:e293270790bda2411a3626e57e15862403457209cbe755a222c752c37c8f53870ac5708914fca9c46ad11f81505a4af613c8b5e4bba765909191bb5f14d3b656#npm:4.0.0", {\
+          "packageLocation": "./.yarn/__virtual__/linkify-html-virtual-6e66892b19/0/cache/linkify-html-npm-4.0.0-fc5f6d6fad-00ae05f1d1.zip/node_modules/linkify-html/",\
+          "packageDependencies": [\
+            ["linkify-html", "virtual:e293270790bda2411a3626e57e15862403457209cbe755a222c752c37c8f53870ac5708914fca9c46ad11f81505a4af613c8b5e4bba765909191bb5f14d3b656#npm:4.0.0"],\
+            ["@types/linkifyjs", null],\
+            ["linkifyjs", "npm:4.0.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/linkifyjs",\
+            "linkifyjs"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["linkifyjs", [\
+        ["npm:4.0.0", {\
+          "packageLocation": "./.yarn/cache/linkifyjs-npm-4.0.0-28c84b9c37-58656364a7.zip/node_modules/linkifyjs/",\
+          "packageDependencies": [\
+            ["linkifyjs", "npm:4.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["lint-staged", [\
         ["npm:13.0.3", {\
           "packageLocation": "./.yarn/cache/lint-staged-npm-13.0.3-5f9010e5ff-53d585007d.zip/node_modules/lint-staged/",\
@@ -12138,6 +12169,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["csstype", "npm:3.1.0"],\
             ["dayjs", "npm:1.11.3"],\
             ["framer-motion", "virtual:23903c877c9b6e0096cdb937e1067a0d818648e95522403a3ac1e6b5593519cbc12b79192f7f7dade9f3c66ac84cdf6c7040a2fad2792288e1a62c44580c6965#npm:7.2.1"],\
+            ["linkify-html", "virtual:e293270790bda2411a3626e57e15862403457209cbe755a222c752c37c8f53870ac5708914fca9c46ad11f81505a4af613c8b5e4bba765909191bb5f14d3b656#npm:4.0.0"],\
+            ["linkifyjs", "npm:4.0.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:9e05c98faccdfc7dafbaea8c5fc22e01e5085e5d1ebb1f6237b50185bbd8ad4557555b3cc224c877eda274e567f5c1fb9226741f7d1cc2f18b479767d93f40bb#npm:18.2.0"],\
             ["react-icons", "virtual:e293270790bda2411a3626e57e15862403457209cbe755a222c752c37c8f53870ac5708914fca9c46ad11f81505a4af613c8b5e4bba765909191bb5f14d3b656#npm:4.4.0"],\
