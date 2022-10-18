@@ -50,7 +50,7 @@ export const data: PortfolioData = {
           'Framework: Next.js, Gatsby.js',
           'GraphQL Clients: (apollo, urql)',
           'Remove-data-management: (react-query, swr)',
-          'State-management libs: (zustand, vatio, jotai)',
+          'State-management libs: (zustand, valtio, jotai)',
           'Animations: (framer-motion)',
           'Styling: (emotion, chakra-ui, material-ui)',
         ],
@@ -129,15 +129,16 @@ export const data: PortfolioData = {
     subtitle: '',
     items: [
       {
-        coverImageUrl: '/images/book1_cover.jpeg', // TODO: 향후 수정 필요
+        coverImageUrl: '/images/book_cover-removebg-preview.png',
         title: 'GraphQL과 타입스크립트로 개발하는 웹 서비스',
         subtitle: '설계부터 개발, 배포까지 따라하며 완성하는 웹 풀스택 개발',
-        linkUrl: '#',
-        description: '2022. 10. 출간예정',
+        linkUrl: 'https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=302978770',
+        description: '2022. 10. 14.',
         publisher: {
           name: '비제이퍼블릭',
           nameInEn: 'BJpublic',
           publisherImageUrl: '/images/bjpublic.jpg',
+          publisherHomepage: 'https://bjpublic.tistory.com/',
         },
       },
     ],

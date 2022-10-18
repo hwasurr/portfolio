@@ -52,6 +52,7 @@ export type WritingLink = {
     name: string;
     nameInEn?: string;
     publisherImageUrl?: string;
+    publisherHomepage?: string;
   };
 };
 export interface Writings extends PortfolioSectionBase {

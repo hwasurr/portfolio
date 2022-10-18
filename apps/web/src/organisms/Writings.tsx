@@ -1,5 +1,5 @@
 import { useTheme } from '@emotion/react';
-import { Box, List, ListItem, Text } from '@my/components';
+import { Box, CustomLink, List, ListItem, Text } from '@my/components';
 import MyImage from '@my/components/src/display/Image/MyImage';
 import Section from '../components/section/Section';
 import data from '../data/data.ko';
@@ -32,17 +32,32 @@ export default function Writings(): JSX.Element {
                 />
                 <Box>
                   <Text fontSize="sm">{writing.description}</Text>
-                  <Text>{writing.title}</Text>
+                  <Text>
+                    <CustomLink to={writing.linkUrl} enableUnderlineAnimation>
+                      {writing.title}
+                    </CustomLink>
+                  </Text>
                   <Text color="gray">{writing.subtitle}</Text>
                   <Box.Flex gap={1} marginY={1}>
-                    <MyImage
-                      width="20"
-                      height="20"
-                      src={writing.publisher.publisherImageUrl}
-                      alt={writing.publisher.name}
-                      draggable={false}
-                    />
-                    <Text fontSize="sm">{writing.publisher.name}</Text>
+                    {writing.publisher.publisherImageUrl && (
+                      <MyImage
+                        width="20"
+                        height="20"
+                        src={writing.publisher.publisherImageUrl}
+                        alt={writing.publisher.name}
+                        draggable={false}
+                      />
+                    )}
+                    {writing.publisher.publisherHomepage ? (
+                      <CustomLink
+                        to={writing.publisher.publisherHomepage}
+                        enableUnderlineAnimation
+                      >
+                        <Text fontSize="sm">{writing.publisher.name}</Text>
+                      </CustomLink>
+                    ) : (
+                      <Text fontSize="sm">{writing.publisher.name}</Text>
+                    )}
                   </Box.Flex>
                 </Box>
               </Box.Flex>
