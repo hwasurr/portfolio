@@ -31,12 +31,24 @@ export interface SkillSet {
 export interface MySkills extends PortfolioSectionBase {
   skillSet: SkillSet[];
 }
-
+export interface ProjectStack {
+  name: string;
+  color: string;
+}
+export interface Project {
+  title: string;
+  description: string;
+  startedAt: string;
+  endedAt: string;
+  stacks: ProjectStack[];
+  parts: string;
+  mypart: string;
+}
 export interface ExperienceService {
   title: string;
   startedAt: string;
   endedAt: string;
-  services: { title: string; description: string }[];
+  projects: Project[];
 }
 export interface Experiences extends PortfolioSectionBase {
   items: ExperienceService[];

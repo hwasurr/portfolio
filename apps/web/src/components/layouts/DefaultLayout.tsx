@@ -108,7 +108,7 @@ export default function PortfolioLayout({
                 background: theme.palette.black.medium,
                 left: 0,
                 width: '100%',
-                minHeight: 1000,
+                minHeight: 1400,
                 transformOrigin: 'top center',
                 display: 'inline-block',
                 paddingTop: '60%',

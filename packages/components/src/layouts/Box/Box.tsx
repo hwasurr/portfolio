@@ -122,6 +122,23 @@ export function Box({
   );
 }
 
+export function GlassBox(props: BoxProps): JSX.Element {
+  return (
+    <Box
+      {...props}
+      sx={
+        props.sx instanceof Object
+          ? {
+              backgroundColor: 'rgba(255,255,255,0.85)',
+              color: 'rgba(0,0,0,0.85)',
+              ...props.sx,
+            }
+          : props.sx
+      }
+    />
+  );
+}
+
 export function Center(props: BoxProps): JSX.Element {
   return <Box {...props} textAlign="center" />;
 }
@@ -132,5 +149,6 @@ export function Flex(props: BoxProps): JSX.Element {
 
 Box.Center = Center;
 Box.Flex = Flex;
+Box.GlassBox = GlassBox;
 
 export default Box;

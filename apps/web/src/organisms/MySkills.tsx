@@ -3,6 +3,7 @@ import { Box, Heading, List, ListItem, Text } from '@my/components';
 import Section from '../components/section/Section';
 import { SkillSet } from '../data/data.interface';
 import data from '../data/data.ko';
+import { bottomUpMotionProps } from '../utils/motions/bottomUp';
 import { toLowerDashedCase } from '../utils/toLowerDashedCase';
 
 // 섹션 2 - MySkills
@@ -33,33 +34,26 @@ export default function MySkills(): JSX.Element {
 
 function SkillItem(skill: SkillSet): JSX.Element {
   const theme = useTheme();
-  const variants = {
-    whileInView: { y: 0, opacity: 1 },
-    initial: { y: 30, opacity: 0 },
-  };
   return (
-    <Box.Flex
+    <Box.GlassBox
       key={skill.type}
+      display="flex"
       flexDir="column"
       justify="space-between"
       padding={8}
       sx={{
-        backgroundColor: 'white',
-        height: 350,
+        backgroundColor: 'rgba(255,255,255,0.85)',
         color: 'rgba(0,0,0,0.85)',
+        height: 350,
         [theme.displayMediaQueries.sm]: {
           height: '100%',
         },
       }}
-      motionProps={{
-        variants,
-        whileInView: 'whileInView',
-        initial: 'initial',
-        viewport: { once: true, amount: 0.5 },
-      }}
+      rounded="md"
+      motionProps={bottomUpMotionProps}
     >
       <Heading.H6>{skill.type}</Heading.H6>
-      <Box marginY={4}>
+      <Box marginY={4} sx={{ background: 'transparent' }}>
         <List>
           {skill.items.map((skillItem) => (
             <ListItem key={skillItem} listStyle="outside">
@@ -68,6 +62,6 @@ function SkillItem(skill: SkillSet): JSX.Element {
           ))}
         </List>
       </Box>
-    </Box.Flex>
+    </Box.GlassBox>
   );
 }

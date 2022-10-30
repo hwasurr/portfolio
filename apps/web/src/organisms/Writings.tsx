@@ -14,7 +14,15 @@ export default function Writings(): JSX.Element {
         <List>
           {data.writings.items.map((writing) => (
             <ListItem key={writing.title}>
-              <Box.Flex gap={4}>
+              <Box.Flex
+                gap={4}
+                sx={{
+                  [theme.displayMediaQueries.base]: {
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                  },
+                }}
+              >
                 <MyImage
                   draggable={false}
                   alt={writing.title}

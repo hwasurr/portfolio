@@ -11,6 +11,7 @@ export interface TextProps extends PropsWithChildren {
   letterSpacing?: Property.LetterSpacing;
   wordbreak?: Property.WordBreak;
   sx?: Interpolation<ITheme>;
+  noOfLines?: number;
 }
 
 export function Text({
@@ -22,6 +23,7 @@ export function Text({
   letterSpacing = '-0.025rem',
   wordbreak,
   sx,
+  noOfLines = 0,
 }: TextProps): JSX.Element {
   const theme = useTheme();
   const textCss = css`
@@ -32,7 +34,17 @@ export function Text({
     letter-spacing: ${letterSpacing};
     word-break: ${wordbreak};
   `;
-  return <p css={[textCss, sx]}>{children}</p>;
+
+  const lineLimitCss = css({
+    lineHeight: 1.4,
+    display: '-webkit-box',
+    '-webkit-line-clamp': `${noOfLines}`, // <- you can change rows number
+    '-webkit-box-orient': 'vertical',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  });
+
+  return <p css={[textCss, sx, noOfLines ? lineLimitCss : undefined]}>{children}</p>;
 }
 
 export default Text;

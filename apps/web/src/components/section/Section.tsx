@@ -3,6 +3,7 @@ import { Box, Heading } from '@my/components';
 import { BoxProps } from '@my/components/src/layouts/Box/Box';
 import { H1, HeadingProps } from '@my/components/src/layouts/Heading/Heading';
 import { PropsWithChildren } from 'react';
+import { leftSlideMotionProps } from '../../utils/motions/leftSlide';
 
 interface SectionProps extends PropsWithChildren {
   id?: string;
@@ -98,11 +99,7 @@ export function SectionTitle({ title, subtitle }: SectionTitleProps): JSX.Elemen
             transition:
               'transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1), -webkit-transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1)',
           }}
-          motionProps={{
-            initial: { opacity: 0, x: -25 },
-            whileInView: { opacity: 1, x: 0 },
-            viewport: { once: true, amount: 0.5 },
-          }}
+          motionProps={leftSlideMotionProps}
         >
           <H1
             sx={{
@@ -128,6 +125,7 @@ export function SectionTitle({ title, subtitle }: SectionTitleProps): JSX.Elemen
             whileInView: { opacity: 1, x: 0 },
             viewport: { once: true, amount: 0.5 },
           }}
+          rounded="md"
         />
       </Box.Flex>
 
