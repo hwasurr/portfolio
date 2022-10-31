@@ -1,7 +1,7 @@
 import { useTheme } from '@emotion/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import * as React from 'react';
-import { PropsWithChildren, useRef } from 'react';
+import { PropsWithChildren, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import FocusLock from 'react-focus-lock';
 import { RemoveScroll } from 'react-remove-scroll';
@@ -25,6 +25,14 @@ export default function Modal({
       onClose();
     }
   };
+
+  useEffect(() => {
+    const escKeyModalClose = (e: KeyboardEvent): void => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', escKeyModalClose);
+    return () => window.removeEventListener('keydown', escKeyModalClose);
+  }, [onClose]);
 
   return createPortal(
     <AnimatePresence>
@@ -67,7 +75,8 @@ export default function Modal({
                   margin: 'auto',
                   minHeight: '300px',
                   backgroundColor: 'white',
-                  padding: 24,
+                  padding: theme.spacing[6],
+                  borderRadius: theme.borderRadius.md,
                 }}
               >
                 <motion.div css={{ position: 'sticky', top: 0, textAlign: 'end' }}>
@@ -75,6 +84,9 @@ export default function Modal({
                     variant="ghost-outline"
                     color="info"
                     sx={{
+                      outline: '1px',
+                      outlineStyle: 'dashed',
+                      background: 'white',
                       padding: '8px 12px',
                       borderRadius: '1.5rem',
                     }}

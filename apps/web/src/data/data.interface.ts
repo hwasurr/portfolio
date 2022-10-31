@@ -76,11 +76,23 @@ export interface ContactMe extends PortfolioSectionBase {
   items: ContactLink[];
 }
 
+export type EtcItem = {
+  title: string;
+  description: string;
+  linkUrl?: string;
+  startedAt?: string;
+  endedAt?: string;
+};
+export interface Etc extends PortfolioSectionBase {
+  items: EtcItem[];
+}
+
 export type PortfolioData = {
   landingSection: LandingSection;
   aboutme: AboutMe;
   mySkills: MySkills;
   experiences: Experiences;
   writings: Writings;
+  etc?: Etc;
   contactMe: ContactMe;
 };

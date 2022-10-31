@@ -69,39 +69,54 @@ function ExperienceProjectItem(project: Project): JSX.Element {
       }}
     >
       <ListItem type="button" sx={{ padding: '16px 32px' }} onClick={onOpen}>
-        <Text fontSize="sm">
-          {project.startedAt} ~ {project.endedAt}
-        </Text>
-
-        <Text fontSize="lg" fontWeight="bold">
-          {project.title}
-        </Text>
-
-        <Text fontSize="xs">{project.parts}</Text>
-
-        <Box.Flex sx={{ background: 'transparent', columnGap: 8 }} flexWrap="wrap">
-          {project.stacks.map((stack) => (
-            <Text key={stack.name} fontSize="xs">
-              <span style={{ color: stack.color }}>#</span>
-              {stack.name}
-            </Text>
-          ))}
-        </Box.Flex>
+        <ProjectSummary {...project} />
 
         <Box paddingY={2} sx={{ background: 'transparent' }}>
-          <Text fontSize="sm">{project.mypart}</Text>
-        </Box>
-
-        <Box paddingY={2} sx={{ background: 'transparent' }}>
-          <Text sx={{ whiteSpace: 'pre-line' }} noOfLines={6}>
-            {project.description.trim()}
-          </Text>
+          <Text fontSize="xs">자세히보려면 클릭해주세요.</Text>
         </Box>
       </ListItem>
 
       <Modal isOpen={open} onClose={onClose}>
+        <ProjectSummary {...project} />
+        <Box
+          sx={{
+            margin: '16px 0px',
+            height: '1px',
+            width: '100%',
+            backgroundColor: theme.palette.gray.light,
+          }}
+        />
         <Text sx={{ whiteSpace: 'pre-line' }}>{project.description}</Text>
       </Modal>
     </Box.GlassBox>
+  );
+}
+
+function ProjectSummary(project: Project): JSX.Element {
+  return (
+    <Box>
+      <Text fontSize="sm">
+        {project.startedAt} ~ {project.endedAt}
+      </Text>
+
+      <Text fontSize="lg" fontWeight="bold">
+        {project.title}
+      </Text>
+
+      <Text fontSize="xs">{project.parts}</Text>
+
+      <Box.Flex sx={{ background: 'transparent', columnGap: 8 }} flexWrap="wrap">
+        {project.stacks.map((stack) => (
+          <Text key={stack.name} fontSize="xs">
+            <span style={{ color: stack.color }}>#</span>
+            {stack.name}
+          </Text>
+        ))}
+      </Box.Flex>
+
+      <Box paddingY={2} sx={{ background: 'transparent' }}>
+        <Text fontSize="sm">{project.mypart}</Text>
+      </Box>
+    </Box>
   );
 }

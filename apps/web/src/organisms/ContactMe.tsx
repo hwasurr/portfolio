@@ -1,3 +1,4 @@
+import { useTheme } from '@emotion/react';
 import { Box, CustomLink } from '@my/components';
 import { H4 } from '@my/components/src/layouts/Heading/Heading';
 import Section from '../components/section/Section';
@@ -6,6 +7,7 @@ import { toLowerDashedCase } from '../utils/toLowerDashedCase';
 import { PortfolioMotionVariant } from '../utils/type-utils/motion';
 
 export default function ContactMe(): JSX.Element {
+  const theme = useTheme();
   const variants: PortfolioMotionVariant = {
     initial: { opacity: 0, y: 100 },
     show: { opacity: 1, y: 0, transition: { duration: 0.75 } },
@@ -28,7 +30,10 @@ export default function ContactMe(): JSX.Element {
         <Box.Flex justify="center">
           <Box marginY={4}>
             {data.contactMe.items.map((contact) => (
-              <H4 key={contact.title}>
+              <H4
+                key={contact.title}
+                sx={{ [theme.displayMediaQueries.base]: { fontSize: theme.fontSize.xl } }}
+              >
                 <CustomLink
                   enableUnderlineAnimation
                   to={contact.linkUrl}

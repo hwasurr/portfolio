@@ -1,9 +1,62 @@
-import { Box } from '@my/components';
+import { Box, Heading } from '@my/components';
+import { theme } from '@my/style';
 import { motion } from 'framer-motion';
 
 export interface LoaderProps {
-  onLoadFinish: () => void;
+  onLoadFinish?: () => void;
 }
+export function Loader2({ onLoadFinish }: LoaderProps): JSX.Element {
+  return (
+    <Box.Flex
+      key="loader"
+      align="center"
+      justify="center"
+      height="100vh"
+      width="100vw"
+      sx={{ overflow: 'hidden' }}
+    >
+      <Heading.H1
+        sx={{
+          fontSize: '16rem',
+          [theme.displayMediaQueries.xl]: { fontSize: '9rem' },
+          [theme.displayMediaQueries.lg]: { fontSize: '7rem' },
+          [theme.displayMediaQueries.sm]: { fontSize: '3.25rem' },
+          [theme.displayMediaQueries.base]: { fontSize: '2.75rem' },
+        }}
+        motionProps={{
+          animate: {
+            fontFamily: "'Atma', cursive",
+            textShadow: `5px 5px 0px ${theme.palette.secondary.medium}, 
+          10px 10px 0px ${theme.palette.warn.medium},
+          15px 15px 0px ${theme.palette.error.medium},
+          20px 20px 0px ${theme.palette.success.medium},
+          25px 25px 0px ${theme.palette.primary.medium},
+          30px 30px 0px ${theme.palette.info.medium},
+          35px 35px 0px ${theme.palette.gray.dark},
+          40px 40px 0px ${theme.palette.gray.dark},
+          45px 45px 0px ${theme.palette.gray.medium},
+          50px 50px 0px ${theme.palette.gray.medium},
+          55px 55px 0px ${theme.palette.gray.medium},
+          60px 60px 0px ${theme.palette.gray.light},
+          65px 65px 0px ${theme.palette.gray.light},
+          70px 70px 0px ${theme.palette.gray.light},
+          75px 75px 0px #EDF2F7,
+          80px 80px 0px #EDF2F7, 
+          85px 85px 0px #F7FAFC,
+          90px 90px 0px #F7FAFC`,
+            scale: [0.2, 1],
+            opacity: [0, 1, 1, 1, 1, 1, 1, 1, 0],
+            transition: { duration: 2, ease: 'easeOut' },
+          },
+          onAnimationComplete: onLoadFinish,
+        }}
+      >
+        HWASURR
+      </Heading.H1>
+    </Box.Flex>
+  );
+}
+
 export default function Loader({ onLoadFinish }: LoaderProps): JSX.Element {
   return (
     <Box.Flex key="loader" align="center" justify="center" height="100vh" width="100vw">

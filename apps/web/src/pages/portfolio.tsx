@@ -1,6 +1,7 @@
 import DefaultLayout from '../components/layouts/DefaultLayout';
 import AboutMe from '../organisms/AboutMe';
 import ContactMe from '../organisms/ContactMe';
+import Etc from '../organisms/Etc';
 import Experiences from '../organisms/Experiences';
 import Footer from '../organisms/Footer';
 import LandingSection from '../organisms/LandingSection';
@@ -34,7 +35,9 @@ export default function PortfolioPage(): JSX.Element {
       {/* 섹션 4 - Writings */}
       <Writings />
 
-      {/* 섹션 5 - Contact Me */}
+      <Etc />
+
+      {/* 마지막 섹션 - Contact Me */}
       <ContactMe />
 
       {/* Footer */}

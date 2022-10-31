@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 import koLocale from 'dayjs/locale/ko';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import LoaderPage from './pages/loading';
 import PortfolioPage from './pages/portfolio';
 
 dayjs.locale(koLocale);
@@ -13,6 +14,7 @@ export function App(): JSX.Element {
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Routes>
+          <Route path="/loading" element={<LoaderPage />} />
           <Route path="/" element={<PortfolioPage />} />
         </Routes>
       </BrowserRouter>

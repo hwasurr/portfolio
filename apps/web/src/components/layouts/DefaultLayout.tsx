@@ -4,7 +4,7 @@ import { AnimatePresence } from 'framer-motion';
 import { PropsWithChildren, useEffect, useMemo, useState } from 'react';
 import { PortfolioMotionVariant } from '../../utils/type-utils/motion';
 import PortfolioLayoutHeader from '../header/Header';
-import Loader from '../loader/Loader';
+import { Loader2 } from '../loader/Loader';
 
 interface PortfolioLayoutProps extends PropsWithChildren {
   landingSection: React.ReactNode;
@@ -42,7 +42,7 @@ export default function PortfolioLayout({
   return (
     <AnimatePresence>
       {isLoading ? (
-        <Loader onLoadFinish={handleLoadingEnd} />
+        <Loader2 onLoadFinish={handleLoadingEnd} />
       ) : (
         <Box
           sx={{ position: 'relative' }}

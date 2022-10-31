@@ -1,5 +1,5 @@
-import Loader from '../components/loader/Loader';
+import { Loader2 } from '../components/loader/Loader';
 
 export default function LoaderPage(): JSX.Element {
-  return <Loader />;
+  return <Loader2 />;
 }
