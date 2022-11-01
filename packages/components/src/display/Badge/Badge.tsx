@@ -1,5 +1,5 @@
 import { css, useTheme } from '@emotion/react';
-import { IPaletteChromaticColors } from '@my/style';
+import { checkPaletteColor, IPaletteChromaticColors } from '@my/style';
 import { PropsWithChildren } from 'react';
 import Button from '../../button/Button/Button';
 import Text from '../../layouts/Text/Text';
@@ -24,18 +24,19 @@ export function Badge({
     border: 'none',
     borderRadius: theme.borderRadius.xl,
     padding: `0px ${theme.spacing[3]}`,
-    background: theme.palette[color]?.medium || color,
+    background: color && checkPaletteColor(color) ? theme.palette[color]?.medium : color,
     color: theme.palette.white.medium,
     fontSize: theme.fontSize.sm,
     transition: 'background 0.2s',
   });
   const badgeOutlineCss = css({
     border: `${theme.borderWidth.thin} solid`,
-    color: theme.palette[color]?.medium || color,
+    color: color && checkPaletteColor(color) ? theme.palette[color]?.medium : color,
     borderColor: 'transparent',
     background: 'transparent',
     ':hover': {
-      borderColor: theme.palette[color]?.medium || color,
+      borderColor:
+        color && checkPaletteColor(color) ? theme.palette[color]?.medium : color,
     },
   });
 

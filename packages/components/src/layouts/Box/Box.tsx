@@ -1,6 +1,9 @@
+/* eslint-disable no-nested-ternary */
 import { motion, MotionProps } from 'framer-motion';
 import { css, Interpolation, useTheme } from '@emotion/react';
 import {
+  checkBorderKey,
+  checkDisplaySizeKey,
   IBorderKey,
   IBorderRadiusKey,
   IDisplaySizeKey,
@@ -53,11 +56,14 @@ export interface BoxProps extends PropsWithChildren {
   motionProps?: MotionProps;
 }
 
-const useSize = (wORh: CSSType.Property.Width | IDisplaySizeKey): string => {
+const useSize = (
+  wORh?: CSSType.Property.Width | IDisplaySizeKey,
+): string | number | undefined => {
   const theme = useTheme();
-  return typeof wORh === 'string' && Object.keys(theme.displaySize).includes(wORh)
-    ? theme.displaySize[wORh]
-    : wORh;
+  if (!wORh) return undefined;
+  if (typeof wORh === 'string' && checkDisplaySizeKey(wORh))
+    return theme.displaySize[wORh];
+  return wORh;
 };
 export function Box({
   id,
@@ -89,18 +95,18 @@ export function Box({
   const theme = useTheme();
   const boxStyle = css({
     backgroundColor: 'inherit',
-    padding: theme.spacing[padding],
+    padding: padding ? theme.spacing[padding] : padding,
     paddingLeft: paddingX ? theme.spacing[paddingX] : undefined,
     paddingRight: paddingX ? theme.spacing[paddingX] : undefined,
     paddingTop: paddingY ? theme.spacing[paddingY] : undefined,
     paddingBottom: paddingY ? theme.spacing[paddingY] : undefined,
-    margin: theme.spacing[margin],
+    margin: margin ? theme.spacing[margin] : margin,
     marginLeft: marginX ? theme.spacing[marginX] : undefined,
     marginRight: marginX ? theme.spacing[marginX] : undefined,
     marginTop: marginY ? theme.spacing[marginY] : undefined,
     marginBottom: marginY ? theme.spacing[marginY] : undefined,
-    border: Object.keys(theme.borders).includes(border) ? theme.borders[border] : border,
-    borderRadius: theme.borderRadius[rounded],
+    border: border && checkBorderKey(border) ? theme.borders[border] : border,
+    borderRadius: rounded ? theme.borderRadius[rounded] : rounded,
     justifyContent: justify,
     alignItems: align,
     flexDirection: flexDir,
@@ -111,7 +117,7 @@ export function Box({
     height: useSize(height),
     minHeight: useSize(minHeight),
     maxHeight: useSize(maxHeight),
-    gap: theme.spacing[gap],
+    gap: gap ? theme.spacing[gap] : gap,
     ...rest,
   });
   const Cmp = motion[as];

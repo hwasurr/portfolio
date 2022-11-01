@@ -127,9 +127,11 @@ function Navigation(): JSX.Element {
 
 function NavigationList({ onClick }: { onClick?: () => void }): JSX.Element {
   const theme = useTheme();
-  const sections = (Object.keys(data) as Array<keyof PortfolioData>).map((key) =>
-    toLowerDashedCase(data[key].title),
-  );
+  const sections = (Object.keys(data) as Array<keyof PortfolioData>).map((key) => {
+    const realkey = data[key];
+    if (!realkey) return toLowerDashedCase(key);
+    return toLowerDashedCase(realkey.title);
+  });
   const navItem = css({
     display: 'flex',
     justifyContent: 'center',

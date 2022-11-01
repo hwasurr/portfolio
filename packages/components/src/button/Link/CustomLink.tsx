@@ -1,5 +1,6 @@
+/* eslint-disable no-nested-ternary */
 import { css, Interpolation, useTheme } from '@emotion/react';
-import { ITheme } from '@my/style';
+import { checkPaletteColor, ITheme } from '@my/style';
 import * as React from 'react';
 import { Link, LinkProps } from 'react-router-dom';
 
@@ -20,12 +21,18 @@ export function CustomLink({
   const customLinkCss = css({
     position: 'relative',
     textDecoration: 'none',
-    color: defaultColored
-      ? theme.palette[color]?.light || theme.palette.primary.light
-      : 'inherit',
+    color:
+      defaultColored && color
+        ? checkPaletteColor(color)
+          ? theme.palette[color].light
+          : theme.palette.primary.light
+        : 'inherit',
     cursor: 'pointer',
     ':hover,:active,:focus': {
-      color: theme.palette[color]?.light || theme.palette.primary.light,
+      color:
+        color && checkPaletteColor(color)
+          ? theme.palette[color]?.light
+          : theme.palette.primary.light,
     },
   });
 
@@ -37,7 +44,10 @@ export function CustomLink({
       height: '2px',
       left: 0,
       bottom: 0,
-      backgroundColor: theme.palette[color]?.light || theme.palette.primary.light,
+      backgroundColor:
+        color && checkPaletteColor(color)
+          ? theme.palette[color]?.light
+          : theme.palette.primary.light,
       transform: 'scaleX(0)',
       transformOrigin: 'bottom right',
       transition: 'transform 0.25s ease-out',

@@ -17,9 +17,9 @@ const useHeadingCSS = ({
 }: HeadingProps): SerializedStyles => {
   const theme = useTheme();
   return css({
-    color: theme.palette[color]?.medium ?? 'inherit',
-    fontSize: theme.fontSize[fontSize],
-    fontWeight: theme.fontWeight[fontWeight],
+    color: color ? theme.palette[color].medium : 'inherit',
+    fontSize: fontSize ? theme.fontSize[fontSize] : fontSize,
+    fontWeight: fontWeight ? theme.fontWeight[fontWeight] : fontWeight,
     lineHeight: '1.6',
     letterSpacing: '-0.025rem',
     wordBreak: 'keep-all',

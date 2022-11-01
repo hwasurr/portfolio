@@ -18,7 +18,7 @@ export default function Modal({
 }: ModalProps): JSX.Element | null {
   const theme = useTheme();
 
-  const modalBodyRef = useRef<HTMLDivElement>();
+  const modalBodyRef = useRef<HTMLDivElement>(null);
   const onOutsideClick = (e: React.MouseEvent): void => {
     e.stopPropagation();
     if (modalBodyRef.current && !modalBodyRef.current.contains(e.target as any)) {
@@ -33,6 +33,9 @@ export default function Modal({
     window.addEventListener('keydown', escKeyModalClose);
     return () => window.removeEventListener('keydown', escKeyModalClose);
   }, [onClose]);
+
+  const modalEl = document.getElementById('modal');
+  if (!modalEl) return null;
 
   return createPortal(
     <AnimatePresence>
@@ -102,6 +105,6 @@ export default function Modal({
         </RemoveScroll>
       )}
     </AnimatePresence>,
-    document.getElementById('modal'),
+    modalEl,
   );
 }

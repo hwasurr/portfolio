@@ -61,6 +61,9 @@ const fontWeight: IFontWeight = {
 
 // Display size
 export type IDisplaySizeKey = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+export const displaySizeKeys: IDisplaySizeKey[] = ['sm', 'md', 'lg', 'xl', '2xl'];
+export const checkDisplaySizeKey = (key: any): key is IDisplaySizeKey =>
+  displaySizeKeys.includes(key as any);
 export type IDisplaySize = Record<IDisplaySizeKey, string>;
 const displaySizes: IDisplaySize = {
   sm: '30em',
@@ -200,6 +203,17 @@ export type IPaletteChromaticColors =
   | 'error';
 export type IPaletteAchromaticColors = 'transparent' | 'black' | 'white';
 export type IPaletteColors = IPaletteChromaticColors | IPaletteAchromaticColors;
+export const paletteColors: IPaletteChromaticColors[] = [
+  'gray',
+  'primary',
+  'secondary',
+  'success',
+  'info',
+  'warn',
+  'error',
+];
+export const checkPaletteColor = (color: string): color is IPaletteColors =>
+  paletteColors.includes(color as any);
 export type IPalette = Record<IPaletteColors, IColor>;
 export const palette: IPalette = {
   transparent: {
@@ -256,6 +270,9 @@ export const palette: IPalette = {
 
 // border
 export type IBorderKey = 'sm' | 'md' | 'lg';
+export const borderKeys: IBorderKey[] = ['sm', 'md', 'lg'];
+export const checkBorderKey = (key: string): key is IBorderKey =>
+  borderKeys.includes(key as any);
 export type IBorder = Record<IBorderKey, string>;
 const borders: IBorder = {
   sm: `${borderWidth.thin} solid ${palette.gray.light}`,
