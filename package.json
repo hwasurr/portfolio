@@ -11,8 +11,7 @@
   "scripts": {
     "prepare": "husky install",
     "components": "yarn workspace @my/components",
-    "web": "yarn workspace web",
-    "common": "yarn workspace @my/common"
+    "web": "yarn workspace web"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^17.0.3",

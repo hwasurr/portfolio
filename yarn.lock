@@ -2422,21 +2422,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@my/common@workspace:*, @my/common@workspace:packages/common":
-  version: 0.0.0-use.local
-  resolution: "@my/common@workspace:packages/common"
-  dependencies:
-    "@babel/core": ^7.18.6
-    "@babel/plugin-transform-runtime": ^7.18.6
-    "@babel/preset-env": ^7.18.6
-    "@babel/preset-react": ^7.18.6
-    "@babel/preset-typescript": ^7.18.6
-    "@types/node": ^18.0.3
-    tslib: ^2.4.0
-    typescript: ^4.7.4
-  languageName: unknown
-  linkType: soft
-
 "@my/components@workspace:*, @my/components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "@my/components@workspace:packages/components"
@@ -2448,7 +2433,6 @@ __metadata:
     "@babel/preset-typescript": ^7.18.6
     "@emotion/jest": ^11.9.3
     "@emotion/react": ^11.9.3
-    "@my/common": "workspace:*"
     "@my/style": "workspace:*"
     "@testing-library/jest-dom": ^5.16.4
     "@testing-library/react": ^13.3.0
@@ -2789,7 +2773,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>=12, @types/node@npm:^18.0.3":
+"@types/node@npm:*, @types/node@npm:>=12":
   version: 18.0.3
   resolution: "@types/node@npm:18.0.3"
   checksum: 5dec59fbbc1186c808b53df1ca717dad034dbd6a901c75f5b052c845618b531b05f27217122c6254db99529a68618e4cfc534ae3dbf4e88754e9e572df80defa
@@ -9486,7 +9470,6 @@ __metadata:
   dependencies:
     "@emotion/babel-plugin": ^11.9.2
     "@emotion/react": ^11.9.3
-    "@my/common": "workspace:*"
     "@my/components": "workspace:*"
     "@my/style": "workspace:*"
     "@types/node": ^18.0.5
