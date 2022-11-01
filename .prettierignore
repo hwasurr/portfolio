@@ -2,3 +2,6 @@ dist
 build
 .yarn
 node_modules
+cache
+LICENSE
+CHANGELOG
