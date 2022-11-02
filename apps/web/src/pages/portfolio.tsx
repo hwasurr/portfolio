@@ -35,6 +35,7 @@ export default function PortfolioPage(): JSX.Element {
       {/* 섹션 4 - Writings */}
       <Writings />
 
+      {/* 섹션 5 - ETCs */}
       <Etc />
 
       {/* 마지막 섹션 - Contact Me */}

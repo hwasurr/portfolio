@@ -21,12 +21,13 @@ export function CustomLink({
   const customLinkCss = css({
     position: 'relative',
     textDecoration: 'none',
-    color:
-      defaultColored && color
-        ? checkPaletteColor(color)
-          ? theme.palette[color].light
-          : theme.palette.primary.light
-        : 'inherit',
+    color: color
+      ? checkPaletteColor(color)
+        ? theme.palette[color].light
+        : theme.palette.primary.light
+      : defaultColored
+      ? theme.palette.primary.light
+      : 'inherit',
     cursor: 'pointer',
     ':hover,:active,:focus': {
       color:

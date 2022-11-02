@@ -84,7 +84,10 @@ export type EtcItem = {
   endedAt?: string;
 };
 export interface Etc extends PortfolioSectionBase {
-  items: EtcItem[];
+  sections: {
+    title: string;
+    items: EtcItem[];
+  }[];
 }
 
 export type PortfolioData = {

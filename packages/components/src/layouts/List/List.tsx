@@ -33,7 +33,7 @@ export function ListItem({
             background: 'transparent',
             textDecoration: 'inherit',
             cursor: 'pointer',
-            border: '1px solid transparent',
+            border: `1px solid transparent`,
             textAlign: 'inherit',
             fontSize: 'inherit',
           },

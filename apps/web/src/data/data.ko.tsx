@@ -1,4 +1,4 @@
-import { MdArticle, MdMail, MdRssFeed } from 'react-icons/md';
+import { MdMail, MdRssFeed } from 'react-icons/md';
 import { VscGithub } from 'react-icons/vsc';
 import { PortfolioData } from './data.interface';
 
@@ -284,11 +284,98 @@ export const data: PortfolioData = {
       },
     ],
   },
-  // etc: {
-  //   title: 'etc',
-  //   subtitle: '',
-  //   items: [{ title: '입상', description: '뭐시기' }],
-  // },
+  etc: {
+    title: 'etc.',
+    subtitle: '',
+    sections: [
+      {
+        title: '👨‍🎓 교육 및 학력',
+        items: [
+          {
+            title:
+              'AWS 기술 에센셜 (AWS Technical Essentials) + AWS 기반 아키텍처 설계(Architecting on AWS)',
+            startedAt: '2020-07-21',
+            endedAt: '2020-07-24',
+            description: 'AWS Korea 주관',
+          },
+          {
+            title: '혁신성장 청년인재 집중양성 빅데이터 및 머신러닝 교육과정 (996h)',
+            startedAt: '2018-09-03',
+            endedAt: '2019-02-28',
+            description: '과학기술정보통신부, 정보통신기술진흥센터, 부산대학교 주관',
+          },
+          {
+            title: '부산대학교 심리학 학사 졸업',
+            startedAt: '2013-02',
+            endedAt: '2022-08',
+            description: '스타트업 공동 창업 및 회사 생활 병행으로 인해 늦은 졸업',
+          },
+        ],
+      },
+      {
+        title: '🚀 입상',
+        items: [
+          {
+            startedAt: '2019',
+            title: '제4회 부산 ICT융합 해커톤',
+            description: '대상, 주최: 과학기술정보통신부',
+          },
+          {
+            startedAt: '2019',
+            title: '제 2회 부산대 창의융합 소프트웨어 해커톤',
+            description: '대상, 주최: 부산대학교',
+          },
+          {
+            startedAt: '2019',
+            title: 'SW챌린지 창업 공모전',
+            description: '우수상, 주최: 한국SW산업협회',
+          },
+          {
+            startedAt: '2018',
+            title: '부산대학교 선상 빅데이터 해커톤 경진대회',
+            description: '우수상, 주최: 부산대학교',
+          },
+          {
+            startedAt: '2018',
+            title: '부산대학교 제4회 우수기술 사업화 테크톤 경진대회',
+            description: '최우수상, 주최: 부산대학교',
+          },
+        ],
+      },
+      {
+        title: '🌍 오픈소스 기여',
+        items: [
+          {
+            title: 'nestjs/graphql',
+            linkUrl: 'https://github.com/nestjs/graphql/releases/tag/v10.0.19',
+            description:
+              '간단한 기여를 진행. yarn berry pnp모드 프로젝트 환경에서 nestjs/graphql의 peerDependency가 올바르게 설정되어 있지 않았던 문제 해결.',
+          },
+        ],
+      },
+      {
+        title: '🐬 개인 프로젝트',
+        items: [
+          {
+            title: '포트폴리오 (현재 페이지)',
+            linkUrl: 'https://github.com/hwasurr/portfolio',
+            description: 'Vite + React + Emotion 를 활용해 구성한 간단한 포트폴리오 SPA',
+          },
+          {
+            title: '블로그',
+            linkUrl: 'https://github.com/hwasurr/hwasurr.io',
+            description: 'Gatsby + Markdown 를 활용해 구성한 개인 개발 블로그',
+          },
+          {
+            title: '집필도서 예제 코드 저장소',
+            linkUrl: 'https://github.com/hwasurr/graphql-book-fullstack-project',
+            description:
+              '"GraphQL과 타입스크립트로 개발하는 웹 서비스: 설계부터 개발, 배포까지 따라하며 완성하는 웹 풀스택 개발" 도서의 예제 코드로 사용된 프로젝트 저장소.',
+          },
+        ],
+      },
+    ],
+  },
   contactMe: {
     title: 'Contact Me',
     subtitle: '',
@@ -308,11 +395,6 @@ export const data: PortfolioData = {
         title: '이메일',
         linkUrl: 'mailto:iamsupermazinga@gmail.com',
       },
-      // {
-      //   icon: <MdArticle />,
-      //   title: '이력서',
-      //   linkUrl: 'https://',
-      // },
     ],
   },
 };
